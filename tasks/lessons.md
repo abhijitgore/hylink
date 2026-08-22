@@ -56,3 +56,14 @@ An `opacity`/`transform`-only animation runs on the compositor thread, which
 capture, which looks exactly like a CSS bug. Neighbouring animations that touched
 `left`/`top` or `background` advanced normally, which made it look element-specific.
 `--disable-threaded-animation` renders them correctly.
+
+## Verify a "forced" browser flag actually forced anything
+
+`--blink-settings=preferredColorScheme=2` looked like it asked for dark. It is not a
+valid value, Chrome silently rendered light, and the light and dark GIFs came out
+identical — a bug only visible by opening both files. (0 is dark, 1 is light.)
+
+**Rule:** after forcing an environment flag, assert on a pixel, a computed value, or
+some other observable that proves the environment changed. A flag that is accepted
+without error has not necessarily done anything.
+

@@ -346,3 +346,26 @@ trackers", and clicking it wrote `https://example.com/article?id=7` to the clipb
 `utm_source` and `fbclid` gone, `id=7` kept. Harness case 5 covers this.
 
 123 assertions pass. Version 1.7.0.
+
+## Round 9 — published, with a demo and a brew install
+
+- [x] Public repo at github.com/abhijitgore/hylink, MIT, Brave's list noted in NOTICE.md
+- [x] README: motivation, an honest caveat about "open in side", install at the top
+- [x] Animated demo GIF in both colour schemes, generated from the shipped animation
+- [x] Homebrew tap at github.com/abhijitgore/homebrew-tap, verified by installing it
+
+### Review
+
+The GIF is the options page's own CSS animation captured headlessly, not a separate
+recording, so it cannot drift from what ships — `tools/build-demo-gif.sh` plus
+`tools/assemble-gif.py` regenerate both themes. GitHub's `<picture>` swaps them with
+the reader's theme. 32 frames, ~200 kB each after Pillow merges the still stretches
+and keeps their durations.
+
+Homebrew cannot install a Chrome extension outright — Chrome refuses to enable
+anything that did not come from its own store — so the cask stages the files to a
+*stable* path (`~/Library/Application Support/HyLink`) using an `artifact ... target:`
+stanza rather than the default versioned Caskroom directory. That way "Load unpacked"
+stays valid across upgrades instead of breaking on every new version. Verified by
+actually running `brew install --cask abhijitgore/tap/hylink`: tapped, downloaded,
+moved into place, manifest reads 1.7.1.
