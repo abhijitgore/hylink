@@ -41,6 +41,9 @@ pane. The moment Chrome ships the API, this becomes a small change; see
 
 ## Install (unpacked)
 
+Not on the Chrome Web Store yet — `docs/store-listing.md` tracks what is left before
+submission.
+
 1. Open `chrome://extensions`.
 2. Turn on **Developer mode** (top right).
 3. Click **Load unpacked** and pick this folder.

@@ -64,8 +64,7 @@ neither counts as collection.
 - I do not use or transfer user data for purposes unrelated to my item's single purpose.
 - I do not use or transfer user data to determine creditworthiness or for lending purposes.
 
-**Privacy policy URL:** required. Host `PRIVACY.md` somewhere public — GitHub Pages or
-the repo's rendered file both work — and paste the URL.
+**Privacy policy URL:** https://github.com/abhijitgore/hylink/blob/main/PRIVACY.md
 
 ## Permission justifications
 
@@ -112,8 +111,8 @@ size, not the test harness.
 - [x] Permissions minimised — `tabs` deliberately not requested
 - [x] First-run onboarding (options page opens once on install)
 - [x] Automated tests (`node tests/run.js`)
-- [ ] `homepage_url` in the manifest, once there is a public repo or site
-- [ ] Privacy policy hosted at a public URL
+- [x] `homepage_url` in the manifest — https://github.com/abhijitgore/hylink
+- [x] Privacy policy hosted at a public URL
 - [ ] Screenshots and the 440×280 tile
 - [ ] Developer account verified, with a published contact email
 

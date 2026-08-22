@@ -2,8 +2,9 @@
   "manifest_version": 3,
   "name": "HyLink — Hover Link Menu",
   "short_name": "HyLink",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Hover a link in a page's text for a quiet menu: open it in a tab, window, incognito, or a tiled side window, or copy it.",
+  "homepage_url": "https://github.com/abhijitgore/hylink",
   "minimum_chrome_version": "114",
   "permissions": [
     "storage",
