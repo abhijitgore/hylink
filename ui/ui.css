@@ -1,0 +1,202 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --accent: #4f46e5;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f172a; --card: #1e293b; --ink: #e2e8f0; --muted: #94a3b8; --line: #334155; --accent: #a5b4fc; }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+.wrap { max-width: 620px; margin: 0 auto; padding: 32px 24px 48px; }
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
+.sub { color: var(--muted); margin: 4px 0 0; }
+section {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 18px;
+}
+.switch { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; cursor: pointer; }
+.switch input { margin-top: 2px; accent-color: var(--accent); width: 16px; height: 16px; }
+.switch span { display: flex; flex-direction: column; }
+.switch em { font-style: normal; color: var(--muted); font-size: 12px; }
+.field { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 9px 0; }
+.field.hidden { display: none; }
+.range { display: flex; align-items: center; gap: 10px; }
+.range output { min-width: 56px; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+input[type="range"] { accent-color: var(--accent); width: 200px; }
+select, textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+textarea { width: 100%; resize: vertical; }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; margin-bottom: 8px; }
+footer { margin-top: 16px; min-height: 20px; }
+.status { color: var(--accent); font-size: 12px; opacity: 0; transition: opacity .15s; }
+.status.show { opacity: 1; }
+code { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; font-size: 12px; }
+
+.popup { width: 260px; padding: 14px 16px 16px; }
+.popup h1 { font-size: 15px; margin-bottom: 8px; }
+.link-btn {
+  all: unset;
+  margin-top: 10px;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 13px;
+}
+.link-btn:hover { text-decoration: underline; }
+
+/* ------------------------------------------------- first-run explainer + demo */
+
+.intro .steps { margin: 0 0 10px; padding-left: 20px; }
+.intro .steps li { margin: 4px 0; }
+.intro kbd { font: inherit; border: 1px solid currentColor; border-radius: 3px;
+  padding: 0 4px; opacity: .8; }
+
+/* The demo is drawn, not recorded: a few hundred bytes of CSS instead of a GIF, so it
+   stays crisp on any display, follows the colour scheme, and can't go stale when the
+   menu changes — the icons in it are the real ones, injected from src/icons.js.
+
+   Everything is positioned against the link itself rather than against fixed pixel
+   offsets, so it stays aligned whatever the font renders at, and every keyframe list
+   runs on the same 8s clock so the percentages line up. */
+.demo {
+  margin: 0 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  overflow: hidden;
+}
+.stage {
+  position: relative;
+  height: 150px;
+  padding: 20px;
+  font: 13px/2 Georgia, "Times New Roman", serif;
+  user-select: none;
+}
+/* Muted through colour, not opacity: opacity would dim the menu drawn inside it. */
+.page-line { margin: 0; color: var(--muted); }
+.page-line.short { width: 74%; }
+.page-link {
+  position: relative;
+  white-space: nowrap;
+  color: #3366cc;
+  animation: demo-link 8s linear infinite;
+}
+@media (prefers-color-scheme: dark) { .page-link { color: #7aa2f7; } }
+@keyframes demo-link {
+  0%, 9% { text-decoration: none; }
+  10%, 92% { text-decoration: underline; }
+  93%, 100% { text-decoration: none; }
+}
+
+/* Stage 1 — the grip, the same shape the extension draws. */
+.page-link .grip {
+  position: absolute; left: calc(100% + 3px); top: 50%;
+  display: flex; align-items: center; justify-content: center; gap: 2.5px;
+  width: 22px; height: 15px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .62);
+  border: 1px solid rgba(79, 70, 229, .3);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, .14);
+  opacity: 0;
+  animation: demo-grip 8s ease-out infinite;
+}
+.page-link .grip i { width: 3px; height: 3px; border-radius: 50%; background: #4f46e5; }
+@media (prefers-color-scheme: dark) {
+  .page-link .grip {
+    background: rgba(15, 23, 42, .66);
+    border-color: rgba(165, 180, 252, .42);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+  }
+  .page-link .grip i { background: #a5b4fc; }
+}
+/* Transform and opacity only. A colour change here would need an implicit keyframe at
+   0%, which interpolates across the whole first half and turns the capsule into a
+   coloured blob long before the pointer arrives. */
+@keyframes demo-grip {
+  0%, 19%   { opacity: 0; transform: translateY(-50%) scale(.55); }
+  22%, 36%  { opacity: 1; transform: translateY(-50%) scale(1); }
+  40%       { opacity: 1; transform: translateY(-50%) scale(1.12); }
+  43%, 100% { opacity: 0; transform: translateY(-50%) scale(1.12); }
+}
+
+/* Stage 2 — the action bar. */
+.page-link .bar {
+  position: absolute; left: calc(100% + 3px); top: -6px;
+  display: block;
+  padding: 4px 4px 2px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 6px 22px rgba(15, 23, 42, .16);
+  opacity: 0;
+  transform-origin: 0 40%;
+  animation: demo-bar 8s ease-out infinite;
+}
+@keyframes demo-bar {
+  0%, 40%   { opacity: 0; transform: scale(.6); }
+  45%, 88%  { opacity: 1; transform: scale(1); }
+  93%, 100% { opacity: 0; transform: scale(1); }
+}
+.demo-row { display: flex; gap: 2px; }
+.demo-btn {
+  width: 26px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+  color: var(--muted);
+}
+.demo-btn svg :not(.fill) { fill: none; stroke: currentColor; stroke-width: 1.4;
+  stroke-linecap: round; stroke-linejoin: round; }
+.demo-btn svg .fill { fill: currentColor; stroke: none; opacity: .28; }
+.demo-btn.on { background: rgba(79, 70, 229, .12); color: var(--accent); }
+.demo-cap {
+  font: 11px/1.5 -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--muted); margin: 3px 4px 1px;
+}
+
+/* The pointer. `left`/`top` rather than a transform, so the stops can be expressed
+   relative to the link ("just past its end") instead of in absolute pixels. */
+.page-link .cursor {
+  position: absolute; left: -70px; top: 44px;
+  fill: var(--ink);
+  stroke: var(--card);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, .3));
+  animation: demo-cursor 8s ease-in-out infinite;
+}
+@keyframes demo-cursor {
+  0%        { left: -70px; top: 44px; opacity: 0; }
+  4%        { opacity: 1; }
+  /* Arrives on the link and settles — nothing happens until it stops. */
+  12%, 30%  { left: 14px; top: 8px; opacity: 1; }
+  /* Then moves onto the grip, which is what opens the bar. */
+  38%, 88%  { left: calc(100% + 8px); top: 6px; opacity: 1; }
+  96%, 100% { left: -70px; top: 44px; opacity: 0; }
+}
+
+/* Reduced motion gets the last frame as a still: the bar open, nothing moving. */
+@media (prefers-reduced-motion: reduce) {
+  .page-link, .page-link .grip, .page-link .bar, .page-link .cursor { animation: none; }
+  .page-link { text-decoration: underline; }
+  .page-link .grip { opacity: 0; }
+  .page-link .bar { opacity: 1; transform: scale(1); }
+  .page-link .cursor { left: calc(100% + 8px); top: 6px; opacity: 1; }
+}

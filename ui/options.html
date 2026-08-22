@@ -1,0 +1,112 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>HyLink options</title>
+<link rel="stylesheet" href="ui.css">
+<main class="wrap">
+  <header>
+    <h1>HyLink</h1>
+    <p class="sub">Hover a hyperlink to get a menu of ways to open it.</p>
+  </header>
+
+  <section class="intro">
+    <h2>How it works</h2>
+    <figure class="demo" aria-label="Animation: the pointer rests on a link, three dots
+      appear beside it, and moving onto them opens the action bar.">
+      <div class="stage">
+        <p class="page-line">Chrome ships a lot of quiet detail, and</p>
+        <p class="page-line">the <span class="page-link">tab strip<!--
+          --><span class="grip"><i></i><i></i><i></i></span><!--
+          --><span class="bar" id="demoBar"></span><!--
+          --><svg class="cursor" viewBox="0 0 12 18" width="12" height="18" aria-hidden="true"
+            ><path d="M1 1l9.5 8.2-4.4.5 2.4 5.1-2.2 1-2.4-5.1-2.9 3.3z"/></svg><!--
+        --></span> is a good example of it.</p>
+        <p class="page-line short">Most of it you never have to think about.</p>
+      </div>
+    </figure>
+    <ol class="steps">
+      <li><strong>Rest the pointer on a link</strong> in a page's text. Moving restarts
+        the wait, so reading never triggers anything, and links in navigation bars,
+        headers and sidebars are skipped.</li>
+      <li><strong>Three dots appear</strong> just past the link.</li>
+      <li><strong>Move onto them</strong> and they open into the action bar. Press
+        <kbd>Esc</kbd>, scroll, or move away to dismiss it.</li>
+    </ol>
+    <p class="sub">HyLink sends nothing anywhere — no analytics, no network requests.
+      Your settings sync through your Chrome profile and never leave it.</p>
+  </section>
+
+  <section>
+    <label class="switch">
+      <input type="checkbox" id="enabled">
+      <span><strong>Enable HyLink</strong><em>Turn the hover menu on everywhere.</em></span>
+    </label>
+  </section>
+
+  <section>
+    <h2>Appearance</h2>
+    <label class="field">
+      <span>When you hover a link</span>
+      <select id="expandMode">
+        <option value="handle">Show a small grip, expand on hover</option>
+        <option value="immediate">Show the full menu right away</option>
+      </select>
+    </label>
+    <p class="sub">The grip keeps links readable while you browse — the full menu
+      only appears once you move onto it (or hold the modifier key).</p>
+  </section>
+
+  <section>
+    <h2>Timing</h2>
+    <label class="field">
+      <span>Rest on a link this long before it appears</span>
+      <span class="range">
+        <input type="range" id="hoverDelay" min="0" max="1500" step="50">
+        <output id="hoverDelayOut"></output>
+      </span>
+    </label>
+    <p class="sub">Moving the pointer restarts this, so sweeping across text while
+      reading never triggers the menu.</p>
+    <label class="switch">
+      <input type="checkbox" id="requireModifier">
+      <span><strong>Only show while a modifier key is held</strong>
+        <em>Keeps the menu out of the way until you ask for it.</em></span>
+    </label>
+    <label class="field" id="modifierField">
+      <span>Modifier key</span>
+      <select id="modifier">
+        <option value="alt">Alt / Option</option>
+        <option value="ctrl">Control</option>
+        <option value="shift">Shift</option>
+        <option value="meta">Command / Windows</option>
+      </select>
+    </label>
+  </section>
+
+  <section>
+    <h2>Actions shown in the menu</h2>
+    <div id="actions" class="actions"></div>
+    <label class="switch">
+      <input type="checkbox" id="newTabActive">
+      <span><strong>Switch to new tabs immediately</strong>
+        <em>Off means "Open in new tab" opens it in the background.</em></span>
+    </label>
+  </section>
+
+  <section>
+    <h2>Where it appears</h2>
+    <label class="switch">
+      <input type="checkbox" id="skipNavigation">
+      <span><strong>Skip navigation, headers and sidebars</strong>
+        <em>Only offer actions on links in the page's own text. Hold the modifier
+          key to get the menu on a navigation link anyway.</em></span>
+    </label>
+    <p class="sub" style="margin-top:14px">Never show on these sites — one hostname per line. Subdomains are covered too — <code>example.com</code>
+      also disables <code>docs.example.com</code>.</p>
+    <textarea id="disabledSites" rows="5" spellcheck="false" placeholder="mail.google.com"></textarea>
+  </section>
+
+  <footer><span id="status" class="status"></span></footer>
+</main>
+<script src="../src/settings.js"></script>
+<script src="../src/icons.js"></script>
+<script src="options.js"></script>

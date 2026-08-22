@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+*.log
+
+# Generated for the manual test harness by tests/harness/build.sh
+tests/harness/content.harness.js

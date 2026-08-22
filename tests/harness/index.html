@@ -1,0 +1,177 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>HyLink hover harness</title>
+<style>
+  body { font: 16px/1.7 Georgia, serif; margin: 0; padding: 40px 60px 900px;
+         max-width: 760px; color: #202122; background: #fff; }
+  h1 { font: 600 22px system-ui; }
+  p { margin: 22px 0; }
+  a { color: #3366cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .note { font: 13px system-ui; color: #72777d; background: #f8f9fa;
+          border-left: 3px solid #a2a9b1; padding: 8px 12px; }
+  /* A stand-in for Wikipedia's page preview: positioned, opaque, shadowed,
+     appended to <body>, and claiming the maximum z-index. */
+  .preview { position: absolute; width: 320px; padding: 14px 16px;
+             background: #fff; border: 1px solid #a2a9b1; border-radius: 2px;
+             box-shadow: 0 2px 10px rgba(0,0,0,.25); z-index: 2147483647;
+             font: 14px/1.5 system-ui; color: #202122; }
+  .preview b { display: block; font-size: 16px; margin-bottom: 6px; }
+  .spacer { height: 62vh; }
+  /* Case 4 — page chrome. The top bar is semantic; the rail is deliberately
+     div-soup with only a class name to go on. */
+  .topbar { position: sticky; top: 0; background: #f8f9fa; border-bottom: 1px solid #eaecf0;
+            margin: 0 -60px 24px; padding: 10px 60px; font: 14px system-ui; }
+  .topbar a { margin-right: 18px; }
+  .left-rail { float: left; width: 150px; margin: 0 24px 12px -40px; padding: 10px 12px;
+               background: #f8f9fa; border: 1px solid #eaecf0; font: 13px/2 system-ui; }
+  .left-rail a { display: block; }
+</style>
+
+<nav class="topbar"><a href="https://example.com/home">Home</a><a
+  href="https://example.com/docs">Docs</a><a href="https://example.com/pricing">Pricing</a></nav>
+
+<h1>HyLink hover harness</h1>
+<p class="note"><b>Before using this page: turn HyLink off for this site</b> from its
+toolbar popup. The installed extension injects into this page too, and you would be
+looking at two menus stacked on top of each other.<br><br>
+This page stubs <code>chrome.*</code> and loads the real <code>src/settings.js</code> +
+<code>src/content.js</code>. Case 2's link spawns a preview card 500&nbsp;ms after hover —
+100&nbsp;ms after the menu appears — reproducing the Wikipedia race exactly.</p>
+
+<p id="case1">Case 1 — rest on this <a href="https://example.com/plain">plain link</a>:
+a small grip appears beside it. Move onto the grip and it expands into the full bar.
+Sweep past without stopping and nothing should appear at all.</p>
+
+<p id="case2">Case 2 — this one behaves like
+<a href="https://en.wikipedia.org/wiki/Google_Chrome" data-preview="1">Google Chrome</a>
+on Wikipedia: a preview card drops in underneath it half a second after you hover. Expand
+the grip and the bar must place itself clear of the card.</p>
+
+<div class="left-rail"><a href="https://example.com/a">Getting started</a>
+<a href="https://example.com/b">Reference</a><a href="https://example.com/c">Changelog</a></div>
+
+<p id="case5">Case 5 — this
+<a href="https://example.com/article?utm_source=newsletter&amp;fbclid=abc123&amp;id=7">link carries trackers</a>;
+hovering <em>Copy clean link</em> should offer to remove two of them.</p>
+
+<p id="case4">Case 4 — the links in the bar above and the rail on the left must stay
+silent, while this <a href="https://example.com/prose">link in the prose</a> still
+works. Holding the modifier key over a navigation link brings the menu back.</p>
+
+<div class="spacer"></div>
+<p id="case3">Case 3 — a
+<a href="https://example.com/bottom">link near the bottom</a> of the viewport.</p>
+
+<script>
+// --- Chrome API stubs -------------------------------------------------------
+const store = { hoverDelay: 400 };
+window.chrome = {
+  storage: {
+    sync: { get: async (defaults) => ({ ...defaults, ...store }) },
+    onChanged: { addListener() {} }
+  },
+  runtime: {
+    sendMessage: async (msg) => {
+      // The clean endpoint runs the real rules, so the harness exercises them too.
+      if (msg.type === 'hylink/clean') return { ok: true, ...self.HyLinkClean.cleanUrl(msg.url) };
+      console.log('[harness] action:', msg.action, msg.url);
+      return { ok: true };
+    }
+  }
+};
+
+// --- Wikipedia-style hover preview -----------------------------------------
+let card = null, cardTimer = 0;
+document.querySelectorAll('a[data-preview]').forEach((a) => {
+  a.addEventListener('mouseenter', () => {
+    clearTimeout(cardTimer);
+    cardTimer = setTimeout(() => {
+      if (card) card.remove();
+      const r = a.getBoundingClientRect();
+      card = document.createElement('div');
+      card.className = 'preview';
+      card.innerHTML = '<b>Google Chrome</b>Google Chrome is a web browser developed by ' +
+                       'Google. It was first released in 2008 for Microsoft Windows.';
+      document.body.appendChild(card);
+      card.style.left = (r.left + scrollX) + 'px';
+      card.style.top  = (r.bottom + scrollY + 8) + 'px';
+      console.log('[harness] preview card shown');
+    }, 500);
+  });
+  // Wikipedia dismisses its preview when you leave the link; do the same, so a
+  // stale card doesn't sit around blocking the other test cases.
+  a.addEventListener('mouseleave', () => {
+    clearTimeout(cardTimer);
+    setTimeout(() => { if (card && !card.matches(':hover')) { card.remove(); card = null; } }, 300);
+  });
+});
+
+// Does hovering `selector` and settling produce a menu? Returns true/false.
+window.__hoverProbe = async function (selector, { alt = false } = {}) {
+  const a = document.querySelector(selector);
+  const r = a.getBoundingClientRect();
+  const at = { bubbles: true, clientX: r.left + 4, clientY: r.top + r.height / 2, altKey: alt };
+  a.dispatchEvent(new PointerEvent('pointerover', at));
+  a.dispatchEvent(new PointerEvent('pointermove', at));
+  await new Promise((res) => setTimeout(res, 700));
+  // The copy under test only; the installed extension's host is <hylink-root>.
+  const shown = document.querySelectorAll('hylink-harness-root').length > 0;
+  document.body.dispatchEvent(new PointerEvent('pointerover',
+    { bubbles: true, clientX: 2, clientY: 2 }));
+  await new Promise((res) => setTimeout(res, 400));
+  return shown;
+};
+
+// `?probe` runs the checks unattended and puts the result in the title, so headless
+// Chrome (--dump-dom) can read it without a driver:
+//   chrome --headless --virtual-time-budget=8000 --dump-dom 'http://…/index.html?probe'
+if (location.search.includes('probe')) {
+  window.addEventListener('load', async () => {
+    const out = {};
+    out.prose  = await window.__hoverProbe('#case4 a');
+    out.topbar = await window.__hoverProbe('.topbar a');
+    out.rail   = await window.__hoverProbe('.left-rail a');
+    out.forced = await window.__hoverProbe('.left-rail a', { alt: true });
+    // Headless runs report the environment too: the content script closes the menu on
+    // blur and on visibilitychange, so a hidden or unfocused page legitimately shows
+    // nothing and every probe reads false.
+    out.env = { hidden: document.hidden, focused: document.hasFocus() };
+    document.title = 'PROBE ' + JSON.stringify(out);
+  });
+}
+
+// Exposed for the automated check: does a moving pointer keep the grip suppressed?
+window.__sweepTest = async function (selector) {
+  const a = document.querySelector(selector);
+  const r = a.getBoundingClientRect();
+  const count = () => document.querySelectorAll('hylink-harness-root').length;
+  const t0 = performance.now();
+  a.dispatchEvent(new PointerEvent('pointerover',
+    { bubbles: true, clientX: r.left + 4, clientY: r.top + 4 }));
+  for (let i = 0; i < 9; i++) {
+    await new Promise((res) => setTimeout(res, 60));
+    a.dispatchEvent(new PointerEvent('pointermove',
+      { bubbles: true, clientX: r.left + 4 + i * 9, clientY: r.top + 4 }));
+  }
+  const whileMoving = count();
+  const elapsed = Math.round(performance.now() - t0);
+  await new Promise((res) => setTimeout(res, 600));  // now let it settle
+  // `elapsed` matters: a background tab clamps setTimeout to ~1 s, which stretches
+  // the sweep past the hover delay and makes a working rest gate look broken.
+  return { whileMoving, elapsed, afterSettling: count() };
+};
+</script>
+<script>
+// The installed extension injects here too. Its host is <hylink-root>; the copy
+// under test is renamed to <hylink-harness-root> by build.sh, so hide the former
+// and both the screenshots and the probes are unambiguous.
+new MutationObserver(() => {
+  for (const el of document.querySelectorAll('hylink-root')) el.style.display = 'none';
+}).observe(document.documentElement, { childList: true, subtree: true });
+</script>
+<script src="../../src/settings.js"></script>
+<script src="../../src/clean-list.js"></script>
+<script src="../../src/clean.js"></script>
+<script src="../../src/icons.js"></script>
+<script src="./content.harness.js"></script>
