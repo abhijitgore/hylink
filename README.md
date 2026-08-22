@@ -185,8 +185,8 @@ re-encode a URL that had nothing to remove — a link you copy comes back byte-f
 unless something actually came off. Site-scoped rules stay scoped, so YouTube's `si`
 comes off a `/watch` link and nothing else.
 
-`src/clean-list.js` carries Brave's Mozilla Public License 2.0, noted in its header;
-the rest of HyLink is not covered by it. Cleaning runs in the service worker, so the
+`src/clean-list.js` carries Brave's Mozilla Public License 2.0, noted in its header and
+in [NOTICE.md](NOTICE.md); the rest of HyLink is MIT, see [LICENSE](LICENSE). Cleaning runs in the service worker, so the
 rule list never gets injected into the pages you visit.
 
 ## Publishing

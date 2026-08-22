@@ -19,13 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Third-party content
-
-src/clean-list.js is a verbatim copy of the URL-cleaning rules published by Brave
-Software in https://github.com/brave/adblock-lists and remains licensed under the
-Mozilla Public License 2.0, as recorded in that file's header. A copy of the MPL is
-available at https://mozilla.org/MPL/2.0/. The MIT licence above covers the rest of
-this repository.
