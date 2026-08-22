@@ -226,6 +226,11 @@ rule list never gets injected into the pages you visit.
 
 ## Publishing
 
+[RELEASING.md](RELEASING.md) is the release checklist — the important part being that
+the [Homebrew tap](https://github.com/abhijitgore/homebrew-tap) pins a version and a
+tarball checksum, so a new tag here is not finished until the cask there is bumped.
+Nothing errors if they drift; `brew install` just keeps serving the old version.
+
 `docs/store-listing.md` holds everything the Chrome Web Store dashboard asks for —
 single-purpose statement, listing copy, permission justifications, privacy answers, and
 what still has to be produced (screenshots and the 440×280 tile). `PRIVACY.md` is the
