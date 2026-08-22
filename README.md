@@ -1,7 +1,47 @@
 # HyLink — hover link menu for Chrome
 
-Rest the pointer on a hyperlink in the page's text and a small frosted capsule of
-three dots appears beside it. Move onto the capsule and it expands into the action bar:
+Rest the pointer on a hyperlink in a page's text, and the ways to open it come to you.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/demo-dark.gif">
+  <img src="docs/demo-light.gif" alt="A pointer settles on a link; three dots appear beside it; moving onto them opens a row of actions." width="533">
+</picture>
+
+## Install
+
+Not on the Chrome Web Store yet — `docs/store-listing.md` tracks what is left before
+submission. Until then, either of these works.
+
+### With Homebrew
+
+```
+brew install --cask abhijitgore/tap/hylink
+```
+
+That puts the extension in `~/Library/Application Support/HyLink`, and `brew upgrade`
+updates it in place. Chrome cannot enable an extension that did not come from its own
+store, so load it once:
+
+1. Open `chrome://extensions`.
+2. Turn on **Developer mode** (top right).
+3. Click **Load unpacked** and pick `~/Library/Application Support/HyLink`.
+4. Reload any tabs that were already open — content scripts only attach on load.
+
+Because the path stays the same across upgrades, that is a one-time step; later
+`brew upgrade` runs land under the same folder and a **Reload** on
+`chrome://extensions` picks them up.
+
+### From a clone
+
+```
+git clone https://github.com/abhijitgore/hylink.git
+```
+
+Then the same four steps, pointing **Load unpacked** at the cloned folder.
+
+## What is in the menu
+
+Move onto the dots and they expand into the action bar:
 
 | Icon | Action | What it does |
 | --- | --- | --- |
@@ -38,16 +78,6 @@ split view they navigate the other pane, and otherwise they tile two real window
 across the display. It looks similar and behaves differently — a second window, not a
 pane. The moment Chrome ships the API, this becomes a small change; see
 [How "open in side" works](#how-open-in-side-works) for the details.
-
-## Install (unpacked)
-
-Not on the Chrome Web Store yet — `docs/store-listing.md` tracks what is left before
-submission.
-
-1. Open `chrome://extensions`.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and pick this folder.
-4. Reload any tabs that were already open — content scripts only attach on load.
 
 ## Settings
 
