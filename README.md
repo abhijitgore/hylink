@@ -29,7 +29,12 @@ store, so load it once:
 
 Because the path stays the same across upgrades, that is a one-time step; later
 `brew upgrade` runs land under the same folder and a **Reload** on
-`chrome://extensions` picks them up.
+`chrome://extensions` picks them up. `brew uninstall --cask hylink` takes it away
+again.
+
+If you were already loading HyLink from a clone, remove that one from
+`chrome://extensions` first — two copies loaded at once means two menus on every
+link.
 
 ### From a clone
 
