@@ -107,3 +107,17 @@ double quotes do not protect backticks — only single quotes do.
 **How to apply:** write any commit message containing backticks, `$`, or `!` to a
 file and use `git commit -F`, or a quoted heredoc (`<<'EOF'`). Never rely on
 double-quoted `-m` for a message with code spans in it.
+
+## A screenshot script that cannot fail will happily ship a blank
+
+`build-store-shots.js` hovered a link, slept a second and captured — and about two
+runs in three it captured an ordinary web page with no menu on it, reporting success.
+The cause was a race: `Extensions.loadUnpacked` returns before the extension is
+registered, and content scripts are injected *at navigation*, so a page that wins that
+race has no content script at all and no amount of further hovering will produce one.
+Only a reload fixes it.
+
+**How to apply:** any capture step needs a readiness assertion tied to the thing being
+captured — here, polling for `hylink-root` and throwing if it never appears, plus a
+check that the two states are not byte-identical. And when a retry is meant to recover
+from a missing injection, retry the *navigation*, not the interaction.

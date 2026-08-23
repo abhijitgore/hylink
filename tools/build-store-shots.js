@@ -134,6 +134,7 @@ class CDP {
   const cdp = new CDP(chrome);
   await cdp.send('Browser.getVersion');                       // waits for the pipe
   const { id: extId } = await cdp.send('Extensions.loadUnpacked', { path: ROOT });
+  await sleep(1500);            // registration is not instant, and see the reload below
   console.log('loaded ' + extId);
 
   /* 1 + 2 — the menu on an article ------------------------------------------------- */
@@ -148,15 +149,47 @@ class CDP {
   if (!rect) throw new Error('could not find the demo link on the article page');
   const y = (rect.top + rect.bottom) / 2;
 
-  await cdp.move(article.sessionId, rect.right - 30, y);      // hover the link
-  await sleep(1000);
+  /**
+   * Hovering once and sleeping is not enough: on a page that has only just loaded the
+   * content script may not have its listeners attached yet, and a missed `pointerover`
+   * never fires again while the pointer stays on the same link. So leave the link and
+   * come back until the menu actually exists — and fail loudly if it never does, since
+   * the failure mode otherwise is a screenshot of an ordinary web page.
+   */
+  const shown = () => cdp.eval(article.sessionId, "!!document.querySelector('hylink-root')");
+  let ready = false;
+  for (let attempt = 0; attempt < 4 && !ready; attempt++) {
+    // A reload, not just another hover. If the page won the race against the
+    // extension registering, it has no content script at all and never will —
+    // content scripts are injected at navigation, so only a fresh load can fix it.
+    if (attempt) {
+      await cdp.send('Page.reload', {}, article.sessionId);
+      await sleep(2500);
+    }
+    for (let i = 0; i < 3 && !ready; i++) {
+      // Leave the link and come back: a `pointerover` missed while the listeners were
+      // still attaching never fires again while the pointer stays on the same element.
+      await cdp.move(article.sessionId, 60, 720);              // somewhere blank
+      await sleep(200);
+      await cdp.move(article.sessionId, rect.right - 30, y);   // hover the link
+      await sleep(800);                                        // 220ms delay, then the fade
+      ready = await shown();
+    }
+  }
+  if (!ready) throw new Error('the menu never appeared — nothing to screenshot');
   await cdp.shoot(article.sessionId, 'screenshot-2-grip.png');
 
   // The menu lives in a closed shadow root, so there is nothing to query for its
   // position — the grip's placement is re-derived here the way content.js derives it.
   await cdp.move(article.sessionId, rect.right + GRIP_GAP + GRIP_W / 2, y);
-  await sleep(1000);
+  await sleep(1200);
   await cdp.shoot(article.sessionId, 'screenshot-1-actions.png');
+  // The bar is far bigger than the grip, so two identical files mean the pointer
+  // missed the capsule and both shots caught the same state.
+  if (fs.readFileSync(path.join(OUT, 'screenshot-1-actions.png'))
+        .equals(fs.readFileSync(path.join(OUT, 'screenshot-2-grip.png')))) {
+    throw new Error('the action bar never opened — both shots are the same image');
+  }
 
   /* 3 — the settings page ---------------------------------------------------------- */
   console.log('settings page + promo tile:');
