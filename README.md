@@ -1,48 +1,55 @@
 # HyLink — hover link menu for Chrome
 
-Rest the pointer on a hyperlink in a page's text, and the ways to open it come to you.
+Hover the mouse over a hyperlink in a page's text, and the ways to open it come to you.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/demo-dark.gif">
-  <img src="docs/demo-light.gif" alt="A pointer settles on a link; three dots appear beside it; moving onto them opens a row of actions." width="533">
+  <img src="docs/demo-light.gif" alt="The mouse hovers over a link; three dots appear beside it; moving onto them opens a row of actions." width="533">
 </picture>
+
+## Why this exists
+
+I got tired of right-clicking every link I wanted to open somewhere other than where I
+was — right-click, hunt down the menu item, repeat, dozens of times a day. The whole
+design goal is *reach*: the actions appear right where the pointer already is, one
+short move away, and they get out of the way again the moment it is clear I did not
+want them.
 
 ## Install
 
 Not on the Chrome Web Store yet — `docs/store-listing.md` tracks what is left before
-submission. Until then, either of these works.
-
-### With Homebrew
-
-```
-brew install --cask abhijitgore/tap/hylink
-```
-
-That puts the extension in `~/Library/Application Support/HyLink`, and `brew upgrade`
-updates it in place. Chrome cannot enable an extension that did not come from its own
-store, so load it once:
-
-1. Open `chrome://extensions`.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and pick `~/Library/Application Support/HyLink`.
-4. Reload any tabs that were already open — content scripts only attach on load.
-
-Because the path stays the same across upgrades, that is a one-time step; later
-`brew upgrade` runs land under the same folder and a **Reload** on
-`chrome://extensions` picks them up. `brew uninstall --cask hylink` takes it away
-again.
-
-If you were already loading HyLink from a clone, remove that one from
-`chrome://extensions` first — two copies loaded at once means two menus on every
-link.
-
-### From a clone
+submission. Until then, clone it:
 
 ```
 git clone https://github.com/abhijitgore/hylink.git
 ```
 
-Then the same four steps, pointing **Load unpacked** at the cloned folder.
+Chrome cannot enable an extension that did not come from its own store, so load it once:
+
+1. Open `chrome://extensions`.
+2. Turn on **Developer mode** (top right).
+3. Click **Load unpacked** and pick the cloned folder.
+4. Reload any tabs that were already open — content scripts only attach on load.
+
+To use the **Open in incognito** action, also tick **Allow in incognito** for HyLink
+on `chrome://extensions` — Chrome does not let an extension grant itself that, by
+design. Until you do, the action says so in its menu caption rather than failing
+silently.
+
+### With Homebrew instead
+
+```
+brew install --cask abhijitgore/tap/hylink
+```
+
+That puts the extension in `~/Library/Application Support/HyLink`; point
+**Load unpacked** there in the same four steps. The path stays the same across
+upgrades, so loading is a one-time step — later `brew upgrade` runs land under the
+same folder and a **Reload** on `chrome://extensions` picks them up.
+`brew uninstall --cask hylink` takes it away again.
+
+If you were already loading HyLink from a clone, remove that one from
+`chrome://extensions` first — two copies loaded at once means two menus on every link.
 
 ## What is in the menu
 
@@ -53,36 +60,84 @@ Move onto the dots and they expand into the action bar:
 | → | **Open link** | Navigates the current tab to the link. |
 | ⊞ | **Open in new tab** | New tab right after the current one. |
 | ↗ | **Open in new window** | A fresh, normally-sized window. |
-| 🕵 | **Open in incognito** | Reuses an open incognito window, or makes one. Needs *Allow in incognito* — see below. |
+| 🕵 | **Open in incognito** | Reuses an open incognito window, or makes one. Needs *Allow in incognito* — see [Install](#install). |
 | ▐ | **Open in side (right)** | If the tab is **already in a Chrome split view**, navigates the other pane. Otherwise snaps the current window to the **left half** of the display and opens the link in a new window on the **right half**. |
 | ▄ | **Open in side (stacked)** | Same split-view reuse; otherwise snaps the current window to the **top half** and opens the link in a new window on the **bottom half**. |
 | 📋 | **Copy link address** | Copies the resolved absolute URL to the clipboard. |
 | ✨ | **Copy clean link** | Copies the URL with tracking parameters stripped, the way Brave's *Copy clean link* does. Hovering the button shows how many will come off before you click. |
 
-## Why this exists
+## How "open in side" works
 
-I got tired of right-clicking every link I wanted to open somewhere other than where I
-was. Right-click, hunt down the menu, pick the item, do it again on the next link — for
-something I do dozens of times a day, that is a lot of ceremony. I wanted the same
-choices sitting right where my pointer already was.
+**It is not Chrome's real Split View, and it cannot be yet.** Chrome 140 added Split
+View, but the extension API for it is read-only: `tabs.splitViewId` lets an extension
+*detect* a split view and nothing more. The proposal for a create API
+([w3c/webextensions#967](https://github.com/w3c/webextensions/issues/967)) was opened
+in March 2026 and is still open; for now only Chrome's own right-click →
+**Open link in split view** makes one. The moment that API ships, this becomes a small
+change. Until then, HyLink does the two things it actually can:
 
-So the whole design goal is *reach*: the actions appear next to the link, one short
-move away, and they get out of the way again the moment it is clear I did not want
-them.
+1. **Reuse an existing split view.** If the link's tab is already one pane of a split
+   view, *either* side action navigates the other pane — no new window. Chrome offers
+   split views both side-by-side and stacked, and the API exposes no orientation, so
+   both actions simply fill the sibling pane of whatever layout you already have; they
+   differ only in how they tile when there is no split view. Detecting one needs
+   **Chrome 140+**; on older Chrome this step is skipped.
+2. **Otherwise, tile real windows.** Most sites refuse to render inside an iframe
+   (`X-Frame-Options` / CSP `frame-ancestors`), which rules out side-panel and
+   injected-pane approaches, so HyLink uses `chrome.windows` plus
+   `chrome.system.display`. It restores the current window out of
+   maximized/fullscreen first, because Chrome ignores bounds while a window is
+   maximized and rejects `state` combined with bounds in a single update call; it
+   measures the **work area** of the display the window sits on, so the tiles never
+   slide under the macOS Dock/menu bar or the Windows taskbar; and if the display API
+   is unavailable it falls back to the current window's own bounds. The result looks
+   similar to a split view but behaves differently — a second window, not a pane.
 
-## A caveat about "open in side"
+## Staying out of the way
 
-**It is not Chrome's real sidebar, and it cannot be yet.** Chrome 140 added Split View,
-but the extension API for it is read-only: `tabs.splitViewId` lets an extension *detect*
-a split view and nothing more. There is no call to create one — the proposal for that
-([w3c/webextensions#967](https://github.com/w3c/webextensions/issues/967)) is still
-open. Only Chrome's own right-click → **Open link in split view** can make one.
+A full toolbar popping up over every link you pass would make a page unreadable, so
+nothing appears until you actually show interest:
 
-So the two side actions do the closest achievable thing: if the tab is already in a
-split view they navigate the other pane, and otherwise they tile two real windows
-across the display. It looks similar and behaves differently — a second window, not a
-pane. The moment Chrome ships the API, this becomes a small change; see
-[How "open in side" works](#how-open-in-side-works) for the details.
+1. **The mouse has to hover, not just pass through.** Any movement of more than a few
+   pixels restarts the hover delay, so sweeping across text while reading never
+   triggers anything.
+2. **Then you get three dots** in a small frosted capsule, sitting just past the end of
+   the link. It is about one character wide, translucent and blurred rather than solid,
+   so the text underneath still shows through, and it fades out ~160 ms after you move
+   away. It fills in solid the moment the pointer reaches it.
+3. **Only when you move onto the capsule** does the bar open, growing out of it so it
+   stays under your pointer. Holding the modifier key skips straight to it.
+
+**Navigation links get nothing at all.** Links inside `<nav>`, `<header>`, `<footer>`,
+`<aside>`, or an element with a navigational role — plus div-soup equivalents named
+`sidebar`, `navbar`, `breadcrumbs`, `toolbar` and friends — are page chrome, not
+reading material, and a hover menu there is pure noise. Hold the modifier key to get
+the menu on one anyway, or untick **Skip navigation, headers and sidebars** in options.
+Class and id names are matched on token boundaries, so `table-wrapper` is not `tabs`.
+
+Scrolling closes the menu outright — if you're scrolling, you're reading, not clicking.
+Prefer the old behaviour? Set **Show the full menu right away** in options.
+
+## Settings
+
+The options page opens once on install and leads with a looping animation of the whole
+interaction — the mouse hovers, dots appear, dots open into the bar. It is drawn in
+CSS rather than recorded, using the real icon set, so it stays sharp on any display,
+follows your colour scheme, and cannot fall out of date with the menu. With
+`prefers-reduced-motion` it holds the final frame as a still.
+
+Click the HyLink toolbar icon for a quick on/off switch and a "disable on this site"
+toggle, or open **All settings…** for:
+
+- **Grip or full menu** on hover.
+- **Skip navigation, headers and sidebars** (on by default).
+- **Hover delay** (default 220 ms) before the grip appears.
+- **Modifier gating** — optionally require Alt/Ctrl/Shift/Cmd to be held.
+- **Which of the eight actions** appear in the bar.
+- **Foreground vs background** new tabs.
+- **Disabled sites** — one hostname per line; an entry also covers its subdomains.
+
+Press <kbd>Esc</kbd>, click elsewhere, scroll, or move the pointer away to dismiss it.
 
 ## Languages
 
@@ -106,123 +161,6 @@ copy, translated in the developer dashboard rather than from `_locales/`.
 The nine non-English catalogues in `_locales/` were not written by native speakers, so
 corrections are welcome; `node tests/run.js` checks that every catalogue has exactly
 the same keys as `en` and keeps its `$placeholders$`.
-
-## Settings
-
-The options page opens once on install and leads with a looping animation of the whole
-interaction — pointer settles, dots appear, dots open into the bar. It is drawn in CSS
-rather than recorded, using the real icon set, so it stays sharp on any display,
-follows your colour scheme, and cannot fall out of date with the menu. With
-`prefers-reduced-motion` it holds the final frame as a still.
-
-Click the HyLink toolbar icon for a quick on/off switch and a "disable on this site"
-toggle, or open **All settings…** for:
-
-- **Grip or full menu** on hover.
-- **Skip navigation, headers and sidebars** (on by default).
-- **Rest delay** (default 220 ms) before the grip appears.
-- **Modifier gating** — optionally require Alt/Ctrl/Shift/Cmd to be held.
-- **Which of the eight actions** appear in the bar.
-- **Foreground vs background** new tabs.
-- **Disabled sites** — one hostname per line; an entry also covers its subdomains.
-
-Press <kbd>Esc</kbd>, click elsewhere, scroll, or move the pointer away to dismiss it.
-
-## Staying out of the way
-
-A full toolbar popping up over every link you pass would make a page unreadable, so
-nothing appears until you actually show interest:
-
-1. **The pointer has to settle.** Any movement of more than a few pixels restarts the
-   delay, so sweeping across text while reading never triggers anything.
-2. **Then you get three dots** in a small frosted capsule, sitting just past the end of
-   the link. It is about one character wide, translucent and blurred rather than solid,
-   so the text underneath still shows through, and it fades out ~160 ms after you move
-   away. It fills in solid the moment the pointer reaches it.
-3. **Only when you move onto the capsule** does the bar open, growing out of it so it
-   stays under your pointer. Holding the modifier key skips straight to it.
-
-**Navigation links get nothing at all.** Links inside `<nav>`, `<header>`, `<footer>`,
-`<aside>`, or an element with a navigational role — plus div-soup equivalents named
-`sidebar`, `navbar`, `breadcrumbs`, `toolbar` and friends — are page chrome, not
-reading material, and a hover menu there is pure noise. Hold the modifier key to get
-the menu on one anyway, or untick **Skip navigation, headers and sidebars** in options.
-Class and id names are matched on token boundaries, so `table-wrapper` is not `tabs`.
-
-Scrolling closes the menu outright — if you're scrolling, you're reading, not clicking.
-Prefer the old behaviour? Set **Show the full menu right away** in options.
-
-## Incognito
-
-Chrome will not let an extension open an incognito window unless you have ticked
-**Allow in incognito** for it on `chrome://extensions` — an extension cannot grant
-itself that, by design. Until you do, the incognito action says so in the menu caption
-rather than failing silently. HyLink puts the link in an already-open incognito window
-when there is one, instead of piling up new ones.
-
-## How "open in side" works
-
-**Chrome's native Split View cannot be created by an extension.** `tabs.splitViewId`
-(Chrome 140+) is *read-only* — extensions can detect and query split views but there
-is no API to enter or leave one. The proposal for that API
-([w3c/webextensions#967](https://github.com/w3c/webextensions/issues/967)) was opened
-in March 2026 and is still unimplemented. Only Chrome's own right-click →
-**Open link in split view** creates one.
-
-So HyLink does the two things it actually can:
-
-1. **Reuse an existing split view.** If the link's tab is already one pane of a split
-   view, *either* side action navigates the other pane — no new window. Chrome offers
-   split views both side-by-side and stacked (top/bottom), and the API exposes no
-   orientation, so both actions simply fill the sibling pane of whatever layout you
-   already have; they differ only in how they tile when there is no split view.
-   Detecting one needs **Chrome 140+**; on older Chrome this step is skipped.
-2. **Otherwise, tile real windows.** Most sites also refuse to render inside an iframe
-   (`X-Frame-Options` / CSP `frame-ancestors`), which rules out side-panel and
-   injected-pane approaches, so HyLink uses `chrome.windows` plus
-   `chrome.system.display`:
-
-- It restores the current window out of maximized/fullscreen first, because Chrome
-  ignores bounds while a window is maximized and rejects `state` combined with
-  bounds in a single update call.
-- It measures the **work area** of the display the current window sits on, so the
-  tiles never slide under the macOS Dock/menu bar or the Windows taskbar.
-- If the display API is unavailable it falls back to the current window's own bounds.
-
-## Layout
-
-```
-manifest.json
-src/settings.js     shared defaults, storage helpers, denylist matching
-src/icons.js        the menu's icon set, shared with the options page
-_locales/           ten UI translations; `en` is the fallback
-ui/i18n.js          fills the pages from _locales, keeping the English as a fallback
-src/clean.js        tracking-parameter removal (worker only)
-src/clean-list.js   GENERATED — Brave's rules, MPL-2.0; see tools/build-clean-list.js
-src/content.js      hover detection + top-layer shadow-DOM menu (all frames)
-src/tiling.js       display work-area math and window placement
-src/background.js   service worker; split-view reuse, tabs/windows privileges
-ui/                 options page and toolbar popup
-tests/run.js        `node tests/run.js` — 159 assertions, no dependencies
-tools/              regenerates the clean-link rules from Brave's list
-tests/harness/      manual page for hover timing and overlay-dodging
-icons/
-```
-
-## Tests
-
-```
-node tests/run.js
-```
-
-Loads each module into a vm context with a stubbed `chrome` and asserts on the API
-calls it makes: settings normalization, denylist matching, tiling geometry against a
-maximized window on a secondary display, the URL scheme guard (rejections *and*
-acceptances), tab placement, and every split-view fallback path.
-
-`tests/harness/` is a page for the parts that need a real browser — hover timing,
-top-layer rendering, stepping around a hover card, and the navigation denylist against
-a real nav bar and sidebar. Run `tests/harness/build.sh` first. See its README.
 
 ## Clean links
 
@@ -249,6 +187,41 @@ comes off a `/watch` link and nothing else.
 in [NOTICE.md](NOTICE.md); the rest of HyLink is MIT, see [LICENSE](LICENSE). Cleaning runs in the service worker, so the
 rule list never gets injected into the pages you visit.
 
+## Layout
+
+```
+manifest.json
+src/settings.js     shared defaults, storage helpers, denylist matching
+src/icons.js        the menu's icon set, shared with the options page
+_locales/           ten UI translations; `en` is the fallback
+ui/i18n.js          fills the pages from _locales, keeping the English as a fallback
+src/clean.js        tracking-parameter removal (worker only)
+src/clean-list.js   GENERATED — Brave's rules, MPL-2.0; see tools/build-clean-list.js
+src/content.js      hover detection + top-layer shadow-DOM menu (all frames)
+src/tiling.js       display work-area math and window placement
+src/background.js   service worker; split-view reuse, tabs/windows privileges
+ui/                 options page and toolbar popup
+tests/run.js        `node tests/run.js` — 169 assertions, no dependencies
+tools/              regenerates the clean-link rules from Brave's list
+tests/harness/      manual page for hover timing and overlay-dodging
+icons/
+```
+
+## Tests
+
+```
+node tests/run.js
+```
+
+Loads each module into a vm context with a stubbed `chrome` and asserts on the API
+calls it makes: settings normalization, denylist matching, tiling geometry against a
+maximized window on a secondary display, the URL scheme guard (rejections *and*
+acceptances), tab placement, and every split-view fallback path.
+
+`tests/harness/` is a page for the parts that need a real browser — hover timing,
+top-layer rendering, stepping around a hover card, and the navigation denylist against
+a real nav bar and sidebar. Run `tests/harness/build.sh` first. See its README.
+
 ## Publishing
 
 [RELEASING.md](RELEASING.md) is the release checklist — the important part being that
@@ -257,13 +230,14 @@ tarball checksum, so a new tag here is not finished until the cask there is bump
 Nothing errors if they drift; `brew install` just keeps serving the old version.
 
 `docs/store-listing.md` holds everything the Chrome Web Store dashboard asks for —
-single-purpose statement, listing copy, permission justifications, privacy answers, and
-what still has to be produced (screenshots and the 440×280 tile). `PRIVACY.md` is the
-policy; it needs hosting at a public URL before submission.
+single-purpose statement, listing copy, permission justifications, privacy answers.
+The screenshots and the 440×280 promo tile live in `docs/store/`, and `PRIVACY.md`,
+the privacy policy, is hosted at a public URL.
 
 `node tests/run.js` guards the mechanical parts: manifest version, the 132-character
-description limit, icon sizes, the permission set, and the absence of remote code,
-inline scripts and `unload` handlers.
+description limit, icon sizes, the permission set, the absence of remote code, inline
+scripts and `unload` handlers, and that no Markdown file has picked up a harvestable
+email address.
 
 ## Notes and limits
 
