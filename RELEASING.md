@@ -1,14 +1,17 @@
 # Releasing
 
-Two repos have to move together:
+Three things have to move together:
 
 - **abhijitgore/hylink** — the extension. `manifest.json`'s `version` is the source of truth.
 - **abhijitgore/homebrew-tap** — `Casks/hylink.rb`, which pins a `version` and a `sha256`
   of the release tarball.
+- **The Chrome Web Store** — which only ever sees the zip you upload, not the tag.
 
 **Nothing fails loudly if they drift.** A stale cask keeps installing the old version,
-quietly, while the README promises otherwise. So the release is not finished until step
-6 is pushed.
+quietly, while the README promises otherwise. A zip built before the last commit ships
+old code under a new version number, and the store will not notice — it happened once:
+a 1.8.0 zip sat in `dist/` while fourteen of its files changed underneath it. So the
+release is not finished until steps 6 and 7 are both done.
 
 ## Steps
 
@@ -43,6 +46,20 @@ quietly, while the README promises otherwise. So the release is not finished unt
    breaks. The caveats block explains the one-time load, which Chrome requires because
    it will not enable an extension that did not come from its own store.
 
+7. **Build the store zip** — after the tag, never before:
+
+   ```sh
+   sh tools/package.sh                      # dist/hylink-X.Y.Z.zip
+   unzip -p dist/hylink-X.Y.Z.zip manifest.json | grep '"version"'
+   ```
+
+   The second line is the check that matters: the version inside the zip must be the
+   one you just tagged. `dist/` is ignored by git and the script deletes any older zip
+   of the same version, but it does not delete other versions — remove stale ones so
+   there is only one file to upload. Then upload it in the Web Store dashboard. If the
+   store already has this version number, it will refuse the upload; bump and repeat
+   from step 1 rather than rebuilding under the same number.
+
 ## Checking the cask
 
 ```sh
@@ -68,13 +85,18 @@ PYTHON=/tmp/gifenv/bin/python sh tools/build-demo-gif.sh
 ## Chrome Web Store
 
 `docs/store-listing.md` holds the listing copy, the permission justifications, the
-privacy answers, and the outstanding items. The two build steps:
+privacy answers, and the outstanding items.
+
+The zip (step 7) is an allow-list of `manifest.json`, `LICENSE`, `icons`, `src`, `ui`
+and `_locales` — a new top-level directory has to be added to `tools/package.sh` on
+purpose rather than shipping because nobody remembered to exclude it.
+
+The listing images are separate from the zip and only need rebuilding when the UI they
+show has changed — the options page, the menu, or any visible string:
 
 ```sh
-sh tools/package.sh              # dist/hylink-<version>.zip, the upload
-node tools/build-store-shots.js  # docs/store/*.png, the listing images
+node tools/build-store-shots.js  # docs/store/*.png
 ```
 
-The zip is an allow-list of `manifest.json`, `LICENSE`, `icons`, `src`, `ui` and
-`_locales` — a new top-level directory has to be added to `tools/package.sh` on purpose
-rather than shipping because nobody remembered to exclude it.
+It opens a real Chrome window for about fifteen seconds; that is expected. It fails
+loudly if the menu never appears rather than saving a screenshot of a plain page.
