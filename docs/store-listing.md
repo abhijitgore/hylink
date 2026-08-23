@@ -7,12 +7,12 @@ and [image specs](https://developer.chrome.com/docs/webstore/images).
 
 ## Single purpose
 
-> HyLink shows a small menu beside the hyperlink under your pointer, with ways to open
-> that link — in the current tab, a new tab, a new window, incognito, or a tiled side or
-> stacked window — or to copy its address, with or without tracking parameters.
+> HyLink shows a small menu beside the link under the mouse, with ways to open that
+> link — in the current tab, a new tab, a new window, incognito, or side by side or
+> stacked with the current page — or to copy it, with or without tracking parameters.
 
-Everything in the extension serves that one purpose. There is no second feature, no
-account, and no network access.
+Everything in the extension serves that one purpose. No second feature, no account, no
+network access.
 
 ## Store listing copy
 
@@ -27,28 +27,29 @@ account, and no network access.
 
 **Detailed description:**
 
-> Hover the mouse over a link and three dots appear beside it. Move onto them and they
-> open into a row of actions: open the link here, in a new tab, in a new window, in
-> incognito, side by side, stacked, copy its address, or copy it clean — with the
-> tracking parameters stripped out, the way Brave's "copy clean link" does.
+> Hover the mouse over a link to reveal a small three-dot menu beside it. Move the
+> cursor onto the menu and it expands into eight ways to interact with that link: open
+> it in the current tab, a new tab, a new window, or incognito; open it side by side or
+> stacked with the current page; copy the link; or copy a clean link with the tracking
+> parameters removed, the way Brave does it.
 >
-> Built to stay out of the way while you read:
+> Designed to stay out of your way while you read:
 >
-> • The mouse has to hover, not just pass through. Sweeping across text while
->   reading triggers nothing.
-> • Links in navigation bars, headers, footers and sidebars are skipped — the menu is
->   for links in the page's text.
-> • What you first see is three dots about one character wide, not a toolbar. The full
->   menu only opens if you move onto them.
-> • Scrolling dismisses it. So does Esc, or moving away.
-> • It steps around Wikipedia-style hover cards instead of fighting them for the top
->   of the page.
+> • You need to hover the mouse over the link to activate it. Moving across text while
+>   reading won't trigger anything.
+> • It's only shown for links in paragraphs and body text. It is not shown for
+>   elements like navigation bars, headers, footers and sidebars.
+> • What appears first is just three dots, about one character wide. The full menu
+>   only opens when you move the cursor onto them.
+> • Press Esc, scroll, or move the mouse away to dismiss it.
+> • It moves out of the way of hover cards like Wikipedia's link previews instead of
+>   covering them.
 >
-> Everything is adjustable: the delay, which actions appear, whether a modifier key is
-> required, and a per-site off switch in the toolbar popup.
+> Everything is configurable: the hover delay, which actions appear, whether a
+> modifier key must be held, and a per-site off switch in the toolbar popup.
 >
-> HyLink makes no network requests. It has no analytics, no account, and no server.
-> Your settings sync through your own Chrome profile and nothing else leaves your
+> HyLink makes no network requests and has no analytics, no account, and no server.
+> Your settings sync through your own Chrome profile, and nothing else leaves your
 > browser.
 
 ## Privacy tab
@@ -56,7 +57,7 @@ account, and no network access.
 **Does this extension collect user data?** No.
 
 Tick nothing in the data-types list. HyLink reads the hovered link's URL to act on it
-and stores your settings in `chrome.storage.sync`; neither is transmitted anywhere, so
+and stores settings in `chrome.storage.sync`. Neither is transmitted anywhere, so
 neither counts as collection.
 
 **Certifications** — all three apply:
@@ -69,17 +70,17 @@ neither counts as collection.
 
 ## Permission justifications
 
-Paste each into the matching box. Broad host access always draws review scrutiny, so
-the last one matters most.
+Paste each into the matching box. Broad host access gets the most review scrutiny, so
+the `<all_urls>` one matters most.
 
 | Field | Justification |
 | --- | --- |
-| `storage` | Saves the user's own settings — hover delay, which actions appear, per-site off switches. No browsing data is stored. |
-| `system.display` | The "open in side" actions tile two windows across the display the current window is on. The display's work area is needed to size the halves correctly, so the tiles do not land under the taskbar or off-screen. |
+| `storage` | Saves the user's settings — hover delay, which actions appear, per-site off switches. No browsing data is stored. |
+| `system.display` | The "open in side" actions place two windows side by side on the current display. The display's work area is needed to size them so neither lands under the taskbar or off-screen. |
 | `clipboardWrite` | The "Copy link address" and "Copy clean link" actions write the link's URL to the clipboard. |
-| `activeTab` | The toolbar popup shows the current site's hostname and offers a "turn off on this site" switch. `activeTab` is used deliberately in place of the broader `tabs` permission, which would expose the user's browsing history. |
-| Host permission (`<all_urls>`) | The extension's only feature is a menu that appears next to a hyperlink, and links exist on every site, so the content script must run everywhere. It reads only the `href` of the link under the pointer plus the page geometry needed to place the menu clear of hover cards. It makes no network requests and sends no data off the device. |
-| Remote code | No. All JavaScript is contained in the package; nothing is fetched or evaluated at runtime. |
+| `activeTab` | The toolbar popup shows the current site's hostname and offers a "turn off on this site" switch. Used instead of the broader `tabs` permission, which would expose browsing history. |
+| Host permission (`<all_urls>`) | The extension's only feature is a menu beside a hovered link, and links exist on every site, so the content script has to run everywhere. It reads only the `href` of the hovered link and the page geometry needed to place the menu clear of hover cards. No network requests; no data leaves the device. |
+| Remote code | No. All JavaScript ships in the package; nothing is fetched or evaluated at runtime. |
 
 ## Images to produce
 
