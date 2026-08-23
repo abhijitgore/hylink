@@ -79,3 +79,20 @@ release tarball checksums the Homebrew cask pins.
 **Rule:** `userEmail` in the environment identifies the user; it is not the address to
 commit as. Use plain `git commit` and let git's own configuration decide, or read
 `git config user.email` first.
+
+## A headless page never composites the top layer
+
+Capturing HyLink's menu for the store screenshots produced pages that looked completely
+untouched — no grip, no bar — while `document.querySelector('hylink-root')` proved the
+content script had run and built the element. A headless page reports
+`visibilityState: "hidden"`, and a hidden page does not composite the top layer, which
+is where a popover lives. It renders into the DOM and photographs as nothing.
+
+**How to apply:** "the element exists but the screenshot is empty" is a compositing
+question, not a logic one. Check `document.visibilityState` before re-reading the code.
+Anything in the top layer — popovers, `<dialog>`, fullscreen — needs a headed window.
+
+Related, from the same session: a tab created with `Target.createTarget` starts
+backgrounded, so its timers are clamped to about a second. Drive the window's existing
+tab instead. And Chrome ignores `--load-extension` from 137 on; the replacement is
+`Extensions.loadUnpacked` over `--remote-debugging-pipe`, not `--remote-debugging-port`.

@@ -87,36 +87,36 @@ the last one matters most.
 | Asset | Size | Status |
 | --- | --- | --- |
 | Store icon | 128×128 PNG | ✅ `icons/icon128.png` |
+| Action bar on an article | 1280×800 | ✅ `docs/store/screenshot-1-actions.png` |
+| Resting grip on an article | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` |
 | Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` |
 | Small promo tile | 440×280 | ✅ `docs/store/promo-440x280.png` |
-| Action bar on an article | 1280×800 | ⏳ needs a Chrome with HyLink loaded — see below |
-| Resting grip on an article | 1280×800 | ⏳ same |
 | Marquee | 1400×560 | Optional; only needed for featured placement |
 
 Upload order matters — the first screenshot is what most people judge the extension on,
 so lead with the expanded action bar, then the resting grip, then the settings page.
 
-### The two shots that need a real browser
+### Two things the script has to work around
 
-Chrome deprecated `--load-extension` in 137 and by 151 ignores it completely, headless
-and headed alike; `--enable-unsafe-extension-debugging` does not bring it back. So a
-throwaway Chrome can no longer be told to load HyLink, and the two shots that have to
-show the menu on a real page need a Chrome that already has it:
+**Chrome no longer accepts `--load-extension`.** It was deprecated in 137 and by 151 is
+ignored outright, headless and headed alike; `--enable-unsafe-extension-debugging` does
+not bring it back. The replacement is the DevTools command `Extensions.loadUnpacked`,
+which is gated on `--remote-debugging-pipe` rather than `--remote-debugging-port` — so
+the script talks to Chrome over the pipe on fd 3/4 instead of a WebSocket.
 
-```sh
-# quit Chrome first
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9333 &
-node tools/build-store-shots.js
-```
+**The capture cannot be headless.** A headless page reports `visibilityState: "hidden"`
+and never composites the top layer. The menu is a popover, so it gets built in the DOM
+exactly as it should be and then photographs as nothing at all — the page looks
+untouched. The script therefore drives a real window, which appears for about fifteen
+seconds while it runs. It also reuses that window's one tab rather than opening new
+ones: a tab created over CDP starts backgrounded, and a backgrounded page has its timers
+clamped to roughly a second, which is slower than the hover being captured.
 
-It opens its own tab against a local sample article, hovers the link, captures both
-states and closes the tab again. The article at `tools/shots/article.html` is written
-for this: using a real news site would put someone else's masthead and copy in the
-listing images.
+The article at `tools/shots/article.html` is written for this. Using a real news site
+would put someone else's masthead and copy in the listing images.
 
-Full bleed, square corners, no padding — which is what the script produces. Everything
-is rendered at 2× and resampled to 1280×800, because rendering straight at 1280×800
-gives thin, undersampled text.
+Everything is rendered at 2× and resampled to 1280×800, because rendering straight at
+1280×800 gives thin, undersampled text.
 
 ## Pre-submission checklist
 
@@ -132,8 +132,7 @@ gives thin, undersampled text.
 - [x] `homepage_url` in the manifest — https://github.com/abhijitgore/hylink
 - [x] Privacy policy hosted at a public URL
 - [x] Privacy policy contact address published (`abhigore+hylink@gmail.com`)
-- [x] The 440×280 tile
-- [ ] The two hover screenshots (need a Chrome with HyLink loaded — see above)
+- [x] Screenshots and the 440×280 tile (`node tools/build-store-shots.js`)
 - [ ] Developer account verified, with a published contact email
 - [ ] Trader / non-trader declared in the dashboard — non-trader, for a free extension
       with no commercial activity. The EU's Digital Services Act made this mandatory;
