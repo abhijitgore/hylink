@@ -1,0 +1,49 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>HyLink promo tile</title>
+<!-- 440x280 small promo tile. Rendered at 4x and resampled by build-store-shots.js. -->
+<style>
+  html, body { margin: 0; width: 440px; height: 280px; overflow: hidden; }
+  body {
+    font-family: ui-sans-serif, -apple-system, system-ui, "Segoe UI", sans-serif;
+    background: linear-gradient(140deg, #eef0ff 0%, #f7f7fb 52%, #e9ecff 100%);
+    color: #1f2430;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 40px;
+  }
+  h1 { font-size: 40px; letter-spacing: -.028em; margin: 0 0 8px; font-weight: 700; }
+  p  { font-size: 15.5px; line-height: 1.45; color: #4b5160; margin: 0 0 26px; max-width: 300px; }
+  .demo { display: flex; align-items: center; gap: 3px; font: 15px/1 ui-serif, Georgia, serif; }
+  .demo .link { color: #3730a3; text-decoration: underline; text-decoration-color: rgba(55,48,163,.4); text-underline-offset: 2px; }
+  .grip {
+    width: 22px; height: 15px; border-radius: 5px;
+    background: rgba(255,255,255,.62);
+    border: 1px solid rgba(55,48,163,.28);
+    box-shadow: 0 1px 3px rgba(24,24,50,.13);
+    display: flex; align-items: center; justify-content: center; gap: 2.5px;
+  }
+  .grip i { width: 2.5px; height: 2.5px; border-radius: 50%; background: #3730a3; }
+  .bar {
+    margin-left: 9px; display: flex; align-items: center; gap: 2px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(55,48,163,.18);
+    border-radius: 9px; padding: 4px 5px;
+    box-shadow: 0 6px 18px rgba(24,24,50,.14);
+  }
+  .bar span { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; }
+  .bar span:first-child { background: #3730a3; }
+  .bar svg { width: 13px; height: 13px; fill: none; stroke: #3f4557; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .bar span:first-child svg { stroke: #fff; }
+</style>
+<h1>HyLink</h1>
+<p>Hover a link. Open it anywhere — without the right-click.</p>
+<div class="demo">
+  <span class="link">spend that budget carefully</span>
+  <span class="grip"><i></i><i></i><i></i></span>
+  <span class="bar">
+    <span><svg viewBox="0 0 16 16"><path d="M3 3h5M3 3v5M3 3l6.5 6.5"/><path d="M13 8.5v3.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5"/></svg></span>
+    <span><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"/><path d="M2.5 6.5h11"/></svg></span>
+    <span><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M8 3v10"/></svg></span>
+    <span><svg viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5v-2a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span>
+  </span>
+</div>

@@ -40,5 +40,6 @@ card. Nothing it reads leaves your machine.
 
 ## Contact
 
-Questions about this policy: _add the contact address you want published here — the
-Chrome Web Store shows it publicly, so use whichever address you are happy to expose._
+Questions about this policy: <abhigore+hylink@gmail.com>. Bugs and feature requests are
+better filed as [issues](https://github.com/abhijitgore/hylink/issues), where the
+conversation stays public and searchable.

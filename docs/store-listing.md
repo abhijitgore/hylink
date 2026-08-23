@@ -82,23 +82,41 @@ the last one matters most.
 
 ## Images to produce
 
+`node tools/build-store-shots.js` builds these into `docs/store/`.
+
 | Asset | Size | Status |
 | --- | --- | --- |
 | Store icon | 128×128 PNG | ✅ `icons/icon128.png` |
-| Screenshots | 1280×800, 1–5 of them | ❌ **to do** |
-| Small promo tile | 440×280 | ❌ **to do** — listings without one are ranked below those with one |
+| Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` |
+| Small promo tile | 440×280 | ✅ `docs/store/promo-440x280.png` |
+| Action bar on an article | 1280×800 | ⏳ needs a Chrome with HyLink loaded — see below |
+| Resting grip on an article | 1280×800 | ⏳ same |
 | Marquee | 1400×560 | Optional; only needed for featured placement |
 
-Screenshots worth taking, in this order — the first one is what most people judge the
-extension on:
+Upload order matters — the first screenshot is what most people judge the extension on,
+so lead with the expanded action bar, then the resting grip, then the settings page.
 
-1. The expanded action bar beside a link in an article, caption naming the actions.
-2. The resting state — three dots beside a link — to show how little it occupies.
-3. The two tiled windows after "open in side (right)".
-4. The options page.
+### The two shots that need a real browser
 
-Full bleed, square corners, no padding. Take them on a real page at a normal window
-size, not the test harness.
+Chrome deprecated `--load-extension` in 137 and by 151 ignores it completely, headless
+and headed alike; `--enable-unsafe-extension-debugging` does not bring it back. So a
+throwaway Chrome can no longer be told to load HyLink, and the two shots that have to
+show the menu on a real page need a Chrome that already has it:
+
+```sh
+# quit Chrome first
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9333 &
+node tools/build-store-shots.js
+```
+
+It opens its own tab against a local sample article, hovers the link, captures both
+states and closes the tab again. The article at `tools/shots/article.html` is written
+for this: using a real news site would put someone else's masthead and copy in the
+listing images.
+
+Full bleed, square corners, no padding — which is what the script produces. Everything
+is rendered at 2× and resampled to 1280×800, because rendering straight at 1280×800
+gives thin, undersampled text.
 
 ## Pre-submission checklist
 
@@ -113,8 +131,14 @@ size, not the test harness.
 - [x] Automated tests (`node tests/run.js`)
 - [x] `homepage_url` in the manifest — https://github.com/abhijitgore/hylink
 - [x] Privacy policy hosted at a public URL
-- [ ] Screenshots and the 440×280 tile
+- [x] Privacy policy contact address published (`abhigore+hylink@gmail.com`)
+- [x] The 440×280 tile
+- [ ] The two hover screenshots (need a Chrome with HyLink loaded — see above)
 - [ ] Developer account verified, with a published contact email
+- [ ] Trader / non-trader declared in the dashboard — non-trader, for a free extension
+      with no commercial activity. The EU's Digital Services Act made this mandatory;
+      declaring trader would require publishing a physical address.
+- [ ] `dist/hylink-<version>.zip` built with `sh tools/package.sh`
 
 ## Known review risks
 

@@ -4,3 +4,6 @@ node_modules/
 
 # Generated for the manual test harness by tests/harness/build.sh
 tests/harness/content.harness.js
+
+# Chrome Web Store upload, built by tools/package.sh
+dist/

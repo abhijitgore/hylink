@@ -67,6 +67,14 @@ PYTHON=/tmp/gifenv/bin/python sh tools/build-demo-gif.sh
 
 ## Chrome Web Store
 
-Not submitted yet. `docs/store-listing.md` holds the listing copy, the permission
-justifications, the privacy answers, and what is still outstanding — screenshots, the
-440×280 tile, and the contact address in `PRIVACY.md`.
+`docs/store-listing.md` holds the listing copy, the permission justifications, the
+privacy answers, and the outstanding items. The two build steps:
+
+```sh
+sh tools/package.sh              # dist/hylink-<version>.zip, the upload
+node tools/build-store-shots.js  # docs/store/*.png, the listing images
+```
+
+The zip is an allow-list of `manifest.json`, `LICENSE`, `icons`, `src`, `ui` and
+`_locales` — a new top-level directory has to be added to `tools/package.sh` on purpose
+rather than shipping because nobody remembered to exclude it.
