@@ -117,7 +117,7 @@
     "message": "La plupart, on n'a jamais à y penser."
   },
   "optStep1Lead": {
-    "message": "Immobilisez le pointeur sur un lien"
+    "message": "Survolez un lien"
   },
   "optStep1Body": {
     "message": "dans le texte de la page. Le moindre mouvement relance l'attente : lire ne déclenche donc jamais rien, et les liens des barres de navigation, en-têtes et barres latérales sont ignorés."
@@ -162,7 +162,7 @@
     "message": "Délais"
   },
   "optDelay": {
-    "message": "Durée d'arrêt sur un lien avant l'apparition"
+    "message": "Durée de survol d'un lien avant l'apparition"
   },
   "optDelayHint": {
     "message": "Bouger le pointeur relance le délai : balayer le texte en lisant ne déclenche jamais le menu."

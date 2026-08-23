@@ -117,7 +117,7 @@
     "message": "Sebagian besar tak pernah perlu dipikirkan."
   },
   "optStep1Lead": {
-    "message": "Diamkan kursor di atas tautan"
+    "message": "Arahkan kursor ke tautan"
   },
   "optStep1Body": {
     "message": "di dalam teks halaman. Menggerakkan kursor mengulang hitungannya, jadi membaca tidak pernah memicu apa pun, dan tautan di bilah navigasi, header, serta sidebar dilewati."
@@ -162,7 +162,7 @@
     "message": "Waktu"
   },
   "optDelay": {
-    "message": "Lama kursor diam di tautan sebelum muncul"
+    "message": "Lama kursor diarahkan ke tautan sebelum muncul"
   },
   "optDelayHint": {
     "message": "Menggerakkan kursor mengulanginya, jadi menyapu teks sambil membaca tidak pernah memunculkan menu."

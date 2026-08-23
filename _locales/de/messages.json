@@ -117,7 +117,7 @@
     "message": "Über die meisten muss man nie nachdenken."
   },
   "optStep1Lead": {
-    "message": "Halte den Zeiger auf einem Link an"
+    "message": "Fahre mit der Maus über einen Link"
   },
   "optStep1Body": {
     "message": "im Text der Seite. Jede Bewegung startet die Wartezeit neu, sodass Lesen nie etwas auslöst, und Links in Navigationsleisten, Kopfzeilen und Seitenleisten werden übersprungen."
@@ -162,7 +162,7 @@
     "message": "Timing"
   },
   "optDelay": {
-    "message": "So lange auf einem Link ruhen, bevor es erscheint"
+    "message": "Verweildauer auf einem Link, bevor es erscheint"
   },
   "optDelayHint": {
     "message": "Bewegen setzt das zurück, sodass Überstreichen von Text beim Lesen das Menü nie auslöst."

@@ -117,7 +117,7 @@
     "message": "Casi nunca tienes que pensar en ellos."
   },
   "optStep1Lead": {
-    "message": "Detén el cursor sobre un enlace"
+    "message": "Pasa el cursor sobre un enlace"
   },
   "optStep1Body": {
     "message": "dentro del texto de la página. Si lo mueves, la espera vuelve a empezar, así que leer nunca activa nada, y los enlaces de barras de navegación, encabezados y barras laterales se omiten."
@@ -162,7 +162,7 @@
     "message": "Tiempos"
   },
   "optDelay": {
-    "message": "Tiempo de espera sobre el enlace antes de aparecer"
+    "message": "Tiempo con el cursor encima antes de aparecer"
   },
   "optDelayHint": {
     "message": "Mover el cursor lo reinicia, así que pasar por encima del texto mientras lees nunca activa el menú."

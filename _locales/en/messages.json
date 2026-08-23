@@ -46,7 +46,7 @@
   },
   "optDemoLinkText":   { "message": "tab strip" },
   "optDemoLine3":      { "message": "Most of it you never have to think about." },
-  "optStep1Lead":      { "message": "Rest the pointer on a link" },
+  "optStep1Lead":      { "message": "Hover the mouse over a link" },
   "optStep1Body":      { "message": "in a page's text. Moving restarts the wait, so reading never triggers anything, and links in navigation bars, headers and sidebars are skipped." },
   "optStep2Lead":      { "message": "Three dots appear" },
   "optStep2Body":      { "message": "just past the link." },
@@ -63,7 +63,7 @@
   "optModeHint":       { "message": "The grip keeps links readable while you browse — the full menu only appears once you move onto it (or hold the modifier key)." },
 
   "optTiming":         { "message": "Timing" },
-  "optDelay":          { "message": "Rest on a link this long before it appears" },
+  "optDelay":          { "message": "Hover a link this long before it appears" },
   "optDelayHint":      { "message": "Moving the pointer restarts this, so sweeping across text while reading never triggers the menu." },
   "optRequireModifier":     { "message": "Only show while a modifier key is held" },
   "optRequireModifierHint": { "message": "Keeps the menu out of the way until you ask for it." },

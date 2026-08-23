@@ -117,7 +117,7 @@
     "message": "Çoğunu hiç düşünmeniz bile gerekmez."
   },
   "optStep1Lead": {
-    "message": "İşaretçiyi bir bağlantı üzerinde bekletin"
+    "message": "İmleci bir bağlantının üzerine getirin"
   },
   "optStep1Body": {
     "message": "sayfanın metni içinde. İşaretçiyi oynatmak bekleme süresini sıfırlar; böylece okumak hiçbir şeyi tetiklemez ve gezinme çubuklarındaki, başlıklardaki ve kenar çubuklarındaki bağlantılar atlanır."
@@ -162,7 +162,7 @@
     "message": "Zamanlama"
   },
   "optDelay": {
-    "message": "Görünmeden önce bağlantı üzerinde bekleme süresi"
+    "message": "Görünmeden önce imlecin bağlantı üzerinde kalma süresi"
   },
   "optDelayHint": {
     "message": "İşaretçiyi oynatmak bunu sıfırlar; okurken metnin üzerinden geçmek menüyü açmaz."

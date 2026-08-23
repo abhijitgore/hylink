@@ -117,7 +117,7 @@
     "message": "Você quase nunca precisa pensar neles."
   },
   "optStep1Lead": {
-    "message": "Pare o cursor sobre um link"
+    "message": "Passe o cursor sobre um link"
   },
   "optStep1Body": {
     "message": "no texto da página. Mover o cursor reinicia a espera, então ler nunca dispara nada, e links em barras de navegação, cabeçalhos e barras laterais são ignorados."
@@ -162,7 +162,7 @@
     "message": "Tempo"
   },
   "optDelay": {
-    "message": "Tempo parado sobre o link antes de aparecer"
+    "message": "Tempo com o cursor sobre o link antes de aparecer"
   },
   "optDelayHint": {
     "message": "Mover o cursor reinicia a contagem, então passar pelo texto enquanto lê nunca abre o menu."
