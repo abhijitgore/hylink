@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Ouvrir le lien"
+  },
+  "actionNewTab": {
+    "message": "Ouvrir dans un nouvel onglet"
+  },
+  "actionNewWindow": {
+    "message": "Ouvrir dans une nouvelle fenêtre"
+  },
+  "actionIncognito": {
+    "message": "Ouvrir en navigation privée"
+  },
+  "actionSideRight": {
+    "message": "Ouvrir à côté (à droite)"
+  },
+  "actionSideStacked": {
+    "message": "Ouvrir à côté (empilé)"
+  },
+  "actionCopy": {
+    "message": "Copier l'adresse du lien"
+  },
+  "actionCopyClean": {
+    "message": "Copier le lien nettoyé"
+  },
+  "menuLabel": {
+    "message": "Actions sur le lien"
+  },
+  "capCopied": {
+    "message": "Adresse copiée"
+  },
+  "capCopyFailed": {
+    "message": "Copie impossible"
+  },
+  "capCleanPreviewOne": {
+    "message": "Copier sans 1 traceur"
+  },
+  "capCleanPreviewMany": {
+    "message": "Copier sans $count$ traceurs",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Rien à retirer — déjà propre"
+  },
+  "capCleanedOne": {
+    "message": "Copié — 1 traceur retiré"
+  },
+  "capCleanedMany": {
+    "message": "Copié — $count$ traceurs retirés",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Copié — rien à retirer"
+  },
+  "errBadUrl": {
+    "message": "URL non valide"
+  },
+  "errScheme": {
+    "message": "Les liens $scheme$ ne sont pas ouverts",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Autorisez d'abord HyLink en navigation privée (chrome://extensions)"
+  },
+  "popupEnabled": {
+    "message": "Menu au survol activé"
+  },
+  "popupDisableOn": {
+    "message": "Désactiver sur"
+  },
+  "popupThisSite": {
+    "message": "ce site"
+  },
+  "popupAllSettings": {
+    "message": "Tous les paramètres…"
+  },
+  "optTitle": {
+    "message": "Paramètres de HyLink"
+  },
+  "optTagline": {
+    "message": "Survolez un lien pour voir les façons de l'ouvrir."
+  },
+  "optHowItWorks": {
+    "message": "Comment ça marche"
+  },
+  "optDemoLine1": {
+    "message": "Chrome regorge de petits détails discrets, et"
+  },
+  "optDemoLine2": {
+    "message": "la $link$ en est un bon exemple.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "barre d'onglets"
+  },
+  "optDemoLine3": {
+    "message": "La plupart, on n'a jamais à y penser."
+  },
+  "optStep1Lead": {
+    "message": "Immobilisez le pointeur sur un lien"
+  },
+  "optStep1Body": {
+    "message": "dans le texte de la page. Le moindre mouvement relance l'attente : lire ne déclenche donc jamais rien, et les liens des barres de navigation, en-têtes et barres latérales sont ignorés."
+  },
+  "optStep2Lead": {
+    "message": "Trois points apparaissent"
+  },
+  "optStep2Body": {
+    "message": "juste après le lien."
+  },
+  "optStep3Lead": {
+    "message": "Amenez-y le pointeur"
+  },
+  "optStep3Body": {
+    "message": "et ils s'ouvrent en barre d'actions. Appuyez sur Échap, faites défiler la page ou éloignez le pointeur pour la fermer."
+  },
+  "optNoNetwork": {
+    "message": "HyLink n'envoie rien nulle part — aucune analyse, aucune requête réseau. Vos paramètres se synchronisent via votre profil Chrome et n'en sortent jamais."
+  },
+  "optEnable": {
+    "message": "Activer HyLink"
+  },
+  "optEnableHint": {
+    "message": "Active le menu au survol partout."
+  },
+  "optAppearance": {
+    "message": "Apparence"
+  },
+  "optOnHover": {
+    "message": "Au survol d'un lien"
+  },
+  "optModeHandle": {
+    "message": "Afficher une petite poignée, développer au survol"
+  },
+  "optModeImmediate": {
+    "message": "Afficher tout de suite le menu complet"
+  },
+  "optModeHint": {
+    "message": "La poignée garde les liens lisibles pendant la navigation : le menu complet n'apparaît que si vous l'atteignez (ou maintenez la touche de modification)."
+  },
+  "optTiming": {
+    "message": "Délais"
+  },
+  "optDelay": {
+    "message": "Durée d'arrêt sur un lien avant l'apparition"
+  },
+  "optDelayHint": {
+    "message": "Bouger le pointeur relance le délai : balayer le texte en lisant ne déclenche jamais le menu."
+  },
+  "optRequireModifier": {
+    "message": "N'afficher qu'avec une touche de modification enfoncée"
+  },
+  "optRequireModifierHint": {
+    "message": "Le menu reste à l'écart tant que vous ne le demandez pas."
+  },
+  "optModifier": {
+    "message": "Touche de modification"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Contrôle"
+  },
+  "optModifierShift": {
+    "message": "Maj"
+  },
+  "optModifierMeta": {
+    "message": "Commande / Windows"
+  },
+  "optActions": {
+    "message": "Actions affichées dans le menu"
+  },
+  "optNewTabActive": {
+    "message": "Passer immédiatement aux nouveaux onglets"
+  },
+  "optNewTabActiveHint": {
+    "message": "Désactivé, « Ouvrir dans un nouvel onglet » l'ouvre en arrière-plan."
+  },
+  "optWhere": {
+    "message": "Où il apparaît"
+  },
+  "optSkipNav": {
+    "message": "Ignorer navigation, en-têtes et barres latérales"
+  },
+  "optSkipNavHint": {
+    "message": "Ne proposer des actions que sur les liens du texte de la page. Maintenez la touche de modification pour obtenir quand même le menu sur un lien de navigation."
+  },
+  "optSites": {
+    "message": "Ne jamais afficher sur ces sites — un nom d'hôte par ligne. Les sous-domaines sont inclus —"
+  },
+  "optSitesExample": {
+    "message": "example.com désactive aussi docs.example.com."
+  },
+  "optSaved": {
+    "message": "Enregistré"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

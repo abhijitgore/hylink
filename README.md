@@ -84,6 +84,29 @@ across the display. It looks similar and behaves differently — a second window
 pane. The moment Chrome ships the API, this becomes a small change; see
 [How "open in side" works](#how-open-in-side-works) for the details.
 
+## Languages
+
+The menu, popup and options page follow Chrome's language setting:
+
+| | | |
+| --- | --- | --- |
+| English (`en`) | Español (`es`) | Português do Brasil (`pt_BR`) |
+| Русский (`ru`) | हिन्दी (`hi`) | Français (`fr`) |
+| Deutsch (`de`) | 日本語 (`ja`) | Bahasa Indonesia (`id`) |
+| Türkçe (`tr`) | | |
+
+Anything else falls back to English, and so does any string a catalogue happens to be
+missing — `default_locale` is `en`. The regional variants resolve on their own:
+`en_GB`, `es_419`, `pt_PT` and friends land on the closest catalogue.
+
+Only the extension's own UI is translated. The Chrome Web Store listing is not, and
+the manifest's name and description are deliberately left in English — those are store
+copy, translated in the developer dashboard rather than from `_locales/`.
+
+The nine non-English catalogues in `_locales/` were not written by native speakers, so
+corrections are welcome; `node tests/run.js` checks that every catalogue has exactly
+the same keys as `en` and keeps its `$placeholders$`.
+
 ## Settings
 
 The options page opens once on install and leads with a looping animation of the whole
@@ -172,13 +195,15 @@ So HyLink does the two things it actually can:
 manifest.json
 src/settings.js     shared defaults, storage helpers, denylist matching
 src/icons.js        the menu's icon set, shared with the options page
+_locales/           ten UI translations; `en` is the fallback
+ui/i18n.js          fills the pages from _locales, keeping the English as a fallback
 src/clean.js        tracking-parameter removal (worker only)
 src/clean-list.js   GENERATED — Brave's rules, MPL-2.0; see tools/build-clean-list.js
 src/content.js      hover detection + top-layer shadow-DOM menu (all frames)
 src/tiling.js       display work-area math and window placement
 src/background.js   service worker; split-view reuse, tabs/windows privileges
 ui/                 options page and toolbar popup
-tests/run.js        `node tests/run.js` — 123 assertions, no dependencies
+tests/run.js        `node tests/run.js` — 159 assertions, no dependencies
 tools/              regenerates the clean-link rules from Brave's list
 tests/harness/      manual page for hover timing and overlay-dodging
 icons/

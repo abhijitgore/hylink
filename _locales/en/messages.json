@@ -1,0 +1,90 @@
+{
+  "actionOpen":        { "message": "Open link" },
+  "actionNewTab":      { "message": "Open in new tab" },
+  "actionNewWindow":   { "message": "Open in new window" },
+  "actionIncognito":   { "message": "Open in incognito" },
+  "actionSideRight":   { "message": "Open in side (right)" },
+  "actionSideStacked": { "message": "Open in side (stacked)" },
+  "actionCopy":        { "message": "Copy link address" },
+  "actionCopyClean":   { "message": "Copy clean link" },
+
+  "menuLabel":         { "message": "Link actions" },
+  "capCopied":         { "message": "Copied link address" },
+  "capCopyFailed":     { "message": "Could not copy" },
+  "capCleanPreviewOne":  { "message": "Copy without 1 tracker" },
+  "capCleanPreviewMany": {
+    "message": "Copy without $count$ trackers",
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
+  },
+  "capCleanPreviewNone": { "message": "Nothing to remove — already clean" },
+  "capCleanedOne":       { "message": "Copied — 1 tracker removed" },
+  "capCleanedMany": {
+    "message": "Copied — $count$ trackers removed",
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
+  },
+  "capCleanedNone":    { "message": "Copied — nothing to remove" },
+
+  "errBadUrl":         { "message": "Not a valid URL" },
+  "errScheme": {
+    "message": "Refusing to open $scheme$ link",
+    "placeholders": { "scheme": { "content": "$1", "example": "javascript:" } }
+  },
+  "errIncognito":      { "message": "Allow HyLink in incognito first (chrome://extensions)" },
+
+  "popupEnabled":      { "message": "Hover menu enabled" },
+  "popupDisableOn":    { "message": "Disable on" },
+  "popupThisSite":     { "message": "this site" },
+  "popupAllSettings":  { "message": "All settings…" },
+
+  "optTitle":          { "message": "HyLink options" },
+  "optTagline":        { "message": "Hover a hyperlink to get a menu of ways to open it." },
+  "optHowItWorks":     { "message": "How it works" },
+  "optDemoLine1":      { "message": "Chrome ships a lot of quiet detail, and" },
+  "optDemoLine2": {
+    "message": "the $link$ is a good example of it.",
+    "placeholders": { "link": { "content": "$1", "example": "tab strip" } }
+  },
+  "optDemoLinkText":   { "message": "tab strip" },
+  "optDemoLine3":      { "message": "Most of it you never have to think about." },
+  "optStep1Lead":      { "message": "Rest the pointer on a link" },
+  "optStep1Body":      { "message": "in a page's text. Moving restarts the wait, so reading never triggers anything, and links in navigation bars, headers and sidebars are skipped." },
+  "optStep2Lead":      { "message": "Three dots appear" },
+  "optStep2Body":      { "message": "just past the link." },
+  "optStep3Lead":      { "message": "Move onto them" },
+  "optStep3Body":      { "message": "and they open into the action bar. Press Esc, scroll, or move away to dismiss it." },
+  "optNoNetwork":      { "message": "HyLink sends nothing anywhere — no analytics, no network requests. Your settings sync through your Chrome profile and never leave it." },
+
+  "optEnable":         { "message": "Enable HyLink" },
+  "optEnableHint":     { "message": "Turn the hover menu on everywhere." },
+  "optAppearance":     { "message": "Appearance" },
+  "optOnHover":        { "message": "When you hover a link" },
+  "optModeHandle":     { "message": "Show a small grip, expand on hover" },
+  "optModeImmediate":  { "message": "Show the full menu right away" },
+  "optModeHint":       { "message": "The grip keeps links readable while you browse — the full menu only appears once you move onto it (or hold the modifier key)." },
+
+  "optTiming":         { "message": "Timing" },
+  "optDelay":          { "message": "Rest on a link this long before it appears" },
+  "optDelayHint":      { "message": "Moving the pointer restarts this, so sweeping across text while reading never triggers the menu." },
+  "optRequireModifier":     { "message": "Only show while a modifier key is held" },
+  "optRequireModifierHint": { "message": "Keeps the menu out of the way until you ask for it." },
+  "optModifier":       { "message": "Modifier key" },
+  "optModifierAlt":    { "message": "Alt / Option" },
+  "optModifierCtrl":   { "message": "Control" },
+  "optModifierShift":  { "message": "Shift" },
+  "optModifierMeta":   { "message": "Command / Windows" },
+
+  "optActions":        { "message": "Actions shown in the menu" },
+  "optNewTabActive":     { "message": "Switch to new tabs immediately" },
+  "optNewTabActiveHint": { "message": "Off means \"Open in new tab\" opens it in the background." },
+
+  "optWhere":          { "message": "Where it appears" },
+  "optSkipNav":        { "message": "Skip navigation, headers and sidebars" },
+  "optSkipNavHint":    { "message": "Only offer actions on links in the page's own text. Hold the modifier key to get the menu on a navigation link anyway." },
+  "optSites":          { "message": "Never show on these sites — one hostname per line. Subdomains are covered too —" },
+  "optSitesExample":   { "message": "example.com also disables docs.example.com." },
+  "optSaved":          { "message": "Saved" },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": { "count": { "content": "$1", "example": "220" } }
+  }
+}

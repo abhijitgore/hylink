@@ -9,7 +9,7 @@
   'use strict';
 
   const { ACTIONS, DEFAULTS, NAV_SELECTOR, getSettings, normalize, isSiteDisabled,
-    looksNavigational } = self.HyLinkSettings;
+    looksNavigational, t, actionLabel } = self.HyLinkSettings;
   const { ICONS, svgIcon } = self.HyLinkIcons;
 
   /**
@@ -288,13 +288,13 @@
     menuEl = document.createElement('div');
     menuEl.className = 'menu';
     menuEl.setAttribute('role', 'menu');
-    menuEl.setAttribute('aria-label', 'Link actions');
+    menuEl.setAttribute('aria-label', t('menuLabel', 'Link actions'));
     // 'manual' so Chrome never light-dismisses it; we own show/hide entirely.
     if (SUPPORTS_POPOVER) menuEl.setAttribute('popover', 'manual');
 
     const dots = document.createElement('div');
     dots.className = 'dots';
-    dots.setAttribute('aria-label', 'Link actions');
+    dots.setAttribute('aria-label', t('menuLabel', 'Link actions'));
     for (let i = 0; i < 3; i++) dots.appendChild(document.createElement('i'));
 
     const row = document.createElement('div');
@@ -328,9 +328,10 @@
       btn.type = 'button';
       btn.className = 'btn';
       btn.dataset.action = action.id;
-      btn.title = action.label;
+      const label = actionLabel(action);
+      btn.title = label;
       btn.setAttribute('role', 'menuitem');
-      btn.setAttribute('aria-label', action.label);
+      btn.setAttribute('aria-label', label);
       btn.appendChild(svgIcon(ICONS[action.id]));
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -338,11 +339,11 @@
         run(action.id);
       });
       btn.addEventListener('pointerenter', () => {
-        setCaption(action.label, 'strong');
+        setCaption(label, 'strong');
         if (action.id === 'copyClean') previewClean(btn);
       });
       btn.addEventListener('pointerleave', () => setCaption(shortUrl(currentUrl)));
-      btn.addEventListener('focus', () => setCaption(action.label, 'strong'));
+      btn.addEventListener('focus', () => setCaption(label, 'strong'));
       row.appendChild(btn);
     }
   }
@@ -729,8 +730,18 @@
     return promise;
   }
 
-  function trackers(count) {
-    return count === 1 ? '1 tracker' : count + ' trackers';
+  /**
+   * Chrome's i18n has no plural rules, so each count gets its own message. Two forms
+   * is enough for the languages shipped; a language needing more would need its own
+   * key rather than a smarter helper here.
+   */
+  function cleanMessage(prefix, count) {
+    if (!count) return t(prefix + 'None', prefix === 'capCleanPreview'
+      ? 'Nothing to remove — already clean' : 'Copied — nothing to remove');
+    if (count === 1) return t(prefix + 'One', prefix === 'capCleanPreview'
+      ? 'Copy without 1 tracker' : 'Copied — 1 tracker removed');
+    return t(prefix + 'Many', prefix === 'capCleanPreview'
+      ? `Copy without ${count} trackers` : `Copied — ${count} trackers removed`, [String(count)]);
   }
 
   async function previewClean(btn) {
@@ -738,9 +749,7 @@
     const res = await requestClean(url);
     // The pointer may have moved on while the worker woke up.
     if (currentUrl !== url || !btn.matches(':hover')) return;
-    setCaption(res.removed.length
-      ? 'Copy without ' + trackers(res.removed.length)
-      : 'Nothing to remove — already clean', 'strong');
+    setCaption(cleanMessage('capCleanPreview', res.removed.length), 'strong');
   }
 
   async function run(actionId) {
@@ -754,20 +763,17 @@
     }
     if (actionId === 'copy') {
       const ok = await copyText(url);
-      setCaption(ok ? 'Copied link address' : 'Could not copy', ok ? 'strong' : 'error');
+      setCaption(ok ? t('capCopied', 'Copied link address') : t('capCopyFailed', 'Could not copy'),
+                 ok ? 'strong' : 'error');
       setTimeout(teardown, ok ? 650 : 1400);
       return;
     }
     if (actionId === 'copyClean') {
       const res = await requestClean(url);
       const ok = await copyText(res.url);
-      setCaption(
-        ok
-          ? (res.removed.length ? 'Copied — ' + trackers(res.removed.length) + ' removed'
-                                : 'Copied — nothing to remove')
-          : 'Could not copy',
-        ok ? 'strong' : 'error'
-      );
+      setCaption(ok ? cleanMessage('capCleaned', res.removed.length)
+                    : t('capCopyFailed', 'Could not copy'),
+                 ok ? 'strong' : 'error');
       setTimeout(teardown, ok ? 900 : 1400);
       return;
     }

@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Abrir enlace"
+  },
+  "actionNewTab": {
+    "message": "Abrir en una pestaña nueva"
+  },
+  "actionNewWindow": {
+    "message": "Abrir en una ventana nueva"
+  },
+  "actionIncognito": {
+    "message": "Abrir en incógnito"
+  },
+  "actionSideRight": {
+    "message": "Abrir al lado (derecha)"
+  },
+  "actionSideStacked": {
+    "message": "Abrir al lado (apilado)"
+  },
+  "actionCopy": {
+    "message": "Copiar dirección del enlace"
+  },
+  "actionCopyClean": {
+    "message": "Copiar enlace limpio"
+  },
+  "menuLabel": {
+    "message": "Acciones del enlace"
+  },
+  "capCopied": {
+    "message": "Dirección copiada"
+  },
+  "capCopyFailed": {
+    "message": "No se pudo copiar"
+  },
+  "capCleanPreviewOne": {
+    "message": "Copiar sin 1 rastreador"
+  },
+  "capCleanPreviewMany": {
+    "message": "Copiar sin $count$ rastreadores",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Nada que quitar: ya está limpio"
+  },
+  "capCleanedOne": {
+    "message": "Copiado: 1 rastreador eliminado"
+  },
+  "capCleanedMany": {
+    "message": "Copiado: $count$ rastreadores eliminados",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Copiado: no había nada que quitar"
+  },
+  "errBadUrl": {
+    "message": "La URL no es válida"
+  },
+  "errScheme": {
+    "message": "No se abren enlaces $scheme$",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Primero permite HyLink en incógnito (chrome://extensions)"
+  },
+  "popupEnabled": {
+    "message": "Menú al pasar el cursor activado"
+  },
+  "popupDisableOn": {
+    "message": "Desactivar en"
+  },
+  "popupThisSite": {
+    "message": "este sitio"
+  },
+  "popupAllSettings": {
+    "message": "Todos los ajustes…"
+  },
+  "optTitle": {
+    "message": "Opciones de HyLink"
+  },
+  "optTagline": {
+    "message": "Pasa el cursor por un enlace para ver formas de abrirlo."
+  },
+  "optHowItWorks": {
+    "message": "Cómo funciona"
+  },
+  "optDemoLine1": {
+    "message": "Chrome tiene muchos detalles discretos, y"
+  },
+  "optDemoLine2": {
+    "message": "la $link$ es un buen ejemplo.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "barra de pestañas"
+  },
+  "optDemoLine3": {
+    "message": "Casi nunca tienes que pensar en ellos."
+  },
+  "optStep1Lead": {
+    "message": "Detén el cursor sobre un enlace"
+  },
+  "optStep1Body": {
+    "message": "dentro del texto de la página. Si lo mueves, la espera vuelve a empezar, así que leer nunca activa nada, y los enlaces de barras de navegación, encabezados y barras laterales se omiten."
+  },
+  "optStep2Lead": {
+    "message": "Aparecen tres puntos"
+  },
+  "optStep2Body": {
+    "message": "justo después del enlace."
+  },
+  "optStep3Lead": {
+    "message": "Muévete hasta ellos"
+  },
+  "optStep3Body": {
+    "message": "y se abren en la barra de acciones. Pulsa Esc, desplaza la página o aléjate para cerrarla."
+  },
+  "optNoNetwork": {
+    "message": "HyLink no envía nada a ningún sitio: sin analíticas ni peticiones de red. Tus ajustes se sincronizan a través de tu perfil de Chrome y nunca salen de él."
+  },
+  "optEnable": {
+    "message": "Activar HyLink"
+  },
+  "optEnableHint": {
+    "message": "Activa el menú al pasar el cursor en todas partes."
+  },
+  "optAppearance": {
+    "message": "Apariencia"
+  },
+  "optOnHover": {
+    "message": "Al pasar el cursor por un enlace"
+  },
+  "optModeHandle": {
+    "message": "Mostrar un tirador pequeño y ampliarlo al pasar por encima"
+  },
+  "optModeImmediate": {
+    "message": "Mostrar el menú completo enseguida"
+  },
+  "optModeHint": {
+    "message": "El tirador mantiene los enlaces legibles mientras navegas: el menú completo solo aparece cuando te mueves hasta él (o mantienes pulsada la tecla modificadora)."
+  },
+  "optTiming": {
+    "message": "Tiempos"
+  },
+  "optDelay": {
+    "message": "Tiempo de espera sobre el enlace antes de aparecer"
+  },
+  "optDelayHint": {
+    "message": "Mover el cursor lo reinicia, así que pasar por encima del texto mientras lees nunca activa el menú."
+  },
+  "optRequireModifier": {
+    "message": "Mostrar solo con una tecla modificadora pulsada"
+  },
+  "optRequireModifierHint": {
+    "message": "Mantiene el menú apartado hasta que lo pidas."
+  },
+  "optModifier": {
+    "message": "Tecla modificadora"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Opción"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Mayús"
+  },
+  "optModifierMeta": {
+    "message": "Comando / Windows"
+  },
+  "optActions": {
+    "message": "Acciones que aparecen en el menú"
+  },
+  "optNewTabActive": {
+    "message": "Cambiar a las pestañas nuevas de inmediato"
+  },
+  "optNewTabActiveHint": {
+    "message": "Si está desactivado, «Abrir en una pestaña nueva» la abre en segundo plano."
+  },
+  "optWhere": {
+    "message": "Dónde aparece"
+  },
+  "optSkipNav": {
+    "message": "Omitir la navegación, los encabezados y las barras laterales"
+  },
+  "optSkipNavHint": {
+    "message": "Ofrece acciones solo en los enlaces del texto de la página. Mantén pulsada la tecla modificadora para obtener el menú en un enlace de navegación de todos modos."
+  },
+  "optSites": {
+    "message": "No mostrar nunca en estos sitios: un nombre de host por línea. Los subdominios también están cubiertos:"
+  },
+  "optSitesExample": {
+    "message": "example.com también desactiva docs.example.com."
+  },
+  "optSaved": {
+    "message": "Guardado"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

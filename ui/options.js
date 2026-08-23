@@ -1,8 +1,9 @@
 'use strict';
-const { ACTIONS, getSettings } = self.HyLinkSettings;
+const { ACTIONS, getSettings, t, actionLabel } = self.HyLinkSettings;
 const { ICONS, svgIcon } = self.HyLinkIcons;
 
 const $ = (id) => document.getElementById(id);
+const ms = (value) => t('optMs', `${value} ms`, [String(value)]);
 let saveTimer = 0;
 
 function buildActionList(visible) {
@@ -18,7 +19,7 @@ function buildActionList(visible) {
     cb.addEventListener('change', save);
     const span = document.createElement('span');
     const strong = document.createElement('strong');
-    strong.textContent = action.label;
+    strong.textContent = actionLabel(action);
     span.appendChild(strong);
     label.append(cb, span);
     box.appendChild(label);
@@ -29,6 +30,25 @@ function buildActionList(visible) {
  * The demo's action bar, built from the real icon set so it can never show a menu the
  * extension doesn't have. Everything that moves is CSS; this only fills in the row.
  */
+/**
+ * The demo's middle line wraps a link, so it cannot be swapped wholesale by
+ * ui/i18n.js — the translation carries a placeholder and the two halves are rebuilt
+ * around the existing link element.
+ */
+function buildDemoLine() {
+  const link = document.querySelector('.page-link');
+  if (!link) return;
+  const line = link.parentElement;
+  const text = t('optDemoLine2', '', ['\u0000']);
+  if (!text) return;                        // no catalogue — keep the English markup
+  const [before, after] = text.split('\u0000');
+  if (after === undefined) return;
+  link.firstChild.textContent = t('optDemoLinkText', 'tab strip');
+  for (const node of [...line.childNodes]) if (node !== link) line.removeChild(node);
+  line.insertBefore(document.createTextNode(before), link);
+  line.appendChild(document.createTextNode(after));
+}
+
 function buildDemo() {
   const bar = document.getElementById('demoBar');
   const row = document.createElement('div');
@@ -41,7 +61,7 @@ function buildDemo() {
   }
   const caption = document.createElement('div');
   caption.className = 'demo-cap';
-  caption.textContent = ACTIONS[0].label;
+  caption.textContent = actionLabel(ACTIONS[0]);
   bar.append(row, caption);
 }
 
@@ -69,7 +89,7 @@ function collect() {
 function render(s) {
   $('enabled').checked = s.enabled;
   $('hoverDelay').value = s.hoverDelay;
-  $('hoverDelayOut').textContent = s.hoverDelay + ' ms';
+  $('hoverDelayOut').textContent = ms(s.hoverDelay);
   $('requireModifier').checked = s.requireModifier;
   $('modifier').value = s.modifier;
   $('expandMode').value = s.expandMode;
@@ -82,14 +102,14 @@ function render(s) {
 
 async function save() {
   const settings = collect();
-  $('hoverDelayOut').textContent = settings.hoverDelay + ' ms';
+  $('hoverDelayOut').textContent = ms(settings.hoverDelay);
   $('modifierField').classList.toggle('hidden', !settings.requireModifier);
   await chrome.storage.sync.set(settings);
   // Unticking every box is treated as hiding none; re-render so the checkboxes show
   // what was actually stored rather than an empty-looking list.
   const visible = ACTIONS.map((a) => a.id).filter((id) => !settings.hiddenActions.includes(id));
   buildActionList(visible);
-  flash('Saved');
+  flash(t('optSaved', 'Saved'));
 }
 
 function flash(text) {
@@ -100,6 +120,7 @@ function flash(text) {
   saveTimer = setTimeout(() => el.classList.remove('show'), 1200);
 }
 
+buildDemoLine();
 buildDemo();
 
 getSettings().then((s) => {
@@ -109,7 +130,7 @@ getSettings().then((s) => {
     $(id).addEventListener('change', save);
   }
   $('hoverDelay').addEventListener('input', () => {
-    $('hoverDelayOut').textContent = $('hoverDelay').value + ' ms';
+    $('hoverDelayOut').textContent = ms($('hoverDelay').value);
   });
   $('hoverDelay').addEventListener('change', save);
   $('disabledSites').addEventListener('change', save);

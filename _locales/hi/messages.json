@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "लिंक खोलें"
+  },
+  "actionNewTab": {
+    "message": "नए टैब में खोलें"
+  },
+  "actionNewWindow": {
+    "message": "नई विंडो में खोलें"
+  },
+  "actionIncognito": {
+    "message": "गुप्त विंडो में खोलें"
+  },
+  "actionSideRight": {
+    "message": "बगल में खोलें (दाएँ)"
+  },
+  "actionSideStacked": {
+    "message": "बगल में खोलें (एक के नीचे एक)"
+  },
+  "actionCopy": {
+    "message": "लिंक का पता कॉपी करें"
+  },
+  "actionCopyClean": {
+    "message": "साफ़ लिंक कॉपी करें"
+  },
+  "menuLabel": {
+    "message": "लिंक की कार्रवाइयाँ"
+  },
+  "capCopied": {
+    "message": "लिंक का पता कॉपी हो गया"
+  },
+  "capCopyFailed": {
+    "message": "कॉपी नहीं हो सका"
+  },
+  "capCleanPreviewOne": {
+    "message": "1 ट्रैकर हटाकर कॉपी करें"
+  },
+  "capCleanPreviewMany": {
+    "message": "$count$ ट्रैकर हटाकर कॉपी करें",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "हटाने को कुछ नहीं — लिंक पहले से साफ़ है"
+  },
+  "capCleanedOne": {
+    "message": "कॉपी हुआ — 1 ट्रैकर हटाया"
+  },
+  "capCleanedMany": {
+    "message": "कॉपी हुआ — $count$ ट्रैकर हटाए",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "कॉपी हुआ — हटाने को कुछ नहीं था"
+  },
+  "errBadUrl": {
+    "message": "यह मान्य URL नहीं है"
+  },
+  "errScheme": {
+    "message": "$scheme$ लिंक नहीं खोले जाते",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "पहले chrome://extensions में HyLink को गुप्त मोड की अनुमति दें"
+  },
+  "popupEnabled": {
+    "message": "होवर मेन्यू चालू है"
+  },
+  "popupDisableOn": {
+    "message": "यहाँ बंद करें:"
+  },
+  "popupThisSite": {
+    "message": "इस साइट"
+  },
+  "popupAllSettings": {
+    "message": "सभी सेटिंग…"
+  },
+  "optTitle": {
+    "message": "HyLink सेटिंग"
+  },
+  "optTagline": {
+    "message": "किसी लिंक पर कर्सर ले जाएँ और उसे खोलने के तरीके देखें।"
+  },
+  "optHowItWorks": {
+    "message": "यह कैसे काम करता है"
+  },
+  "optDemoLine1": {
+    "message": "Chrome में कई बारीक बातें हैं, और"
+  },
+  "optDemoLine2": {
+    "message": "$link$ इसका अच्छा उदाहरण है।",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "टैब पट्टी"
+  },
+  "optDemoLine3": {
+    "message": "इनमें से ज़्यादातर के बारे में कभी सोचना ही नहीं पड़ता।"
+  },
+  "optStep1Lead": {
+    "message": "लिंक पर कर्सर ठहराएँ"
+  },
+  "optStep1Body": {
+    "message": "पेज के टेक्स्ट में। कर्सर हिलाने पर इंतज़ार फिर से शुरू हो जाता है, इसलिए पढ़ते समय कुछ नहीं खुलता, और नेविगेशन बार, हेडर तथा साइडबार के लिंक छोड़ दिए जाते हैं।"
+  },
+  "optStep2Lead": {
+    "message": "तीन बिंदु दिखते हैं"
+  },
+  "optStep2Body": {
+    "message": "लिंक के ठीक बाद।"
+  },
+  "optStep3Lead": {
+    "message": "उन पर कर्सर ले जाएँ"
+  },
+  "optStep3Body": {
+    "message": "और वे कार्रवाई पट्टी में खुल जाते हैं। बंद करने के लिए Esc दबाएँ, स्क्रॉल करें या कर्सर हटा लें।"
+  },
+  "optNoNetwork": {
+    "message": "HyLink कहीं कुछ नहीं भेजता — न एनालिटिक्स, न नेटवर्क अनुरोध। आपकी सेटिंग आपके Chrome प्रोफ़ाइल से सिंक होती हैं और उससे बाहर नहीं जातीं।"
+  },
+  "optEnable": {
+    "message": "HyLink चालू करें"
+  },
+  "optEnableHint": {
+    "message": "हर जगह होवर मेन्यू चालू करता है।"
+  },
+  "optAppearance": {
+    "message": "रूप"
+  },
+  "optOnHover": {
+    "message": "लिंक पर कर्सर ले जाने पर"
+  },
+  "optModeHandle": {
+    "message": "छोटा हैंडल दिखाएँ, कर्सर आने पर फैलाएँ"
+  },
+  "optModeImmediate": {
+    "message": "पूरा मेन्यू तुरंत दिखाएँ"
+  },
+  "optModeHint": {
+    "message": "हैंडल से पढ़ते समय लिंक साफ़ दिखते रहते हैं — पूरा मेन्यू तभी खुलता है जब आप उस पर कर्सर ले जाएँ (या मॉडिफ़ायर कुंजी दबाए रखें)।"
+  },
+  "optTiming": {
+    "message": "समय"
+  },
+  "optDelay": {
+    "message": "दिखने से पहले लिंक पर इतनी देर ठहरें"
+  },
+  "optDelayHint": {
+    "message": "कर्सर हिलाने पर यह फिर से शुरू हो जाता है, इसलिए पढ़ते हुए टेक्स्ट पर से गुज़रने पर मेन्यू नहीं खुलता।"
+  },
+  "optRequireModifier": {
+    "message": "केवल मॉडिफ़ायर कुंजी दबी होने पर दिखाएँ"
+  },
+  "optRequireModifierHint": {
+    "message": "जब तक आप न कहें, मेन्यू रास्ते से हटा रहता है।"
+  },
+  "optModifier": {
+    "message": "मॉडिफ़ायर कुंजी"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Shift"
+  },
+  "optModifierMeta": {
+    "message": "Command / Windows"
+  },
+  "optActions": {
+    "message": "मेन्यू में दिखने वाली कार्रवाइयाँ"
+  },
+  "optNewTabActive": {
+    "message": "नए टैब पर तुरंत जाएँ"
+  },
+  "optNewTabActiveHint": {
+    "message": "बंद रहने पर \"नए टैब में खोलें\" उसे पृष्ठभूमि में खोलता है।"
+  },
+  "optWhere": {
+    "message": "यह कहाँ दिखता है"
+  },
+  "optSkipNav": {
+    "message": "नेविगेशन, हेडर और साइडबार छोड़ें"
+  },
+  "optSkipNavHint": {
+    "message": "कार्रवाइयाँ केवल पेज के अपने टेक्स्ट के लिंक पर दें। नेविगेशन लिंक पर भी मेन्यू चाहिए तो मॉडिफ़ायर कुंजी दबाए रखें।"
+  },
+  "optSites": {
+    "message": "इन साइटों पर कभी न दिखाएँ — हर पंक्ति में एक होस्टनाम। सबडोमेन भी शामिल हैं —"
+  },
+  "optSitesExample": {
+    "message": "example.com से docs.example.com भी बंद हो जाता है।"
+  },
+  "optSaved": {
+    "message": "सहेजा गया"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

@@ -369,3 +369,32 @@ stanza rather than the default versioned Caskroom directory. That way "Load unpa
 stays valid across upgrades instead of breaking on every new version. Verified by
 actually running `brew install --cask abhijitgore/tap/hylink`: tapped, downloaded,
 moved into place, manifest reads 1.7.1.
+
+## Round 10 — ten languages
+
+- [x] `_locales/` for en, es, pt_BR, ru, hi, fr, de, ja, id, tr (65 strings each)
+- [x] `ui/i18n.js` fills the pages; English stays inline as the fallback
+- [x] `t()` / `actionLabel()` in settings.js, used by the content script and worker
+- [x] 37 assertions: key parity, placeholder parity, and inline-English-vs-catalogue drift
+
+### Review
+
+Locales chosen from a coverage estimate (see the chat notes): weighted for *desktop*
+Chrome users, since extensions do not run on mobile, these ten reach roughly 75% of the
+addressable market. `zh_CN` was dropped — mainland China cannot reach the Web Store, so
+it scored below `id` and `tr`.
+
+Only UI strings are localised. The manifest name and description stay English: they are
+store-listing copy, translated in the developer dashboard, and the user asked
+explicitly not to add store strings here.
+
+Two design points worth keeping: the English text stays inline in the HTML rather than
+being blanked and filled, so a broken catalogue degrades to English instead of an empty
+page — and a test ties the inline copy to `_locales/en` so the two cannot drift. The
+demo's middle line wraps a link, so it uses a `$link$` placeholder and rebuilds the two
+halves around the existing element, which lets translators move the words.
+
+Verified by rendering the options page headlessly against the real catalogues for de,
+ja and tr — including the rebuilt demo line and the localised action-bar caption.
+
+159 assertions pass. Version 1.8.0.

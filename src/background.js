@@ -5,7 +5,7 @@
  */
 importScripts('settings.js', 'tiling.js', 'clean-list.js', 'clean.js');
 
-const { getSettings } = self.HyLinkSettings;
+const { getSettings, t } = self.HyLinkSettings;
 const { openTiled } = self.HyLinkTiling;
 const { cleanUrl } = self.HyLinkClean;
 
@@ -17,10 +17,10 @@ function assertSafe(rawUrl) {
   try {
     parsed = new URL(rawUrl);
   } catch (_) {
-    throw new Error('Not a valid URL');
+    throw new Error(t('errBadUrl', 'Not a valid URL'));
   }
   if (!SAFE_SCHEMES.has(parsed.protocol)) {
-    throw new Error(`Refusing to open ${parsed.protocol} link`);
+    throw new Error(t('errScheme', `Refusing to open ${parsed.protocol} link`, [parsed.protocol]));
   }
   return parsed.href;
 }
@@ -71,7 +71,7 @@ async function openIncognito(url) {
     // Older builds without the check: fall through and let create() decide.
   }
   if (!allowed) {
-    throw new Error('Allow HyLink in incognito first (chrome://extensions)');
+    throw new Error(t('errIncognito', 'Allow HyLink in incognito first (chrome://extensions)'));
   }
 
   let windows = [];

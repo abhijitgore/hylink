@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Buka tautan"
+  },
+  "actionNewTab": {
+    "message": "Buka di tab baru"
+  },
+  "actionNewWindow": {
+    "message": "Buka di jendela baru"
+  },
+  "actionIncognito": {
+    "message": "Buka di mode samaran"
+  },
+  "actionSideRight": {
+    "message": "Buka di samping (kanan)"
+  },
+  "actionSideStacked": {
+    "message": "Buka di samping (bertumpuk)"
+  },
+  "actionCopy": {
+    "message": "Salin alamat tautan"
+  },
+  "actionCopyClean": {
+    "message": "Salin tautan bersih"
+  },
+  "menuLabel": {
+    "message": "Tindakan tautan"
+  },
+  "capCopied": {
+    "message": "Alamat tautan disalin"
+  },
+  "capCopyFailed": {
+    "message": "Tidak bisa menyalin"
+  },
+  "capCleanPreviewOne": {
+    "message": "Salin tanpa 1 pelacak"
+  },
+  "capCleanPreviewMany": {
+    "message": "Salin tanpa $count$ pelacak",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Tidak ada yang perlu dihapus — sudah bersih"
+  },
+  "capCleanedOne": {
+    "message": "Disalin — 1 pelacak dihapus"
+  },
+  "capCleanedMany": {
+    "message": "Disalin — $count$ pelacak dihapus",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Disalin — tidak ada yang perlu dihapus"
+  },
+  "errBadUrl": {
+    "message": "URL tidak valid"
+  },
+  "errScheme": {
+    "message": "Tautan $scheme$ tidak dibuka",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Izinkan dulu HyLink di mode samaran (chrome://extensions)"
+  },
+  "popupEnabled": {
+    "message": "Menu hover aktif"
+  },
+  "popupDisableOn": {
+    "message": "Nonaktifkan di"
+  },
+  "popupThisSite": {
+    "message": "situs ini"
+  },
+  "popupAllSettings": {
+    "message": "Semua setelan…"
+  },
+  "optTitle": {
+    "message": "Setelan HyLink"
+  },
+  "optTagline": {
+    "message": "Arahkan kursor ke tautan untuk melihat cara membukanya."
+  },
+  "optHowItWorks": {
+    "message": "Cara kerjanya"
+  },
+  "optDemoLine1": {
+    "message": "Chrome punya banyak detail kecil, dan"
+  },
+  "optDemoLine2": {
+    "message": "$link$ adalah contoh yang bagus.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "bilah tab"
+  },
+  "optDemoLine3": {
+    "message": "Sebagian besar tak pernah perlu dipikirkan."
+  },
+  "optStep1Lead": {
+    "message": "Diamkan kursor di atas tautan"
+  },
+  "optStep1Body": {
+    "message": "di dalam teks halaman. Menggerakkan kursor mengulang hitungannya, jadi membaca tidak pernah memicu apa pun, dan tautan di bilah navigasi, header, serta sidebar dilewati."
+  },
+  "optStep2Lead": {
+    "message": "Tiga titik muncul"
+  },
+  "optStep2Body": {
+    "message": "tepat setelah tautan."
+  },
+  "optStep3Lead": {
+    "message": "Gerakkan kursor ke titik itu"
+  },
+  "optStep3Body": {
+    "message": "dan titik itu terbuka menjadi bilah tindakan. Tekan Esc, gulir, atau jauhkan kursor untuk menutupnya."
+  },
+  "optNoNetwork": {
+    "message": "HyLink tidak mengirim apa pun ke mana pun — tanpa analitik, tanpa permintaan jaringan. Setelan Anda tersinkron lewat profil Chrome dan tidak pernah keluar dari sana."
+  },
+  "optEnable": {
+    "message": "Aktifkan HyLink"
+  },
+  "optEnableHint": {
+    "message": "Menyalakan menu hover di mana saja."
+  },
+  "optAppearance": {
+    "message": "Tampilan"
+  },
+  "optOnHover": {
+    "message": "Saat kursor di atas tautan"
+  },
+  "optModeHandle": {
+    "message": "Tampilkan pegangan kecil, bentangkan saat disentuh kursor"
+  },
+  "optModeImmediate": {
+    "message": "Langsung tampilkan menu lengkap"
+  },
+  "optModeHint": {
+    "message": "Pegangan menjaga tautan tetap terbaca saat menjelajah — menu lengkap baru muncul setelah kursor sampai di sana (atau saat tombol pengubah ditahan)."
+  },
+  "optTiming": {
+    "message": "Waktu"
+  },
+  "optDelay": {
+    "message": "Lama kursor diam di tautan sebelum muncul"
+  },
+  "optDelayHint": {
+    "message": "Menggerakkan kursor mengulanginya, jadi menyapu teks sambil membaca tidak pernah memunculkan menu."
+  },
+  "optRequireModifier": {
+    "message": "Tampilkan hanya saat tombol pengubah ditahan"
+  },
+  "optRequireModifierHint": {
+    "message": "Menu tidak mengganggu sampai Anda memintanya."
+  },
+  "optModifier": {
+    "message": "Tombol pengubah"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Shift"
+  },
+  "optModifierMeta": {
+    "message": "Command / Windows"
+  },
+  "optActions": {
+    "message": "Tindakan yang muncul di menu"
+  },
+  "optNewTabActive": {
+    "message": "Langsung pindah ke tab baru"
+  },
+  "optNewTabActiveHint": {
+    "message": "Jika mati, \"Buka di tab baru\" membukanya di latar belakang."
+  },
+  "optWhere": {
+    "message": "Tempat munculnya"
+  },
+  "optSkipNav": {
+    "message": "Lewati navigasi, header, dan sidebar"
+  },
+  "optSkipNavHint": {
+    "message": "Hanya tawarkan tindakan pada tautan di dalam teks halaman. Tahan tombol pengubah untuk tetap memunculkan menu pada tautan navigasi."
+  },
+  "optSites": {
+    "message": "Jangan pernah tampilkan di situs ini — satu nama host per baris. Subdomain ikut tercakup —"
+  },
+  "optSitesExample": {
+    "message": "example.com juga menonaktifkan docs.example.com."
+  },
+  "optSaved": {
+    "message": "Tersimpan"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

@@ -129,5 +129,7 @@ URL-cleaning rules and carries their Mozilla Public License 2.0, marked in the f
 header. It is data, not remote code — nothing is fetched at runtime — but the licence
 belongs in whatever notice the listing or repo carries.
 
-**Not internationalised.** There is no `_locales/` directory, so the listing and UI are
-English only. Not a policy problem, just a reach limit.
+**Listing not translated.** The extension UI ships in ten languages (`_locales/`), but
+the manifest's name and description stay English on purpose and the store listing has
+no translations yet — those are entered per-language in the developer dashboard. Not a
+policy problem, just a reach limit on discovery.

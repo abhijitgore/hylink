@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Открыть ссылку"
+  },
+  "actionNewTab": {
+    "message": "Открыть в новой вкладке"
+  },
+  "actionNewWindow": {
+    "message": "Открыть в новом окне"
+  },
+  "actionIncognito": {
+    "message": "Открыть в режиме инкогнито"
+  },
+  "actionSideRight": {
+    "message": "Открыть сбоку (справа)"
+  },
+  "actionSideStacked": {
+    "message": "Открыть сбоку (снизу)"
+  },
+  "actionCopy": {
+    "message": "Копировать адрес ссылки"
+  },
+  "actionCopyClean": {
+    "message": "Копировать чистую ссылку"
+  },
+  "menuLabel": {
+    "message": "Действия со ссылкой"
+  },
+  "capCopied": {
+    "message": "Адрес скопирован"
+  },
+  "capCopyFailed": {
+    "message": "Не удалось скопировать"
+  },
+  "capCleanPreviewOne": {
+    "message": "Копировать без 1 трекера"
+  },
+  "capCleanPreviewMany": {
+    "message": "Копировать без трекеров: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Удалять нечего — ссылка уже чистая"
+  },
+  "capCleanedOne": {
+    "message": "Скопировано — удалён 1 трекер"
+  },
+  "capCleanedMany": {
+    "message": "Скопировано — удалено трекеров: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Скопировано — удалять было нечего"
+  },
+  "errBadUrl": {
+    "message": "Некорректный URL"
+  },
+  "errScheme": {
+    "message": "Ссылки $scheme$ не открываются",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Сначала разрешите HyLink в инкогнито (chrome://extensions)"
+  },
+  "popupEnabled": {
+    "message": "Меню при наведении включено"
+  },
+  "popupDisableOn": {
+    "message": "Отключить на"
+  },
+  "popupThisSite": {
+    "message": "этом сайте"
+  },
+  "popupAllSettings": {
+    "message": "Все настройки…"
+  },
+  "optTitle": {
+    "message": "Настройки HyLink"
+  },
+  "optTagline": {
+    "message": "Наведите курсор на ссылку, чтобы увидеть способы её открыть."
+  },
+  "optHowItWorks": {
+    "message": "Как это работает"
+  },
+  "optDemoLine1": {
+    "message": "В Chrome много незаметных деталей, и"
+  },
+  "optDemoLine2": {
+    "message": "$link$ — хороший тому пример.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "панель вкладок"
+  },
+  "optDemoLine3": {
+    "message": "О большинстве из них можно вообще не думать."
+  },
+  "optStep1Lead": {
+    "message": "Задержите курсор на ссылке"
+  },
+  "optStep1Body": {
+    "message": "в тексте страницы. Движение курсора запускает отсчёт заново, поэтому при чтении меню не появляется, а ссылки в навигации, шапках и боковых панелях пропускаются."
+  },
+  "optStep2Lead": {
+    "message": "Появляются три точки"
+  },
+  "optStep2Body": {
+    "message": "сразу после ссылки."
+  },
+  "optStep3Lead": {
+    "message": "Наведите на них курсор"
+  },
+  "optStep3Body": {
+    "message": "и они раскроются в панель действий. Нажмите Esc, прокрутите страницу или уведите курсор, чтобы закрыть её."
+  },
+  "optNoNetwork": {
+    "message": "HyLink никуда ничего не отправляет — ни аналитики, ни сетевых запросов. Настройки синхронизируются через ваш профиль Chrome и не покидают его."
+  },
+  "optEnable": {
+    "message": "Включить HyLink"
+  },
+  "optEnableHint": {
+    "message": "Включает меню при наведении на всех сайтах."
+  },
+  "optAppearance": {
+    "message": "Внешний вид"
+  },
+  "optOnHover": {
+    "message": "При наведении на ссылку"
+  },
+  "optModeHandle": {
+    "message": "Показывать маленький маркер и раскрывать при наведении"
+  },
+  "optModeImmediate": {
+    "message": "Сразу показывать полное меню"
+  },
+  "optModeHint": {
+    "message": "Маркер не мешает читать ссылки при просмотре — полное меню появляется, только когда вы наводите на него курсор (или удерживаете клавишу-модификатор)."
+  },
+  "optTiming": {
+    "message": "Задержка"
+  },
+  "optDelay": {
+    "message": "Сколько держать курсор на ссылке до появления"
+  },
+  "optDelayHint": {
+    "message": "Движение курсора сбрасывает отсчёт, поэтому при чтении меню не появляется."
+  },
+  "optRequireModifier": {
+    "message": "Показывать только при удержании клавиши-модификатора"
+  },
+  "optRequireModifierHint": {
+    "message": "Меню не мешает, пока вы сами его не вызовете."
+  },
+  "optModifier": {
+    "message": "Клавиша-модификатор"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Shift"
+  },
+  "optModifierMeta": {
+    "message": "Command / Windows"
+  },
+  "optActions": {
+    "message": "Действия в меню"
+  },
+  "optNewTabActive": {
+    "message": "Сразу переключаться на новые вкладки"
+  },
+  "optNewTabActiveHint": {
+    "message": "Если выключено, «Открыть в новой вкладке» открывает её в фоне."
+  },
+  "optWhere": {
+    "message": "Где появляется"
+  },
+  "optSkipNav": {
+    "message": "Пропускать навигацию, шапки и боковые панели"
+  },
+  "optSkipNavHint": {
+    "message": "Предлагать действия только для ссылок в тексте страницы. Удерживайте клавишу-модификатор, чтобы всё же вызвать меню на навигационной ссылке."
+  },
+  "optSites": {
+    "message": "Никогда не показывать на этих сайтах — по одному хосту в строке. Поддомены тоже учитываются —"
+  },
+  "optSitesExample": {
+    "message": "example.com отключает и docs.example.com."
+  },
+  "optSaved": {
+    "message": "Сохранено"
+  },
+  "optMs": {
+    "message": "$count$ мс",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

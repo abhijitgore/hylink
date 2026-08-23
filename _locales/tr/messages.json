@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Bağlantıyı aç"
+  },
+  "actionNewTab": {
+    "message": "Yeni sekmede aç"
+  },
+  "actionNewWindow": {
+    "message": "Yeni pencerede aç"
+  },
+  "actionIncognito": {
+    "message": "Gizli pencerede aç"
+  },
+  "actionSideRight": {
+    "message": "Yan tarafta aç (sağda)"
+  },
+  "actionSideStacked": {
+    "message": "Yan tarafta aç (üst üste)"
+  },
+  "actionCopy": {
+    "message": "Bağlantı adresini kopyala"
+  },
+  "actionCopyClean": {
+    "message": "Temiz bağlantıyı kopyala"
+  },
+  "menuLabel": {
+    "message": "Bağlantı işlemleri"
+  },
+  "capCopied": {
+    "message": "Bağlantı adresi kopyalandı"
+  },
+  "capCopyFailed": {
+    "message": "Kopyalanamadı"
+  },
+  "capCleanPreviewOne": {
+    "message": "1 izleyici olmadan kopyala"
+  },
+  "capCleanPreviewMany": {
+    "message": "$count$ izleyici olmadan kopyala",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Kaldırılacak bir şey yok — zaten temiz"
+  },
+  "capCleanedOne": {
+    "message": "Kopyalandı — 1 izleyici kaldırıldı"
+  },
+  "capCleanedMany": {
+    "message": "Kopyalandı — $count$ izleyici kaldırıldı",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Kopyalandı — kaldırılacak bir şey yoktu"
+  },
+  "errBadUrl": {
+    "message": "Geçerli bir URL değil"
+  },
+  "errScheme": {
+    "message": "$scheme$ bağlantıları açılmaz",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Önce chrome://extensions üzerinden HyLink'e gizli modda izin verin"
+  },
+  "popupEnabled": {
+    "message": "Üzerine gelme menüsü açık"
+  },
+  "popupDisableOn": {
+    "message": "Şurada kapat:"
+  },
+  "popupThisSite": {
+    "message": "bu site"
+  },
+  "popupAllSettings": {
+    "message": "Tüm ayarlar…"
+  },
+  "optTitle": {
+    "message": "HyLink ayarları"
+  },
+  "optTagline": {
+    "message": "Bir bağlantının üzerine gelin, açma yollarını görün."
+  },
+  "optHowItWorks": {
+    "message": "Nasıl çalışır"
+  },
+  "optDemoLine1": {
+    "message": "Chrome sessiz ayrıntılarla dolu ve"
+  },
+  "optDemoLine2": {
+    "message": "$link$ bunun güzel bir örneği.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "sekme çubuğu"
+  },
+  "optDemoLine3": {
+    "message": "Çoğunu hiç düşünmeniz bile gerekmez."
+  },
+  "optStep1Lead": {
+    "message": "İşaretçiyi bir bağlantı üzerinde bekletin"
+  },
+  "optStep1Body": {
+    "message": "sayfanın metni içinde. İşaretçiyi oynatmak bekleme süresini sıfırlar; böylece okumak hiçbir şeyi tetiklemez ve gezinme çubuklarındaki, başlıklardaki ve kenar çubuklarındaki bağlantılar atlanır."
+  },
+  "optStep2Lead": {
+    "message": "Üç nokta belirir"
+  },
+  "optStep2Body": {
+    "message": "bağlantının hemen ardında."
+  },
+  "optStep3Lead": {
+    "message": "İşaretçiyi üzerlerine getirin"
+  },
+  "optStep3Body": {
+    "message": "ve işlem çubuğuna açılırlar. Kapatmak için Esc'e basın, sayfayı kaydırın ya da uzaklaşın."
+  },
+  "optNoNetwork": {
+    "message": "HyLink hiçbir yere bir şey göndermez — analitik yok, ağ isteği yok. Ayarlarınız Chrome profilinizle eşitlenir ve oradan dışarı çıkmaz."
+  },
+  "optEnable": {
+    "message": "HyLink'i etkinleştir"
+  },
+  "optEnableHint": {
+    "message": "Üzerine gelme menüsünü her yerde açar."
+  },
+  "optAppearance": {
+    "message": "Görünüm"
+  },
+  "optOnHover": {
+    "message": "Bir bağlantının üzerine gelince"
+  },
+  "optModeHandle": {
+    "message": "Küçük bir tutamaç göster, üzerine gelince genişlet"
+  },
+  "optModeImmediate": {
+    "message": "Menünün tamamını hemen göster"
+  },
+  "optModeHint": {
+    "message": "Tutamaç, gezinirken bağlantıları okunur tutar — menünün tamamı ancak üzerine geldiğinizde (ya da değiştirici tuşu basılı tuttuğunuzda) açılır."
+  },
+  "optTiming": {
+    "message": "Zamanlama"
+  },
+  "optDelay": {
+    "message": "Görünmeden önce bağlantı üzerinde bekleme süresi"
+  },
+  "optDelayHint": {
+    "message": "İşaretçiyi oynatmak bunu sıfırlar; okurken metnin üzerinden geçmek menüyü açmaz."
+  },
+  "optRequireModifier": {
+    "message": "Yalnızca değiştirici tuş basılıyken göster"
+  },
+  "optRequireModifierHint": {
+    "message": "Siz istemedikçe menü yolunuzdan uzak durur."
+  },
+  "optModifier": {
+    "message": "Değiştirici tuş"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Shift"
+  },
+  "optModifierMeta": {
+    "message": "Command / Windows"
+  },
+  "optActions": {
+    "message": "Menüde görünen işlemler"
+  },
+  "optNewTabActive": {
+    "message": "Yeni sekmelere hemen geç"
+  },
+  "optNewTabActiveHint": {
+    "message": "Kapalıyken \"Yeni sekmede aç\" onu arka planda açar."
+  },
+  "optWhere": {
+    "message": "Nerede görünür"
+  },
+  "optSkipNav": {
+    "message": "Gezinme, başlık ve kenar çubuklarını atla"
+  },
+  "optSkipNavHint": {
+    "message": "İşlemleri yalnızca sayfanın kendi metnindeki bağlantılarda sun. Yine de bir gezinme bağlantısında menü isterseniz değiştirici tuşu basılı tutun."
+  },
+  "optSites": {
+    "message": "Bu sitelerde asla gösterme — her satıra bir ana makine adı. Alt alan adları da kapsanır —"
+  },
+  "optSitesExample": {
+    "message": "example.com, docs.example.com'u da devre dışı bırakır."
+  },
+  "optSaved": {
+    "message": "Kaydedildi"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

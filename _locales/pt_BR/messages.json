@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Abrir link"
+  },
+  "actionNewTab": {
+    "message": "Abrir em nova aba"
+  },
+  "actionNewWindow": {
+    "message": "Abrir em nova janela"
+  },
+  "actionIncognito": {
+    "message": "Abrir em janela anônima"
+  },
+  "actionSideRight": {
+    "message": "Abrir ao lado (direita)"
+  },
+  "actionSideStacked": {
+    "message": "Abrir ao lado (empilhado)"
+  },
+  "actionCopy": {
+    "message": "Copiar endereço do link"
+  },
+  "actionCopyClean": {
+    "message": "Copiar link limpo"
+  },
+  "menuLabel": {
+    "message": "Ações do link"
+  },
+  "capCopied": {
+    "message": "Endereço copiado"
+  },
+  "capCopyFailed": {
+    "message": "Não foi possível copiar"
+  },
+  "capCleanPreviewOne": {
+    "message": "Copiar sem 1 rastreador"
+  },
+  "capCleanPreviewMany": {
+    "message": "Copiar sem $count$ rastreadores",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Nada a remover — já está limpo"
+  },
+  "capCleanedOne": {
+    "message": "Copiado — 1 rastreador removido"
+  },
+  "capCleanedMany": {
+    "message": "Copiado — $count$ rastreadores removidos",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Copiado — nada a remover"
+  },
+  "errBadUrl": {
+    "message": "URL inválida"
+  },
+  "errScheme": {
+    "message": "Links $scheme$ não são abertos",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Permita o HyLink na janela anônima primeiro (chrome://extensions)"
+  },
+  "popupEnabled": {
+    "message": "Menu ao passar o cursor ativado"
+  },
+  "popupDisableOn": {
+    "message": "Desativar em"
+  },
+  "popupThisSite": {
+    "message": "neste site"
+  },
+  "popupAllSettings": {
+    "message": "Todas as configurações…"
+  },
+  "optTitle": {
+    "message": "Opções do HyLink"
+  },
+  "optTagline": {
+    "message": "Passe o cursor sobre um link para ver maneiras de abri-lo."
+  },
+  "optHowItWorks": {
+    "message": "Como funciona"
+  },
+  "optDemoLine1": {
+    "message": "O Chrome tem muitos detalhes discretos, e"
+  },
+  "optDemoLine2": {
+    "message": "a $link$ é um bom exemplo disso.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "barra de abas"
+  },
+  "optDemoLine3": {
+    "message": "Você quase nunca precisa pensar neles."
+  },
+  "optStep1Lead": {
+    "message": "Pare o cursor sobre um link"
+  },
+  "optStep1Body": {
+    "message": "no texto da página. Mover o cursor reinicia a espera, então ler nunca dispara nada, e links em barras de navegação, cabeçalhos e barras laterais são ignorados."
+  },
+  "optStep2Lead": {
+    "message": "Três pontos aparecem"
+  },
+  "optStep2Body": {
+    "message": "logo depois do link."
+  },
+  "optStep3Lead": {
+    "message": "Mova o cursor até eles"
+  },
+  "optStep3Body": {
+    "message": "e eles se abrem na barra de ações. Pressione Esc, role a página ou afaste o cursor para fechá-la."
+  },
+  "optNoNetwork": {
+    "message": "O HyLink não envia nada para lugar nenhum — sem análises, sem requisições de rede. Suas configurações sincronizam pelo seu perfil do Chrome e nunca saem dele."
+  },
+  "optEnable": {
+    "message": "Ativar o HyLink"
+  },
+  "optEnableHint": {
+    "message": "Ativa o menu ao passar o cursor em todos os sites."
+  },
+  "optAppearance": {
+    "message": "Aparência"
+  },
+  "optOnHover": {
+    "message": "Ao passar o cursor sobre um link"
+  },
+  "optModeHandle": {
+    "message": "Mostrar uma alça pequena e expandir ao passar o cursor"
+  },
+  "optModeImmediate": {
+    "message": "Mostrar o menu completo imediatamente"
+  },
+  "optModeHint": {
+    "message": "A alça mantém os links legíveis enquanto você navega — o menu completo só aparece quando você move o cursor até ela (ou segura a tecla modificadora)."
+  },
+  "optTiming": {
+    "message": "Tempo"
+  },
+  "optDelay": {
+    "message": "Tempo parado sobre o link antes de aparecer"
+  },
+  "optDelayHint": {
+    "message": "Mover o cursor reinicia a contagem, então passar pelo texto enquanto lê nunca abre o menu."
+  },
+  "optRequireModifier": {
+    "message": "Mostrar apenas com uma tecla modificadora pressionada"
+  },
+  "optRequireModifierHint": {
+    "message": "Mantém o menu fora do caminho até você pedir por ele."
+  },
+  "optModifier": {
+    "message": "Tecla modificadora"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Shift"
+  },
+  "optModifierMeta": {
+    "message": "Command / Windows"
+  },
+  "optActions": {
+    "message": "Ações exibidas no menu"
+  },
+  "optNewTabActive": {
+    "message": "Mudar para as novas abas imediatamente"
+  },
+  "optNewTabActiveHint": {
+    "message": "Desativado, \"Abrir em nova aba\" abre em segundo plano."
+  },
+  "optWhere": {
+    "message": "Onde aparece"
+  },
+  "optSkipNav": {
+    "message": "Ignorar navegação, cabeçalhos e barras laterais"
+  },
+  "optSkipNavHint": {
+    "message": "Oferece ações apenas em links no texto da própria página. Segure a tecla modificadora para obter o menu em um link de navegação mesmo assim."
+  },
+  "optSites": {
+    "message": "Nunca mostrar nestes sites — um nome de host por linha. Subdomínios também são cobertos —"
+  },
+  "optSitesExample": {
+    "message": "example.com também desativa docs.example.com."
+  },
+  "optSaved": {
+    "message": "Salvo"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

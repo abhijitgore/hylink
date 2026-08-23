@@ -6,13 +6,14 @@
   <h1>HyLink</h1>
   <label class="switch">
     <input type="checkbox" id="enabled">
-    <span><strong>Hover menu enabled</strong></span>
+    <span><strong data-i18n="popupEnabled">Hover menu enabled</strong></span>
   </label>
   <label class="switch">
     <input type="checkbox" id="siteOff">
-    <span><strong>Disable on <span id="host">this site</span></strong></span>
+    <span><strong><span data-i18n="popupDisableOn">Disable on</span> <span id="host" data-i18n="popupThisSite">this site</span></strong></span>
   </label>
-  <button type="button" id="openOptions" class="link-btn">All settings…</button>
+  <button type="button" id="openOptions" class="link-btn" data-i18n="popupAllSettings">All settings…</button>
 </main>
 <script src="../src/settings.js"></script>
+<script src="i18n.js"></script>
 <script src="popup.js"></script>

@@ -258,6 +258,47 @@ function loadWorker(opts = {}) {
           list.rules.every((r) => Array.isArray(r.include) && r.include.length));
   }
 
+  describe('locales');
+  {
+    const dir = path.join(ROOT, '_locales');
+    const locales = fs.readdirSync(dir).sort();
+    const en = JSON.parse(fs.readFileSync(path.join(dir, 'en', 'messages.json'), 'utf8'));
+    const enKeys = Object.keys(en).sort();
+
+    eq('the locales that ship', locales,
+       ['de', 'en', 'es', 'fr', 'hi', 'id', 'ja', 'pt_BR', 'ru', 'tr']);
+    eq('manifest declares the fallback',
+       JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.json'), 'utf8')).default_locale, 'en');
+
+    for (const locale of locales) {
+      const messages = JSON.parse(fs.readFileSync(path.join(dir, locale, 'messages.json'), 'utf8'));
+      eq(`${locale}: same keys as en`, Object.keys(messages).sort(), enKeys);
+      // A placeholder that goes missing in translation renders as a literal $count$.
+      const bad = enKeys.filter((key) => {
+        const wanted = Object.keys(en[key].placeholders || {});
+        const got = Object.keys(messages[key].placeholders || {});
+        if (JSON.stringify(wanted) !== JSON.stringify(got)) return true;
+        return wanted.some((name) => !messages[key].message.includes('$' + name + '$'));
+      });
+      eq(`${locale}: placeholders intact`, bad, []);
+      check(`${locale}: nothing empty`,
+            Object.values(messages).every((m) => m.message && m.message.trim()));
+    }
+
+    // The pages keep their English inline as a fallback; if someone edits one and not
+    // the other they drift apart silently, so tie them together here.
+    const strip = (text) => text.replace(/\s+/g, ' ').trim();
+    for (const page of ['ui/options.html', 'ui/popup.html']) {
+      const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
+      const used = [...html.matchAll(/data-i18n(?:-title|-placeholder)?="([^"]+)"/g)].map((m) => m[1]);
+      eq(`${page}: every key exists`, used.filter((key) => !(key in en)), []);
+      const mismatched = [...html.matchAll(/data-i18n="([^"]+)"[^>]*>([^<]*)</g)]
+        .filter(([, key, text]) => strip(text) !== strip(en[key].message))
+        .map(([, key]) => key);
+      eq(`${page}: inline English matches the catalogue`, mismatched, []);
+    }
+  }
+
   describe('first run');
   {
     let sb = loadWorker();

@@ -8,15 +8,33 @@
 
   /** Every action the hover menu can offer, in menu order. */
   const ACTIONS = [
-    { id: 'open',        label: 'Open link' },
-    { id: 'newTab',      label: 'Open in new tab' },
-    { id: 'newWindow',   label: 'Open in new window' },
-    { id: 'incognito',   label: 'Open in incognito' },
-    { id: 'sideRight',   label: 'Open in side (right)' },
-    { id: 'sideStacked', label: 'Open in side (stacked)' },
-    { id: 'copy',        label: 'Copy link address' },
-    { id: 'copyClean',   label: 'Copy clean link' }
+    { id: 'open',        key: 'actionOpen',        label: 'Open link' },
+    { id: 'newTab',      key: 'actionNewTab',      label: 'Open in new tab' },
+    { id: 'newWindow',   key: 'actionNewWindow',   label: 'Open in new window' },
+    { id: 'incognito',   key: 'actionIncognito',   label: 'Open in incognito' },
+    { id: 'sideRight',   key: 'actionSideRight',   label: 'Open in side (right)' },
+    { id: 'sideStacked', key: 'actionSideStacked', label: 'Open in side (stacked)' },
+    { id: 'copy',        key: 'actionCopy',        label: 'Copy link address' },
+    { id: 'copyClean',   key: 'actionCopyClean',   label: 'Copy clean link' }
   ];
+
+  /**
+   * Localised text, falling back to the English written inline above and in the
+   * pages themselves — so a missing catalogue degrades to English rather than to
+   * blank buttons, and the tests can run without a `chrome` object at all.
+   */
+  function t(key, fallback, subs) {
+    try {
+      return chrome.i18n.getMessage(key, subs) || fallback;
+    } catch (_) {
+      return fallback;
+    }
+  }
+
+  /** The menu label for an action, in the user's language. */
+  function actionLabel(action) {
+    return t(action.key, action.label);
+  }
 
   /**
    * The action set as it stood when settings were an opt-in `visibleActions` list.
@@ -149,6 +167,6 @@
 
   root.HyLinkSettings = {
     ACTIONS, LEGACY_ACTIONS, DEFAULTS, NAV_SELECTOR, NAV_TOKEN_RE,
-    getSettings, migrate, normalize, isSiteDisabled, looksNavigational
+    getSettings, migrate, normalize, isSiteDisabled, looksNavigational, t, actionLabel
   };
 })(typeof self !== 'undefined' ? self : this);

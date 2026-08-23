@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "Link öffnen"
+  },
+  "actionNewTab": {
+    "message": "In neuem Tab öffnen"
+  },
+  "actionNewWindow": {
+    "message": "In neuem Fenster öffnen"
+  },
+  "actionIncognito": {
+    "message": "Im Inkognitofenster öffnen"
+  },
+  "actionSideRight": {
+    "message": "Daneben öffnen (rechts)"
+  },
+  "actionSideStacked": {
+    "message": "Daneben öffnen (übereinander)"
+  },
+  "actionCopy": {
+    "message": "Linkadresse kopieren"
+  },
+  "actionCopyClean": {
+    "message": "Bereinigten Link kopieren"
+  },
+  "menuLabel": {
+    "message": "Linkaktionen"
+  },
+  "capCopied": {
+    "message": "Linkadresse kopiert"
+  },
+  "capCopyFailed": {
+    "message": "Kopieren nicht möglich"
+  },
+  "capCleanPreviewOne": {
+    "message": "Ohne 1 Tracker kopieren"
+  },
+  "capCleanPreviewMany": {
+    "message": "Ohne $count$ Tracker kopieren",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "Nichts zu entfernen — schon sauber"
+  },
+  "capCleanedOne": {
+    "message": "Kopiert — 1 Tracker entfernt"
+  },
+  "capCleanedMany": {
+    "message": "Kopiert — $count$ Tracker entfernt",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "Kopiert — nichts zu entfernen"
+  },
+  "errBadUrl": {
+    "message": "Keine gültige URL"
+  },
+  "errScheme": {
+    "message": "$scheme$-Links werden nicht geöffnet",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "Erlaube HyLink zuerst im Inkognitomodus (chrome://extensions)"
+  },
+  "popupEnabled": {
+    "message": "Hover-Menü aktiviert"
+  },
+  "popupDisableOn": {
+    "message": "Deaktivieren auf"
+  },
+  "popupThisSite": {
+    "message": "dieser Website"
+  },
+  "popupAllSettings": {
+    "message": "Alle Einstellungen…"
+  },
+  "optTitle": {
+    "message": "HyLink-Einstellungen"
+  },
+  "optTagline": {
+    "message": "Zeige auf einen Link, um Wege zum Öffnen zu sehen."
+  },
+  "optHowItWorks": {
+    "message": "So funktioniert es"
+  },
+  "optDemoLine1": {
+    "message": "Chrome steckt voller stiller Details, und"
+  },
+  "optDemoLine2": {
+    "message": "die $link$ ist ein gutes Beispiel dafür.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "Tableiste"
+  },
+  "optDemoLine3": {
+    "message": "Über die meisten muss man nie nachdenken."
+  },
+  "optStep1Lead": {
+    "message": "Halte den Zeiger auf einem Link an"
+  },
+  "optStep1Body": {
+    "message": "im Text der Seite. Jede Bewegung startet die Wartezeit neu, sodass Lesen nie etwas auslöst, und Links in Navigationsleisten, Kopfzeilen und Seitenleisten werden übersprungen."
+  },
+  "optStep2Lead": {
+    "message": "Drei Punkte erscheinen"
+  },
+  "optStep2Body": {
+    "message": "direkt hinter dem Link."
+  },
+  "optStep3Lead": {
+    "message": "Fahre darauf"
+  },
+  "optStep3Body": {
+    "message": "und sie öffnen sich zur Aktionsleiste. Drücke Esc, scrolle oder fahre weg, um sie zu schließen."
+  },
+  "optNoNetwork": {
+    "message": "HyLink sendet nichts irgendwohin — keine Analytik, keine Netzwerkanfragen. Deine Einstellungen werden über dein Chrome-Profil synchronisiert und verlassen es nie."
+  },
+  "optEnable": {
+    "message": "HyLink aktivieren"
+  },
+  "optEnableHint": {
+    "message": "Schaltet das Hover-Menü überall ein."
+  },
+  "optAppearance": {
+    "message": "Darstellung"
+  },
+  "optOnHover": {
+    "message": "Beim Zeigen auf einen Link"
+  },
+  "optModeHandle": {
+    "message": "Kleinen Griff zeigen, beim Darüberfahren aufklappen"
+  },
+  "optModeImmediate": {
+    "message": "Vollständiges Menü sofort zeigen"
+  },
+  "optModeHint": {
+    "message": "Der Griff hält Links beim Lesen frei — das vollständige Menü erscheint erst, wenn du darauf fährst (oder die Modifikatortaste hältst)."
+  },
+  "optTiming": {
+    "message": "Timing"
+  },
+  "optDelay": {
+    "message": "So lange auf einem Link ruhen, bevor es erscheint"
+  },
+  "optDelayHint": {
+    "message": "Bewegen setzt das zurück, sodass Überstreichen von Text beim Lesen das Menü nie auslöst."
+  },
+  "optRequireModifier": {
+    "message": "Nur bei gedrückter Modifikatortaste zeigen"
+  },
+  "optRequireModifierHint": {
+    "message": "Hält das Menü fern, bis du danach fragst."
+  },
+  "optModifier": {
+    "message": "Modifikatortaste"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Strg"
+  },
+  "optModifierShift": {
+    "message": "Umschalt"
+  },
+  "optModifierMeta": {
+    "message": "Befehl / Windows"
+  },
+  "optActions": {
+    "message": "Im Menü gezeigte Aktionen"
+  },
+  "optNewTabActive": {
+    "message": "Sofort zu neuen Tabs wechseln"
+  },
+  "optNewTabActiveHint": {
+    "message": "Aus bedeutet, dass „In neuem Tab öffnen“ ihn im Hintergrund öffnet."
+  },
+  "optWhere": {
+    "message": "Wo es erscheint"
+  },
+  "optSkipNav": {
+    "message": "Navigation, Kopfzeilen und Seitenleisten überspringen"
+  },
+  "optSkipNavHint": {
+    "message": "Aktionen nur für Links im Text der Seite anbieten. Halte die Modifikatortaste, um das Menü trotzdem auf einem Navigationslink zu bekommen."
+  },
+  "optSites": {
+    "message": "Auf diesen Websites nie zeigen — ein Hostname pro Zeile. Subdomains sind mit abgedeckt —"
+  },
+  "optSitesExample": {
+    "message": "example.com deaktiviert auch docs.example.com."
+  },
+  "optSaved": {
+    "message": "Gespeichert"
+  },
+  "optMs": {
+    "message": "$count$ ms",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}

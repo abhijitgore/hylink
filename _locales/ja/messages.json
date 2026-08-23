@@ -1,0 +1,227 @@
+{
+  "actionOpen": {
+    "message": "リンクを開く"
+  },
+  "actionNewTab": {
+    "message": "新しいタブで開く"
+  },
+  "actionNewWindow": {
+    "message": "新しいウィンドウで開く"
+  },
+  "actionIncognito": {
+    "message": "シークレット ウィンドウで開く"
+  },
+  "actionSideRight": {
+    "message": "横に開く（右）"
+  },
+  "actionSideStacked": {
+    "message": "横に開く（上下）"
+  },
+  "actionCopy": {
+    "message": "リンクのアドレスをコピー"
+  },
+  "actionCopyClean": {
+    "message": "クリーンなリンクをコピー"
+  },
+  "menuLabel": {
+    "message": "リンクの操作"
+  },
+  "capCopied": {
+    "message": "リンクのアドレスをコピーしました"
+  },
+  "capCopyFailed": {
+    "message": "コピーできませんでした"
+  },
+  "capCleanPreviewOne": {
+    "message": "トラッカー 1 個を除いてコピー"
+  },
+  "capCleanPreviewMany": {
+    "message": "トラッカー $count$ 個を除いてコピー",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanPreviewNone": {
+    "message": "削除するものはありません — すでにクリーンです"
+  },
+  "capCleanedOne": {
+    "message": "コピーしました — トラッカー 1 個を削除"
+  },
+  "capCleanedMany": {
+    "message": "コピーしました — トラッカー $count$ 個を削除",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "capCleanedNone": {
+    "message": "コピーしました — 削除するものはありませんでした"
+  },
+  "errBadUrl": {
+    "message": "有効な URL ではありません"
+  },
+  "errScheme": {
+    "message": "$scheme$ のリンクは開けません",
+    "placeholders": {
+      "scheme": {
+        "content": "$1",
+        "example": "javascript:"
+      }
+    }
+  },
+  "errIncognito": {
+    "message": "先に chrome://extensions でシークレット モードでの実行を許可してください"
+  },
+  "popupEnabled": {
+    "message": "ホバー メニューを有効化"
+  },
+  "popupDisableOn": {
+    "message": "無効にする:"
+  },
+  "popupThisSite": {
+    "message": "このサイト"
+  },
+  "popupAllSettings": {
+    "message": "すべての設定…"
+  },
+  "optTitle": {
+    "message": "HyLink の設定"
+  },
+  "optTagline": {
+    "message": "リンクにカーソルを合わせると、開き方の選択肢が出ます。"
+  },
+  "optHowItWorks": {
+    "message": "使い方"
+  },
+  "optDemoLine1": {
+    "message": "Chrome には静かな工夫がたくさんあり、"
+  },
+  "optDemoLine2": {
+    "message": "$link$ はその良い例です。",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "tab strip"
+      }
+    }
+  },
+  "optDemoLinkText": {
+    "message": "タブ バー"
+  },
+  "optDemoLine3": {
+    "message": "そのほとんどは意識する必要すらありません。"
+  },
+  "optStep1Lead": {
+    "message": "リンクの上でカーソルを止める"
+  },
+  "optStep1Body": {
+    "message": "ページ本文の中で。カーソルを動かすと待ち時間はやり直しになるので、読んでいるだけでは何も出ません。ナビゲーション バー、ヘッダー、サイドバーのリンクは対象外です。"
+  },
+  "optStep2Lead": {
+    "message": "3 つの点が出る"
+  },
+  "optStep2Body": {
+    "message": "リンクのすぐ後ろに。"
+  },
+  "optStep3Lead": {
+    "message": "その上にカーソルを移す"
+  },
+  "optStep3Body": {
+    "message": "と操作バーが開きます。Esc キー、スクロール、カーソルを離す、のいずれかで閉じます。"
+  },
+  "optNoNetwork": {
+    "message": "HyLink はどこにも何も送信しません — 解析もネットワーク リクエストもありません。設定は Chrome プロフィール経由で同期され、そこから出ることはありません。"
+  },
+  "optEnable": {
+    "message": "HyLink を有効にする"
+  },
+  "optEnableHint": {
+    "message": "すべてのサイトでホバー メニューを有効にします。"
+  },
+  "optAppearance": {
+    "message": "外観"
+  },
+  "optOnHover": {
+    "message": "リンクにカーソルを合わせたとき"
+  },
+  "optModeHandle": {
+    "message": "小さなグリップを表示し、カーソルを合わせたら展開"
+  },
+  "optModeImmediate": {
+    "message": "最初からメニュー全体を表示"
+  },
+  "optModeHint": {
+    "message": "グリップなら閲覧中もリンクが読みやすいままです。メニュー全体は、その上にカーソルを移したとき（または修飾キーを押したとき）だけ開きます。"
+  },
+  "optTiming": {
+    "message": "タイミング"
+  },
+  "optDelay": {
+    "message": "表示までにリンク上で止めておく時間"
+  },
+  "optDelayHint": {
+    "message": "カーソルを動かすとやり直しになるため、読みながら文字の上を通ってもメニューは出ません。"
+  },
+  "optRequireModifier": {
+    "message": "修飾キーを押している間だけ表示"
+  },
+  "optRequireModifierHint": {
+    "message": "呼び出すまでメニューを邪魔にしません。"
+  },
+  "optModifier": {
+    "message": "修飾キー"
+  },
+  "optModifierAlt": {
+    "message": "Alt / Option"
+  },
+  "optModifierCtrl": {
+    "message": "Control"
+  },
+  "optModifierShift": {
+    "message": "Shift"
+  },
+  "optModifierMeta": {
+    "message": "Command / Windows"
+  },
+  "optActions": {
+    "message": "メニューに表示する操作"
+  },
+  "optNewTabActive": {
+    "message": "新しいタブへすぐ切り替える"
+  },
+  "optNewTabActiveHint": {
+    "message": "オフにすると「新しいタブで開く」はバックグラウンドで開きます。"
+  },
+  "optWhere": {
+    "message": "表示される場所"
+  },
+  "optSkipNav": {
+    "message": "ナビゲーション、ヘッダー、サイドバーを除外"
+  },
+  "optSkipNavHint": {
+    "message": "ページ本文のリンクにだけ操作を出します。ナビゲーションのリンクでも出したいときは修飾キーを押してください。"
+  },
+  "optSites": {
+    "message": "これらのサイトでは表示しない — 1 行に 1 ホスト名。サブドメインも対象です —"
+  },
+  "optSitesExample": {
+    "message": "example.com は docs.example.com も無効にします。"
+  },
+  "optSaved": {
+    "message": "保存しました"
+  },
+  "optMs": {
+    "message": "$count$ ミリ秒",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "220"
+      }
+    }
+  }
+}
