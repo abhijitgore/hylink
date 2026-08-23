@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- A: the shipped mark, repadded to the store's 96x96-inside-128x128. -->
+  <g transform="translate(16 16)">
+    <rect width="96" height="96" rx="22" fill="#4f46e5"/>
+    <g fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 26H26a8 8 0 0 0-8 8v36a8 8 0 0 0 8 8h36a8 8 0 0 0 8-8V56"/>
+      <path d="M52 44 78 18"/>
+      <path d="M58 18h20v20"/>
+    </g>
+  </g>
+</svg>

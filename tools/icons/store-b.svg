@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- B: the gesture itself — a link, and the grip that appears just past it. -->
+  <g transform="translate(16 16)">
+    <rect width="96" height="96" rx="22" fill="#4f46e5"/>
+    <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round">
+      <path d="M36 56 29 63a12 12 0 0 1-17-17l7-7"/>
+      <path d="M46 30 53 23a12 12 0 0 1 17 17l-7 7"/>
+      <path d="M33 59 59 33"/>
+    </g>
+    <!-- the grip, third dot fading to suggest it has only just appeared -->
+    <g fill="#fff">
+      <circle cx="56" cy="74" r="5.5"/>
+      <circle cx="72" cy="74" r="5.5"/>
+      <circle cx="88" cy="74" r="5.5" opacity=".5"/>
+    </g>
+  </g>
+</svg>

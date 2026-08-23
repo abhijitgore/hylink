@@ -131,7 +131,7 @@ Everything is rendered at 2× and resampled to 1280×800, because rendering stra
 - [x] Automated tests (`node tests/run.js`)
 - [x] `homepage_url` in the manifest — https://github.com/abhijitgore/hylink
 - [x] Privacy policy hosted at a public URL
-- [x] Privacy policy contact address published (`abhigore+hylink@gmail.com`)
+- [x] Privacy policy contact address published (in `PRIVACY.md`, written unharvestably)
 - [x] Screenshots and the 440×280 tile (`node tools/build-store-shots.js`)
 - [ ] Developer account verified, with a published contact email
 - [ ] Trader / non-trader declared in the dashboard — non-trader, for a free extension

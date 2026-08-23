@@ -40,6 +40,7 @@ card. Nothing it reads leaves your machine.
 
 ## Contact
 
-Questions about this policy: <abhigore+hylink@gmail.com>. Bugs and feature requests are
-better filed as [issues](https://github.com/abhijitgore/hylink/issues), where the
-conversation stays public and searchable.
+Questions about this policy: **abhigore+hylink [at] gmail [dot] com** — spelled out to
+keep it away from address harvesters. Bugs and feature requests are better filed as
+[issues](https://github.com/abhijitgore/hylink/issues), where the conversation stays
+public and searchable.

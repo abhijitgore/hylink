@@ -178,6 +178,45 @@ function loadWorker(opts = {}) {
     }
   }
 
+  describe('published contact address');
+  {
+    /**
+     * The repo is public, so every Markdown file in it is scrapeable — the raw view
+     * at raw.githubusercontent.com included. GitHub's renderer defeats every clever
+     * way of hiding an address: it strips <script> and style attributes, and it
+     * decodes HTML entities and then turns the result back into a live mailto link.
+     * Writing the address out in words is the only thing that survives, so the only
+     * way to keep it that way is to assert nothing has put a bare one back.
+     */
+    const BARE_EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+    // A GitHub noreply alias is public by design and cannot receive mail, so it is
+    // not an address a harvester gains anything from.
+    const HARMLESS = /@users\.noreply\.github\.com$/;
+
+    const markdown = [];
+    (function walk(dir) {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (entry.name === '.git' || entry.name === 'node_modules') continue;
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) walk(full);
+        else if (entry.name.endsWith('.md')) markdown.push(full);
+      }
+    })(ROOT);
+
+    check('found the Markdown to scan', markdown.length > 0, `${markdown.length} files`);
+    for (const file of markdown) {
+      const found = (fs.readFileSync(file, 'utf8').match(BARE_EMAIL) || [])
+        .filter((address) => !HARMLESS.test(address));
+      check(`no harvestable address in ${path.relative(ROOT, file)}`,
+            found.length === 0, found.join(', '));
+    }
+
+    // The point is to make the address hard to scrape, not to lose it.
+    const privacy = fs.readFileSync(path.join(ROOT, 'PRIVACY.md'), 'utf8');
+    check('PRIVACY.md still names a contact',
+          /\[at\]/.test(privacy) && /\[dot\]/.test(privacy));
+  }
+
   describe('shared icon set');
   {
     const { ICONS } = loadPlain(['icons.js']).HyLinkIcons;
