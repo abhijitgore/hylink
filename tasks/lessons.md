@@ -67,3 +67,15 @@ identical — a bug only visible by opening both files. (0 is dark, 1 is light.)
 some other observable that proves the environment changed. A flag that is accepted
 without error has not necessarily done anything.
 
+
+## Don't override git identity with the environment's email
+
+I authored commits with `-c user.email="<the userEmail from CLAUDE.md>"` on two public
+repos. The user's own git config was already set to their GitHub noreply address, so
+the override did the one thing they'd have avoided: put a personal address into public
+commit metadata. Rewriting it afterwards needs a force-push and would change the
+release tarball checksums the Homebrew cask pins.
+
+**Rule:** `userEmail` in the environment identifies the user; it is not the address to
+commit as. Use plain `git commit` and let git's own configuration decide, or read
+`git config user.email` first.
