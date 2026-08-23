@@ -27,14 +27,15 @@ account, and no network access.
 
 **Detailed description:**
 
-> Rest the pointer on a link and three dots appear beside it. Move onto them and they
+> Hover the mouse over a link and three dots appear beside it. Move onto them and they
 > open into a row of actions: open the link here, in a new tab, in a new window, in
 > incognito, side by side, stacked, copy its address, or copy it clean — with the
 > tracking parameters stripped out, the way Brave's "copy clean link" does.
 >
 > Built to stay out of the way while you read:
 >
-> • The pointer has to settle. Sweeping across text while reading triggers nothing.
+> • The mouse has to hover, not just pass through. Sweeping across text while
+>   reading triggers nothing.
 > • Links in navigation bars, headers, footers and sidebars are skipped — the menu is
 >   for links in the page's text.
 > • What you first see is three dots about one character wide, not a toolbar. The full
@@ -88,13 +89,13 @@ the last one matters most.
 | --- | --- | --- |
 | Store icon | 128×128 PNG | ✅ `icons/icon128.png` |
 | Action bar on an article | 1280×800 | ✅ `docs/store/screenshot-1-actions.png` |
-| Resting grip on an article | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` |
+| The grip on an article | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` |
 | Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` |
 | Small promo tile | 440×280 | ✅ `docs/store/promo-440x280.png` |
 | Marquee | 1400×560 | Optional; only needed for featured placement |
 
 Upload order matters — the first screenshot is what most people judge the extension on,
-so lead with the expanded action bar, then the resting grip, then the settings page.
+so lead with the expanded action bar, then the grip on its own, then the settings page.
 
 ### Two things the script has to work around
 

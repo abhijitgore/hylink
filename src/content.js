@@ -1,7 +1,7 @@
 /**
  * HyLink content script.
  *
- * Watches for the pointer resting on a hyperlink, then shows a compact action bar
+ * Watches for the mouse hovering a hyperlink, then shows a compact action bar
  * next to it. The whole UI lives in a closed shadow root so page CSS can't reach
  * in and our CSS can't leak out.
  */
@@ -32,7 +32,7 @@
   const HIDE_DELAY_BAR = 260;
   /**
    * Pointer movement beyond this (px) restarts the delay, so the menu only appears
-   * once the pointer actually settles — sweeping across text while reading never
+   * once the mouse actually stops moving — sweeping across text while reading never
    * triggers it.
    */
   const REST_RADIUS = 6;
@@ -119,7 +119,7 @@
                   box-shadow 110ms ease-out, transform 110ms ease-out;
     }
     /* A short pop on arrival: motion is what makes it findable, and it costs
-       nothing once it has settled. */
+       nothing once it has stopped. */
     .menu.grip.visible .dots { animation: hylink-pop 200ms ease-out; }
     @keyframes hylink-pop {
       from { transform: scale(.55); opacity: .15; }

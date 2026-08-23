@@ -18,7 +18,7 @@ What to check:
 | Case | Expected |
 | --- | --- |
 | Sweep across any link without stopping | Nothing appears. The delay restarts on every few px of movement. |
-| 1 — rest on the plain link | A small translucent grip appears just past the end of the link. |
+| 1 — hover the plain link | A small translucent grip appears just past the end of the link. |
 | 1 — move onto the grip | It expands into the full action bar, growing out of the grip so it stays under the pointer. |
 | 1 — move away | Grip goes in ~160 ms, expanded bar in ~260 ms. |
 | 2 — link with a hover card | Card drops in after the menu; the expanded bar places itself **clear** of the card. |
@@ -27,7 +27,7 @@ What to check:
 
 Two of these are the regressions that matter:
 
-- **The sweep.** Without the rest gate, a grip flickers under every link you pass
+- **The sweep.** Without the hover gate, a grip flickers under every link you pass
   while reading. `window.__sweepTest('#case1 a')` in the console automates it: it
   returns `{whileMoving: 0, afterSettling: 1}`.
 - **Case 2.** It exercises the `MutationObserver` + delayed recheck, and the
@@ -43,12 +43,12 @@ under test, and the page hides any `<hylink-root>` the installed one creates.
 
 ## Probes
 
-- `__hoverProbe(selector, { alt })` — hover, settle, report whether a menu appeared.
+- `__hoverProbe(selector, { alt })` — hover, wait, report whether a menu appeared.
   Case 4's nav bar and `.left-rail` should report `false`, the prose links `true`,
   and a nav link with `{ alt: true }` `true`.
-- `__sweepTest(selector)` — the rest gate. Check the `elapsed` it returns: a
+- `__sweepTest(selector)` — the hover gate. Check the `elapsed` it returns: a
   backgrounded tab clamps `setTimeout` to ~1 s, which stretches the sweep well past
-  the hover delay and makes a working rest gate look broken. Only a run whose
+  the hover delay and makes a working hover gate look broken. Only a run whose
   `elapsed` is near 540 ms says anything.
 
 ## Headless

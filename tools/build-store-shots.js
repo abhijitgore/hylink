@@ -148,7 +148,7 @@ class CDP {
   if (!rect) throw new Error('could not find the demo link on the article page');
   const y = (rect.top + rect.bottom) / 2;
 
-  await cdp.move(article.sessionId, rect.right - 30, y);      // rest on the link
+  await cdp.move(article.sessionId, rect.right - 30, y);      // hover the link
   await sleep(1000);
   await cdp.shoot(article.sessionId, 'screenshot-2-grip.png');
 

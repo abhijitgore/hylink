@@ -71,9 +71,9 @@
   const DEFAULTS = {
     enabled: true,
     /**
-     * ms the pointer must *rest* on a link before the menu appears. The content
-     * script restarts this whenever the pointer moves more than a few px, so
-     * sweeping across text while reading never triggers it.
+     * ms the mouse must *hover* a link, without moving, before the menu appears.
+     * The content script restarts this whenever the pointer moves more than a few
+     * px, so sweeping across text while reading never triggers it.
      */
     hoverDelay: 220,
     /** 'handle' shows a small grip that expands on hover; 'immediate' shows the full bar */

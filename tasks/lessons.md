@@ -23,7 +23,7 @@ Use `Number.isFinite(v) ? v : DEFAULT` (and `v !== undefined` for spreads).
 
 ## Timing tests in an automated browser tab are clamped
 
-`__sweepTest` reported the rest gate broken (`whileMoving: 1`) right after it had
+`__sweepTest` reported the hover gate broken (`whileMoving: 1`) right after it had
 passed. The gate was fine: a tab that isn't foregrounded clamps `setTimeout` to ~1 s,
 so a "540 ms" sweep actually took 8590 ms — far past the 400 ms hover delay, so the
 menu was *supposed* to appear. Nothing in the result said so.
@@ -96,3 +96,14 @@ Related, from the same session: a tab created with `Target.createTarget` starts
 backgrounded, so its timers are clamped to about a second. Drive the window's existing
 tab instead. And Chrome ignores `--load-extension` from 137 on; the replacement is
 `Extensions.loadUnpacked` over `--remote-debugging-pipe`, not `--remote-debugging-port`.
+
+## Backticks inside a double-quoted commit message run as commands
+
+A `git commit -m "... `settle` as a parameter name ..."` silently executed
+`settle` and `afterSettling` as shell commands and substituted their empty output,
+so the pushed message read "Left alone deliberately:  as a parameter name". The
+double quotes do not protect backticks — only single quotes do.
+
+**How to apply:** write any commit message containing backticks, `$`, or `!` to a
+file and use `git commit -F`, or a quoted heredoc (`<<'EOF'`). Never rely on
+double-quoted `-m` for a message with code spans in it.
