@@ -3,7 +3,7 @@
   "name": "HyLink — Hover Link Menu",
   "short_name": "HyLink",
   "version": "1.8.0",
-  "description": "Hover a link in a page's text for a quiet menu: open it in a tab, window, incognito, or a tiled side window, or copy it.",
+  "description": "Hover over a link to reveal a menu: open it in a new tab, window, incognito, or side by side, or copy it. No right-click.",
   "default_locale": "en",
   "homepage_url": "https://github.com/abhijitgore/hylink",
   "minimum_chrome_version": "114",

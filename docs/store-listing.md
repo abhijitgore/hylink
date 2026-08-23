@@ -17,10 +17,10 @@ network access.
 ## Store listing copy
 
 **Name:** HyLink — Hover Link Menu
-**Summary** (the manifest `description`, 120 of the allowed 132 characters):
+**Summary** (the manifest `description`, 121 of the allowed 132 characters):
 
-> Hover a link in a page's text for a quiet menu: open it in a tab, window, incognito,
-> or a tiled side window, or copy it.
+> Hover over a link to reveal a menu: open it in a new tab, window, incognito, or side
+> by side, or copy it. No right-click.
 
 **Category:** Workflow & Planning
 **Language:** English
