@@ -18,7 +18,16 @@ pointing at — and out of the way when I'm just reading.
 
 ## Install
 
-HyLink isn't on the Chrome Web Store yet, so it's loaded unpacked from a clone:
+**[Add to Chrome from the Chrome Web Store](https://chromewebstore.google.com/detail/hylink-%E2%80%94-hover-link-menu/nkgldnfhefcflmlomgndaadbhhdohjaj)** — one click, and updates arrive
+on their own.
+
+To use **Open in incognito**, also enable **Allow in incognito** for HyLink on
+`chrome://extensions`. Chrome doesn't let extensions grant that themselves. Until it's
+enabled, the menu tells you so rather than silently doing nothing.
+
+### Running it unpacked
+
+For hacking on it, or to run a version before it clears review:
 
 ```
 git clone https://github.com/abhijitgore/hylink.git
@@ -28,23 +37,18 @@ git clone https://github.com/abhijitgore/hylink.git
 2. Click **Load unpacked** and choose the cloned folder.
 3. Reload any tabs that were already open — the extension only attaches when a page loads.
 
-To use **Open in incognito**, also enable **Allow in incognito** for HyLink on that same
-page. Chrome doesn't let extensions grant that themselves. Until it's enabled, the menu
-tells you so rather than silently doing nothing.
-
-### Homebrew
+Homebrew keeps that copy up to date:
 
 ```
 brew install --cask abhijitgore/tap/hylink
 ```
 
-This installs to `~/Library/Application Support/HyLink`. Point **Load unpacked** there
-using the same steps above. The path stays the same across `brew upgrade`, so you load
-it once and click **Reload** on `chrome://extensions` after each upgrade.
-`brew uninstall --cask hylink` removes it.
+It installs to `~/Library/Application Support/HyLink`, which you point **Load unpacked**
+at once. The path survives `brew upgrade`, so later upgrades just need **Reload** on
+`chrome://extensions`. `brew uninstall --cask hylink` removes it.
 
-Don't load a clone and the Homebrew copy at the same time — you'll get two menus on
-every link.
+Don't run an unpacked copy and the Web Store one at the same time — you'll get two menus
+on every link.
 
 ## The menu
 
@@ -222,10 +226,11 @@ a real nav bar and sidebar. Run `tests/harness/build.sh` first. See its README.
 tarball checksum, so a new tag here isn't done until the cask there is bumped. Nothing
 errors if they drift — `brew install` just keeps serving the old version.
 
-`docs/store-listing.md` has everything the Chrome Web Store dashboard asks for:
-single-purpose statement, listing copy, permission justifications, privacy answers. The
-screenshots and the 440×280 promo tile are in `docs/store/`, and `PRIVACY.md` is the
-privacy policy, hosted at a public URL.
+HyLink is published at [chromewebstore.google.com](https://chromewebstore.google.com/detail/hylink-%E2%80%94-hover-link-menu/nkgldnfhefcflmlomgndaadbhhdohjaj).
+`docs/store-listing.md` has everything the dashboard asks for: single-purpose statement,
+listing copy, permission justifications, privacy answers. The screenshots and the
+440×280 promo tile are in `docs/store/`, and `PRIVACY.md` is the privacy policy, hosted
+at a public URL.
 
 `node tests/run.js` guards the mechanical parts: manifest version, the 132-character
 description limit, icon sizes, the permission set, no remote code, no inline scripts,
