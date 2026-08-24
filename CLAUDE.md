@@ -95,6 +95,11 @@ translated in the Web Store dashboard rather than from `_locales/`.
 rather than editing by hand. It is a verbatim copy of Brave's rules and carries their
 **MPL-2.0** (see `NOTICE.md`); everything else in the repo is MIT.
 
+`icons/*.png` are generated too, from `tools/icons/icon.svg` via `sh tools/icons/build.sh`
+— edit the SVG, not the PNGs. The same script emits `docs/store/store-icon-128.png`,
+which is deliberately *not* the same image: toolbar icons fill their box, while the Web
+Store wants 96×96 of artwork inside a 128×128 canvas.
+
 ## Constraints worth knowing before you change things
 
 - **The Web Store constraints are tested, not just documented.** `tests/run.js` fails the

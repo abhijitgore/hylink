@@ -87,7 +87,7 @@ the `<all_urls>` one matters most.
 
 | Asset | Size | Status |
 | --- | --- | --- |
-| Store icon | 128×128 PNG | ✅ `icons/icon128.png` |
+| Store icon | 128×128 PNG | ✅ `docs/store/store-icon-128.png` — 96×96 of artwork with 16px transparent padding, which is what the store asks for. `icons/icon128.png` fills its box instead, which is right for the toolbar and wrong here. |
 | Action bar on an article | 1280×800 | ✅ `docs/store/screenshot-1-actions.png` |
 | The grip on an article | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` |
 | Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` |

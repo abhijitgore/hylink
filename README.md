@@ -199,7 +199,7 @@ src/tiling.js       display work-area math and window placement
 src/background.js   service worker; split-view reuse, tabs/windows privileges
 ui/                 options page and toolbar popup
 tests/run.js        `node tests/run.js` — 169 assertions, no dependencies
-tools/              regenerates the clean-link rules from Brave's list
+tools/              regenerates the clean-link rules, the icons and the store assets
 tests/harness/      manual page for hover timing and overlay-dodging
 icons/
 ```
