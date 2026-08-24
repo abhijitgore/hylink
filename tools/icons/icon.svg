@@ -1,75 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
   <!--
     The source for icons/*.png — regenerate with tools/icons/build.sh rather than
-    editing the PNGs.
+    editing the PNGs. The store's icon is generated from this same file.
 
-    Liquid Glass, which is not the same thing as the glossy tiles of 2008. The
-    difference is where the light lives. A glossy icon puts a big specular sheen
-    across the top of the *surface*; glass puts the light in the *edges*, because
-    that is where a real slab bends it. So:
+    A glossy glass tile: a bright sheen over the top, cut by a curve, with light
+    gathering again along the bottom edge where it leaves the slab.
 
-      - the face stays clear and saturated, with only a wide, soft diagonal wash
-      - the rim carries the brightness, and unevenly: bright where it faces the
-        light at the top-left, bright again where light exits at the bottom-right,
-        nearly gone along the two sides
-      - a dark line just inside the rim gives the slab thickness; without it the
-        bright rim reads as a stroke rather than an edge
-      - the glyph is embedded, not printed: a refraction offset below it and a
-        faint highlight above
+    The one thing to preserve if you touch the colours: the base gradient is
+    deliberately deeper than the brand indigo. A strong white sheen over an already
+    light body does not read as shine, it just bleaches — an earlier pass came out
+    pale lavender for exactly that reason. Deepen the body first, then brighten.
+
+    The curve on the sheen matters too. Cut it with a straight edge and it reads as
+    a highlight painted on top; cut it with a curve and it reads as the surface of
+    something.
 
     Everything is baked, because a PNG cannot be translucent over whatever Chrome
     puts behind it, and the icon has to hold up on both light and dark toolbars.
   -->
   <defs>
-    <linearGradient id="body" x1="0.1" y1="0" x2="0.9" y2="1">
-      <stop offset="0"    stop-color="#6d6bf5"/>
-      <stop offset="0.45" stop-color="#5145e0"/>
-      <stop offset="1"    stop-color="#3b2fb5"/>
+    <linearGradient id="body" x1="0.12" y1="0" x2="0.88" y2="1">
+      <stop offset="0"   stop-color="#5b55ec"/>
+      <stop offset="0.5" stop-color="#4436d4"/>
+      <stop offset="1"   stop-color="#2e2296"/>
     </linearGradient>
 
-    <!-- Wide and soft. A hard edge here is what makes an icon look glossy. -->
-    <linearGradient id="wash" x1="0.05" y1="0" x2="0.7" y2="0.85">
-      <stop offset="0"    stop-color="#ffffff" stop-opacity="0.30"/>
-      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.07"/>
-      <stop offset="1"    stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#ffffff" stop-opacity="0.78"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.30"/>
+      <stop offset="1"    stop-color="#ffffff" stop-opacity="0.06"/>
     </linearGradient>
 
-    <!-- Light gathering as it leaves the far edge of the slab. -->
-    <linearGradient id="exit" x1="0.4" y1="0.55" x2="1" y2="1">
-      <stop offset="0"   stop-color="#c7d2fe" stop-opacity="0"/>
-      <stop offset="1"   stop-color="#dbeafe" stop-opacity="0.26"/>
+    <!-- Light gathering as it leaves the bottom of the slab. -->
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a5b4fc" stop-opacity="0"/>
+      <stop offset="1" stop-color="#e0e7ff" stop-opacity="0.38"/>
     </linearGradient>
 
-    <!-- The rim: two bright arcs, two dim flanks. This is the whole effect. -->
+    <!-- Bright where it faces the light, dim along the flanks, bright again where
+         light exits. An even rim looks like a stroke; an uneven one looks like an edge. -->
     <linearGradient id="rim" x1="0.1" y1="0" x2="0.9" y2="1">
       <stop offset="0"    stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="0.18" stop-color="#ffffff" stop-opacity="0.42"/>
-      <stop offset="0.5"  stop-color="#ffffff" stop-opacity="0.10"/>
-      <stop offset="0.82" stop-color="#ffffff" stop-opacity="0.38"/>
-      <stop offset="1"    stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="0.2"  stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="1"    stop-color="#ffffff" stop-opacity="0.8"/>
     </linearGradient>
 
-    <!-- Thickness. The dark side sits opposite the lit side. -->
-    <linearGradient id="depth" x1="0.1" y1="0" x2="0.9" y2="1">
-      <stop offset="0"    stop-color="#1a1560" stop-opacity="0"/>
-      <stop offset="0.55" stop-color="#1a1560" stop-opacity="0.22"/>
-      <stop offset="1"    stop-color="#1a1560" stop-opacity="0.05"/>
-    </linearGradient>
-
-    <clipPath id="tile">
-      <rect width="128" height="128" rx="29"/>
-    </clipPath>
+    <clipPath id="tile"><rect width="128" height="128" rx="29"/></clipPath>
   </defs>
 
   <g clip-path="url(#tile)">
     <rect width="128" height="128" fill="url(#body)"/>
-    <rect width="128" height="128" fill="url(#wash)"/>
-    <rect width="128" height="128" fill="url(#exit)"/>
+    <rect y="70" width="128" height="58" fill="url(#floor)"/>
+    <path d="M0 0h128v40c-20 18-42 27-64 27S18 58 0 44Z" fill="url(#gloss)"/>
   </g>
 
-  <!-- The mark, sitting inside the glass rather than printed on it. -->
+  <!-- The mark, sitting inside the glass rather than printed on it: a refraction
+       offset below it does the work. 10.5 is about the thinnest stroke that still
+       resolves at 16 px. -->
   <g fill="none" stroke-width="10.5" stroke-linecap="round" stroke-linejoin="round">
-    <g stroke="#181254" opacity="0.30" transform="translate(0 2.5)">
+    <g stroke="#181254" opacity="0.34" transform="translate(0 2.5)">
       <path d="M58 44H42a12 12 0 0 0-12 12v30a12 12 0 0 0 12 12h30a12 12 0 0 0 12-12V70"/>
       <path d="M62 66 96 32"/>
       <path d="M74 32h22v22"/>
@@ -83,7 +73,7 @@
 
   <!-- Drawn last, so the edge sits over everything the way a real one would. -->
   <rect x="2.1" y="2.1" width="123.8" height="123.8" rx="27.2"
-        fill="none" stroke="url(#depth)" stroke-width="2.6"/>
+        fill="none" stroke="#1a1560" stroke-opacity="0.20" stroke-width="2.4"/>
   <rect x="0.85" y="0.85" width="126.3" height="126.3" rx="28.2"
-        fill="none" stroke="url(#rim)" stroke-width="1.7"/>
+        fill="none" stroke="url(#rim)" stroke-width="1.9"/>
 </svg>
