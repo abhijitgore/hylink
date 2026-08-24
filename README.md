@@ -25,6 +25,26 @@ To use **Open in incognito**, also enable **Allow in incognito** for HyLink on
 `chrome://extensions`. Chrome doesn't let extensions grant that themselves. Until it's
 enabled, the menu tells you so rather than silently doing nothing.
 
+### About that "read and change all your data" warning
+
+Chrome shows it to every extension that runs on every site, and it describes what the
+permission *allows*, not what the extension *does*. Links exist on every page, so a
+hover menu has to run everywhere — there's no narrower permission to ask for.
+
+What HyLink actually does with it:
+
+- **Reads** two things: the `href` of the link under your pointer, and the tag and
+  class names of its ancestors, to work out whether that link is in a nav bar. Plus
+  enough layout to place the menu where it won't cover a hover card.
+- **Never reads** page text, form fields, passwords, cookies or browsing history.
+- **Sends nothing anywhere.** There is no server, no analytics, no telemetry, and no
+  network code of any kind — `node tests/run.js` fails the build if a `fetch`,
+  `XMLHttpRequest`, `WebSocket` or `sendBeacon` ever appears in the shipped source.
+- **Stores** only your own settings, in `chrome.storage.sync`, which syncs through
+  your Chrome profile and never reaches anyone else.
+
+The code is all here to check, and [PRIVACY.md](PRIVACY.md) sets it out in full.
+
 ### Running it unpacked
 
 For hacking on it, or to run a version before it clears review:

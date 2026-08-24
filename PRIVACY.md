@@ -23,10 +23,21 @@ extension. The URL is examined on your machine and nothing about it is sent anyw
   cookies, or browsing history.
 - No accounts, no sign-in, no advertising, no third-party services.
 
-HyLink's content script runs on every site because the menu has to be able to appear
-next to a link on any page you visit. It reads only the `href` of the link under your
-pointer, plus enough page geometry to place the menu where it will not cover a hover
-card. Nothing it reads leaves your machine.
+## Why Chrome warns about "all your data on all websites"
+
+Chrome shows that warning to every extension that runs on every site. It describes what
+the permission *allows*, not what the extension *does* — and because links appear on
+every page, a hover menu has no narrower permission available to ask for.
+
+HyLink's content script reads the `href` of the link under your pointer, and the tag and
+class names of the elements around it so it can tell a navigation bar from an article,
+plus enough page geometry to place the menu where it will not cover a hover card. It
+does not read page text, form fields, passwords, cookies, or browsing history, and
+nothing it reads leaves your machine.
+
+That last part is enforced, not just promised: the test suite fails the build if a
+`fetch`, `XMLHttpRequest`, `WebSocket` or `sendBeacon` ever appears in the shipped
+source. There is no network code in this extension at all.
 
 ## Permissions
 

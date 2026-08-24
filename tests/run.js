@@ -175,6 +175,12 @@ function loadWorker(opts = {}) {
       fs.readFileSync(path.join(ROOT, 'ui', 'popup.js'), 'utf8');
     check('no eval or Function constructor', !/\beval\(|new Function\(/.test(code));
     check('no remotely loaded script', !/https?:\/\/[^\s'"]+\.js/.test(code));
+    // The README and PRIVACY.md both promise HyLink sends nothing anywhere. That is a
+    // promise about code, so it is checked like one — a single fetch() added later
+    // would make the privacy policy false without anything else noticing.
+    const NETWORK = /\bfetch\(|XMLHttpRequest|\bWebSocket\b|sendBeacon|EventSource|navigator\.sendBeacon/;
+    check('sends nothing anywhere — no network API in shipped code',
+          !NETWORK.test(code), (code.match(NETWORK) || [])[0]);
     check('no unload handlers', !/\b(on)?(before)?unload\b/.test(code));
     for (const page of ['ui/options.html', 'ui/popup.html']) {
       const html = fs.readFileSync(path.join(ROOT, page), 'utf8');

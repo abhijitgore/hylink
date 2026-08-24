@@ -48,6 +48,13 @@ network access.
 > Everything is configurable: the hover delay, which actions appear, whether a
 > modifier key must be held, and a per-site off switch in the toolbar popup.
 >
+> About the "read and change all your data on all websites" warning: Chrome shows
+> that to every extension that runs on every site, and links exist on every page, so
+> a hover menu has no narrower permission to ask for. What HyLink reads is the address
+> of the link under your pointer, and the tag and class names around it so it can tell
+> a nav bar from an article. It never reads page text, form fields, passwords, cookies
+> or history.
+>
 > HyLink makes no network requests and has no analytics, no account, and no server.
 > Your settings sync through your own Chrome profile, and nothing else leaves your
 > browser.
