@@ -34,8 +34,11 @@ card. Nothing it reads leaves your machine.
 | --- | --- |
 | `storage` | Saving your settings. |
 | `system.display` | The work area of the display your window is on, so the tiled "open in side" actions can size the two halves correctly. |
-| `clipboardWrite` | The **Copy link address** and **Copy clean link** actions. |
 | `activeTab` | The toolbar popup shows the current site's hostname and offers a per-site off switch. This is deliberately used instead of the broader `tabs` permission, which would expose your browsing history. |
+
+The **Copy** actions need no permission at all: the copy happens in the page, inside
+the click you just made, which the browser already allows. Asking for `clipboardWrite`
+would have added "Modify data you copy and paste" to the install prompt for nothing.
 | Access to all sites | Injecting the content script that shows the menu. |
 
 ## Contact

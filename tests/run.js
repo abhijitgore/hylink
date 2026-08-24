@@ -160,9 +160,13 @@ function loadWorker(opts = {}) {
           `${manifest.short_name.length}`);
     eq('icons at every size Chrome asks for',
        Object.keys(manifest.icons).sort(), ['128', '16', '32', '48']);
-    eq('permissions stay minimal — `tabs` would add a browsing-history warning',
+    // Every permission here is a line on the install consent screen, so the set is
+    // pinned. `tabs` would add a browsing-history warning; `clipboardWrite` would add
+    // "Modify data you copy and paste" and is not needed — the copy happens in the
+    // content script inside the click's own user activation, which is already allowed.
+    eq('permissions stay minimal — no `tabs`, no `clipboardWrite`',
        manifest.permissions.sort(),
-       ['activeTab', 'clipboardWrite', 'storage', 'system.display']);
+       ['activeTab', 'storage', 'system.display']);
     check('no host_permissions beyond the content script',
           manifest.host_permissions === undefined);
     // Remote code is a rejection, and unload handlers cost pages the back/forward cache.

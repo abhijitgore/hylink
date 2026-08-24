@@ -10,7 +10,6 @@
   "permissions": [
     "storage",
     "system.display",
-    "clipboardWrite",
     "activeTab"
   ],
   "background": {

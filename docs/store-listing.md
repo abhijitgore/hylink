@@ -77,7 +77,6 @@ the `<all_urls>` one matters most.
 | --- | --- |
 | `storage` | Saves the user's settings — hover delay, which actions appear, per-site off switches. No browsing data is stored. |
 | `system.display` | The "open in side" actions place two windows side by side on the current display. The display's work area is needed to size them so neither lands under the taskbar or off-screen. |
-| `clipboardWrite` | The "Copy link address" and "Copy clean link" actions write the link's URL to the clipboard. |
 | `activeTab` | The toolbar popup shows the current site's hostname and offers a "turn off on this site" switch. Used instead of the broader `tabs` permission, which would expose browsing history. |
 | Host permission (`<all_urls>`) | The extension's only feature is a menu beside a hovered link, and links exist on every site, so the content script has to run everywhere. It reads only the `href` of the hovered link and the page geometry needed to place the menu clear of hover cards. No network requests; no data leaves the device. |
 | Remote code | No. All JavaScript ships in the package; nothing is fetched or evaluated at runtime. |

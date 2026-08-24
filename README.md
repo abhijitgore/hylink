@@ -233,9 +233,11 @@ no `unload` handlers, and no harvestable email address in any Markdown file.
 
 ## Notes and limits
 
-- **Permissions**: `storage`, `system.display`, `clipboardWrite`, `activeTab`. The
-  broad `tabs` permission is deliberately *not* requested — nothing here needs it, and
-  it would add a "read your browsing history" install warning.
+- **Permissions**: `storage`, `system.display`, `activeTab`. Every one of these is a
+  line on the install prompt, so the list is kept short. `tabs` is deliberately *not*
+  requested — nothing here needs it, and it would add a "read your browsing history"
+  warning. `clipboardWrite` isn't requested either: copying happens in the page inside
+  the click's own user activation, which needs no permission.
 - Only `http`, `https`, `ftp` and `file` links get a menu. `javascript:` and bare `#`
   links are ignored, and the service worker re-checks the scheme before touching any
   tabs/windows API.
