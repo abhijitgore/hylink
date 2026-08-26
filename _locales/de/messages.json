@@ -23,6 +23,9 @@
   "actionCopyClean": {
     "message": "Bereinigten Link kopieren"
   },
+  "actionCopyOriginal": {
+    "message": "Ursprünglichen Link kopieren"
+  },
   "menuLabel": {
     "message": "Linkaktionen"
   },
@@ -61,6 +64,9 @@
   },
   "capCleanedNone": {
     "message": "Kopiert — nichts zu entfernen"
+  },
+  "capCopiedOriginal": {
+    "message": "Ursprünglichen Link kopiert"
   },
   "errBadUrl": {
     "message": "Keine gültige URL"
@@ -191,11 +197,29 @@
   "optActions": {
     "message": "Im Menü gezeigte Aktionen"
   },
+  "optActionsHint": {
+    "message": "Zieh eine Zeile oder nutze die Pfeile, um das Menü in die Reihenfolge zu bringen, die du willst. Ohne Häkchen bleibt eine Aktion weg."
+  },
+  "optMoveUp": {
+    "message": "Nach oben"
+  },
+  "optMoveDown": {
+    "message": "Nach unten"
+  },
   "optNewTabActive": {
     "message": "Sofort zu neuen Tabs wechseln"
   },
   "optNewTabActiveHint": {
     "message": "Aus bedeutet, dass „In neuem Tab öffnen“ ihn im Hintergrund öffnet."
+  },
+  "optCleaning": {
+    "message": "Tracking-Parameter"
+  },
+  "optCleanFirst": {
+    "message": "Tracking-Parameter vor jeder Aktion entfernen"
+  },
+  "optCleanFirstHint": {
+    "message": "Jede Aktion öffnet oder kopiert dann den bereinigten Link, nicht nur die zum Kopieren. Aus „Bereinigten Link kopieren“ wird „Ursprünglichen Link kopieren“, die unveränderte URL bleibt also einen Klick entfernt."
   },
   "optWhere": {
     "message": "Wo es erscheint"

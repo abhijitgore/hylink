@@ -85,11 +85,24 @@
 
   <section>
     <h2 data-i18n="optActions">Actions shown in the menu</h2>
+    <p class="sub hint" data-i18n="optActionsHint">Drag a row, or use the arrows, to put the
+      menu in the order you want. Unticking one leaves it out.</p>
     <div id="actions" class="actions"></div>
     <label class="switch">
       <input type="checkbox" id="newTabActive">
       <span><strong data-i18n="optNewTabActive">Switch to new tabs immediately</strong>
         <em data-i18n="optNewTabActiveHint">Off means "Open in new tab" opens it in the background.</em></span>
+    </label>
+  </section>
+
+  <section>
+    <h2 data-i18n="optCleaning">Tracking parameters</h2>
+    <label class="switch">
+      <input type="checkbox" id="cleanBeforeAction">
+      <span><strong data-i18n="optCleanFirst">Remove tracking parameters before every action</strong>
+        <em data-i18n="optCleanFirstHint">Every action opens or copies the cleaned link, not just
+          the copy one. "Copy clean link" then becomes "Copy original link", so the untouched
+          URL is still one click away.</em></span>
     </label>
   </section>
 

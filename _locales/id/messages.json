@@ -23,6 +23,9 @@
   "actionCopyClean": {
     "message": "Salin tautan bersih"
   },
+  "actionCopyOriginal": {
+    "message": "Salin tautan asli"
+  },
   "menuLabel": {
     "message": "Tindakan tautan"
   },
@@ -61,6 +64,9 @@
   },
   "capCleanedNone": {
     "message": "Disalin — tidak ada yang perlu dihapus"
+  },
+  "capCopiedOriginal": {
+    "message": "Tautan asli disalin"
   },
   "errBadUrl": {
     "message": "URL tidak valid"
@@ -191,11 +197,29 @@
   "optActions": {
     "message": "Tindakan yang muncul di menu"
   },
+  "optActionsHint": {
+    "message": "Seret sebuah baris, atau pakai panahnya, untuk menyusun menu sesuai urutan yang kamu mau. Menghapus centangnya membuat tindakan itu tidak ditampilkan."
+  },
+  "optMoveUp": {
+    "message": "Naikkan"
+  },
+  "optMoveDown": {
+    "message": "Turunkan"
+  },
   "optNewTabActive": {
     "message": "Langsung pindah ke tab baru"
   },
   "optNewTabActiveHint": {
     "message": "Jika mati, \"Buka di tab baru\" membukanya di latar belakang."
+  },
+  "optCleaning": {
+    "message": "Parameter pelacak"
+  },
+  "optCleanFirst": {
+    "message": "Hapus parameter pelacak sebelum setiap tindakan"
+  },
+  "optCleanFirstHint": {
+    "message": "Bukan cuma yang menyalin — setiap tindakan membuka atau menyalin tautan yang sudah bersih. \"Salin tautan bersih\" lalu berubah jadi \"Salin tautan asli\", jadi URL yang utuh tetap sejauh satu klik."
   },
   "optWhere": {
     "message": "Tempat munculnya"

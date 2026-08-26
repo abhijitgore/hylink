@@ -23,6 +23,9 @@
   "actionCopyClean": {
     "message": "Copier le lien nettoyé"
   },
+  "actionCopyOriginal": {
+    "message": "Copier le lien d'origine"
+  },
   "menuLabel": {
     "message": "Actions sur le lien"
   },
@@ -61,6 +64,9 @@
   },
   "capCleanedNone": {
     "message": "Copié — rien à retirer"
+  },
+  "capCopiedOriginal": {
+    "message": "Lien d'origine copié"
   },
   "errBadUrl": {
     "message": "URL non valide"
@@ -191,11 +197,29 @@
   "optActions": {
     "message": "Actions affichées dans le menu"
   },
+  "optActionsHint": {
+    "message": "Fais glisser une ligne, ou utilise les flèches, pour mettre le menu dans l’ordre que tu veux. Décocher une action la laisse de côté."
+  },
+  "optMoveUp": {
+    "message": "Monter"
+  },
+  "optMoveDown": {
+    "message": "Descendre"
+  },
   "optNewTabActive": {
     "message": "Passer immédiatement aux nouveaux onglets"
   },
   "optNewTabActiveHint": {
     "message": "Désactivé, « Ouvrir dans un nouvel onglet » l'ouvre en arrière-plan."
+  },
+  "optCleaning": {
+    "message": "Paramètres de suivi"
+  },
+  "optCleanFirst": {
+    "message": "Retirer les paramètres de suivi avant chaque action"
+  },
+  "optCleanFirstHint": {
+    "message": "Chaque action ouvre ou copie le lien nettoyé, pas seulement celle qui copie. « Copier le lien nettoyé » devient alors « Copier le lien d’origine », si bien que l’URL intacte reste à un clic."
   },
   "optWhere": {
     "message": "Où il apparaît"

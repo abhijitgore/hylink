@@ -7,6 +7,7 @@
   "actionSideStacked": { "message": "Open in side (stacked)" },
   "actionCopy":        { "message": "Copy link address" },
   "actionCopyClean":   { "message": "Copy clean link" },
+  "actionCopyOriginal": { "message": "Copy original link" },
 
   "menuLabel":         { "message": "Link actions" },
   "capCopied":         { "message": "Copied link address" },
@@ -23,6 +24,7 @@
     "placeholders": { "count": { "content": "$1", "example": "3" } }
   },
   "capCleanedNone":    { "message": "Copied — nothing to remove" },
+  "capCopiedOriginal": { "message": "Copied the original link" },
 
   "errBadUrl":         { "message": "Not a valid URL" },
   "errScheme": {
@@ -74,8 +76,15 @@
   "optModifierMeta":   { "message": "Command / Windows" },
 
   "optActions":        { "message": "Actions shown in the menu" },
+  "optActionsHint":    { "message": "Drag a row, or use the arrows, to put the menu in the order you want. Unticking one leaves it out." },
+  "optMoveUp":         { "message": "Move up" },
+  "optMoveDown":       { "message": "Move down" },
   "optNewTabActive":     { "message": "Switch to new tabs immediately" },
   "optNewTabActiveHint": { "message": "Off means \"Open in new tab\" opens it in the background." },
+
+  "optCleaning":       { "message": "Tracking parameters" },
+  "optCleanFirst":     { "message": "Remove tracking parameters before every action" },
+  "optCleanFirstHint": { "message": "Every action opens or copies the cleaned link, not just the copy one. \"Copy clean link\" then becomes \"Copy original link\", so the untouched URL is still one click away." },
 
   "optWhere":          { "message": "Where it appears" },
   "optSkipNav":        { "message": "Skip navigation, headers and sidebars" },

@@ -46,7 +46,38 @@ select, textarea {
   padding: 6px 8px;
 }
 textarea { width: 100%; resize: vertical; }
-.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; margin-bottom: 8px; }
+/* One column, not two: the list is now ordered, and a two-column grid would make
+   "next in the menu" mean "below" in one place and "to the right" in another. */
+.actions { margin-bottom: 8px; }
+.hint { margin: -6px 0 12px; }
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0 4px;
+}
+.action-row:hover { background: var(--bg); }
+.action-row .switch { flex: 1; }
+.action-row .grip { color: var(--muted); cursor: grab; flex: none; }
+.action-row .grip .fill { fill: currentColor; }
+.action-row.dragging { opacity: .5; border-color: var(--accent); background: var(--bg); }
+.nudge {
+  all: unset;
+  flex: none;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.nudge svg { fill: none; stroke: currentColor; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round; }
+.nudge:hover { background: var(--card); color: var(--accent); }
+.nudge:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* Kept in place rather than hidden, so the arrows don't shuffle under the pointer. */
+.nudge:disabled { opacity: .25; cursor: default; background: none; color: var(--muted); }
 footer { margin-top: 16px; min-height: 20px; }
 .status { color: var(--accent); font-size: 12px; opacity: 0; transition: opacity .15s; }
 .status.show { opacity: 1; }

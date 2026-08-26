@@ -6,7 +6,7 @@
 (function (root) {
   'use strict';
 
-  /** Every action the hover menu can offer, in menu order. */
+  /** Every action the hover menu can offer, in its default menu order. */
   const ACTIONS = [
     { id: 'open',        key: 'actionOpen',        label: 'Open link' },
     { id: 'newTab',      key: 'actionNewTab',      label: 'Open in new tab' },
@@ -31,9 +31,24 @@
     }
   }
 
-  /** The menu label for an action, in the user's language. */
-  function actionLabel(action) {
+  /**
+   * The menu label for an action, in the user's language.
+   *
+   * One action changes meaning with the settings: when cleaning applies to everything,
+   * "Copy link address" is already the clean one, so "Copy clean link" would be a
+   * duplicate. It becomes the way back to the untouched URL instead — the only place
+   * that decides this, so the menu, the options list and the demo cannot disagree.
+   */
+  function actionLabel(action, settings) {
+    if (action.id === 'copyClean' && settings && settings.cleanBeforeAction) {
+      return t('actionCopyOriginal', 'Copy original link');
+    }
     return t(action.key, action.label);
+  }
+
+  /** The action with this id, or undefined — callers walk id lists, not ACTIONS. */
+  function actionById(id) {
+    return ACTIONS.find((action) => action.id === id);
   }
 
   /**
@@ -86,6 +101,17 @@
     newTabActive: true,
     /** action ids the user has switched off — opt-out, so new actions appear by default */
     hiddenActions: [],
+    /**
+     * The menu's order, as ids. Stored in full rather than as a diff from ACTIONS:
+     * the whole point is that the code's order stops being authoritative.
+     */
+    actionOrder: ACTIONS.map((a) => a.id),
+    /**
+     * Strip tracking parameters before *every* action, not just "Copy clean link".
+     * The worker does it for anything it opens; the content script does it for the
+     * two actions that never reach the worker.
+     */
+    cleanBeforeAction: false,
     /** skip links inside navigation, headers, footers and sidebars */
     skipNavigation: true,
     /** hostnames where the menu never appears */
@@ -135,8 +161,23 @@
       : [];
     // Hiding every action would leave an empty bar; treat that as hiding none.
     if (s.hiddenActions.length >= ids.length) s.hiddenActions = [];
-    /** Derived, never stored — what the menu actually renders. */
-    s.visibleActions = ids.filter((id) => !s.hiddenActions.includes(id));
+
+    // A stored order can be stale in three ways: an id that no longer exists, the same
+    // id twice, or — the one that matters — an action added since it was saved. That
+    // last one is appended rather than dropped, for the same reason hiddenActions is an
+    // opt-out list: a new action should turn up, not go missing.
+    const seen = new Set();
+    const order = [];
+    for (const id of Array.isArray(s.actionOrder) ? s.actionOrder : []) {
+      if (!known.has(id) || seen.has(id)) continue;
+      seen.add(id);
+      order.push(id);
+    }
+    for (const id of ids) if (!seen.has(id)) order.push(id);
+    s.actionOrder = order;
+
+    /** Derived, never stored — what the menu actually renders, in the user's order. */
+    s.visibleActions = order.filter((id) => !s.hiddenActions.includes(id));
 
     const delay = Number(s.hoverDelay);
     // Number.isFinite, not `||`: a 0 ms delay is a valid choice, not a missing value.
@@ -167,6 +208,7 @@
 
   root.HyLinkSettings = {
     ACTIONS, LEGACY_ACTIONS, DEFAULTS, NAV_SELECTOR, NAV_TOKEN_RE,
-    getSettings, migrate, normalize, isSiteDisabled, looksNavigational, t, actionLabel
+    getSettings, migrate, normalize, isSiteDisabled, looksNavigational, t, actionLabel,
+    actionById
   };
 })(typeof self !== 'undefined' ? self : this);

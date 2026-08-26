@@ -65,7 +65,9 @@ function loadWorker(opts = {}) {
     console, URL, setTimeout, clearTimeout,
     importScripts: (...f) => f.forEach((x) => vm.runInContext(src(x), sb)),
     chrome: {
-      storage: { sync: { get: async (d) => ({ ...d }) } },
+      // Defaults, overlaid with whatever this test stored — `opts.settings` is how a
+      // suite boots the worker with a setting already switched on.
+      storage: { sync: { get: async (d) => ({ ...d, ...(opts.settings || {}) }) } },
       runtime: {
         onMessage: { addListener: (fn) => { sb.__listener = fn; } },
         onInstalled: { addListener: (fn) => { sb.__onInstalled = fn; } },
@@ -126,6 +128,55 @@ function loadWorker(opts = {}) {
   eq('visible list is derived from hiddenActions',
      normalize({ hiddenActions: ['copy'] }).visibleActions, ACTION_IDS.filter((i) => i !== 'copy'));
   eq('unknown modifier falls back', normalize({ modifier: 'hyper' }).modifier, 'alt');
+  eq('cleaning every action is opt-in', DEFAULTS.cleanBeforeAction, false);
+  eq('the cleaning switch round-trips',
+     normalize({ cleanBeforeAction: true }).cleanBeforeAction, true);
+
+  describe('the menu order is the user\'s');
+  {
+    const reversed = [...ACTION_IDS].reverse();
+    eq('a stored order is kept as-is', normalize({ actionOrder: reversed }).actionOrder, reversed);
+    eq('and the visible list follows it, not the code order',
+       normalize({ actionOrder: reversed }).visibleActions, reversed);
+    eq('hidden actions drop out of the visible list but keep their place in the order',
+       normalize({ actionOrder: reversed, hiddenActions: ['copy'] }).visibleActions,
+       reversed.filter((id) => id !== 'copy'));
+    eq('an id that no longer exists is dropped',
+       normalize({ actionOrder: ['copy', 'telepathy', 'open'] }).actionOrder.slice(0, 2),
+       ['copy', 'open']);
+    eq('a duplicate is collapsed rather than shown twice',
+       normalize({ actionOrder: ['copy', 'copy', 'open'] }).actionOrder.filter((id) => id === 'copy'),
+       ['copy']);
+    // The point of appending rather than dropping: an action added in a later version
+    // has to turn up in the menu of someone who saved an order before it existed.
+    eq('an action the stored order never heard of is appended',
+       normalize({ actionOrder: ['copy'] }).actionOrder,
+       ['copy', ...ACTION_IDS.filter((id) => id !== 'copy')]);
+    eq('nonsense in the key falls back to the default order',
+       normalize({ actionOrder: 'copy,open' }).actionOrder, ACTION_IDS);
+    eq('every action is still accounted for',
+       normalize({ actionOrder: ['copy'] }).actionOrder.length, ACTION_IDS.length);
+  }
+
+  describe('the flipped copy button');
+  {
+    const { actionLabel, actionById } = loadPlain(['settings.js']).HyLinkSettings;
+    const copyClean = actionById('copyClean');
+    // No `chrome` in the sandbox, so t() falls through to the English written inline —
+    // which is exactly the fallback path a missing catalogue would take.
+    eq('is the clean one while cleaning is off',
+       actionLabel(copyClean, normalize({})), 'Copy clean link');
+    eq('and the way back to the original while it is on',
+       actionLabel(copyClean, normalize({ cleanBeforeAction: true })), 'Copy original link');
+    eq('no other action changes label',
+       ACTIONS.filter((a) => a.id !== 'copyClean')
+         .filter((a) => actionLabel(a, normalize({ cleanBeforeAction: true })) !== actionLabel(a)),
+       []);
+    eq('and a caller with no settings gets the plain label',
+       actionLabel(copyClean), 'Copy clean link');
+    eq('actionById knows every action', ACTION_IDS.filter((id) => !actionById(id)), []);
+    eq('and nothing else', actionById('telepathy'), undefined);
+  }
   eq('hostnames trimmed and lowercased', normalize({ disabledSites: [' Mail.Google.COM ', ''] }).disabledSites, ['mail.google.com']);
 
   describe('navigational class/id tokens');
@@ -239,6 +290,18 @@ function loadWorker(opts = {}) {
        manifest.content_scripts[0].js, ['src/settings.js', 'src/icons.js', 'src/content.js']);
     check('so does the options page',
           fs.readFileSync(path.join(ROOT, 'ui', 'options.html'), 'utf8').includes('src/icons.js'));
+
+    // The README's icon column used to be emoji standing in for the real thing, which
+    // is a table that goes quietly wrong. These are generated from ICONS above, so the
+    // check is that the checked-in files still carry that exact markup.
+    const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+    const stale = ACTION_IDS.filter((id) => {
+      const file = path.join(ROOT, 'docs', 'icons', id + '.svg');
+      return !fs.existsSync(file) || !fs.readFileSync(file, 'utf8').includes(ICONS[id]);
+    });
+    eq('docs/icons is in step with the icon set (node tools/build-readme-icons.js)', stale, []);
+    eq('and the README shows every one of them',
+       ACTION_IDS.filter((id) => !readme.includes(`docs/icons/${id}.svg`)), []);
   }
 
   describe('clean link');
@@ -413,7 +476,39 @@ function loadWorker(opts = {}) {
           JSON.stringify(opts));
   }
 
-  
+  describe('cleaning before every action');
+  {
+    const DIRTY = 'https://example.com/a?utm_source=news&id=7&fbclid=xyz';
+    const CLEAN = 'https://example.com/a?id=7';
+    const tab = { id: 11, windowId: 5, splitViewId: -1 };
+
+    // Both halves on purpose: a worker that mangled every URL would pass the "cleaned"
+    // assertion on its own, exactly the way the scheme guard once passed for rejecting
+    // everything (tasks/lessons.md).
+    let sb = loadWorker({ tab, settings: { cleanBeforeAction: true } });
+    await sb.send('newTab', DIRTY);
+    eq('a new tab gets the stripped URL', sb.__log.find((e) => e[0] === 'tab.create')[1].url, CLEAN);
+    await sb.send('newWindow', DIRTY);
+    eq('so does a new window', sb.__log.find((e) => e[0] === 'window.create')[1].url, CLEAN);
+
+    sb = loadWorker({ tab, settings: { cleanBeforeAction: false } });
+    await sb.send('newTab', DIRTY);
+    eq('switched off, the URL is passed through untouched',
+       sb.__log.find((e) => e[0] === 'tab.create')[1].url, DIRTY);
+    await sb.send('newWindow', DIRTY);
+    eq('for every action, not just the tab one',
+       sb.__log.find((e) => e[0] === 'window.create')[1].url, DIRTY);
+
+    // Cleaning happens after the scheme guard, not instead of it.
+    sb = loadWorker({ tab, settings: { cleanBeforeAction: true } });
+    const bad = await sb.send('newTab', 'javascript:alert(1)');
+    check('the scheme guard still runs first', bad.ok === false, JSON.stringify(bad));
+    sb = loadWorker({ tab, settings: { cleanBeforeAction: true } });
+    await sb.send('newTab', 'https://example.com/a');
+    eq('a URL with nothing to remove is not re-encoded',
+       sb.__log.find((e) => e[0] === 'tab.create')[1].url, 'https://example.com/a');
+  }
+
   describe('split view: reuse an existing one, otherwise tile');
   // 1. Tab is in a split view -> navigate the sibling pane, no new window.
   let sb = loadWorker({ tab: { id: 11, windowId: 5, splitViewId: 77 },

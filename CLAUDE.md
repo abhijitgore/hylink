@@ -11,11 +11,12 @@ There is no build step and no dependencies. Files are loaded as-is by Chrome, an
 test suite runs on a bare Node.
 
 ```sh
-node tests/run.js                # the whole suite (169 assertions), exit 1 on failure
+node tests/run.js                # the whole suite (195 assertions), exit 1 on failure
 sh tests/harness/build.sh        # required before using the manual browser harness
 node tools/build-clean-list.js   # regenerate src/clean-list.js from Brave's rules
 sh tools/package.sh              # dist/hylink-<version>.zip — the Web Store upload
 node tools/build-store-shots.js  # docs/store/*.png — the listing images
+node tools/build-readme-icons.js # docs/icons/*.svg — the README's icon column
 ```
 
 **There is no way to run a single test.** `tests/run.js` has no filter flag; every suite
@@ -94,6 +95,11 @@ translated in the Web Store dashboard rather than from `_locales/`.
 `src/clean-list.js` is **generated** — regenerate it with `tools/build-clean-list.js`
 rather than editing by hand. It is a verbatim copy of Brave's rules and carries their
 **MPL-2.0** (see `NOTICE.md`); everything else in the repo is MIT.
+
+`docs/icons/*.svg` are generated from `src/icons.js` by `tools/build-readme-icons.js`,
+so the README's action table shows the menu's real icons rather than emoji standing in
+for them. A test fails if they fall behind the icon set. They are not shipped — `docs/`
+is not in `tools/package.sh`'s allow-list.
 
 `icons/*.png` are generated too, from `tools/icons/icon.svg` via `sh tools/icons/build.sh`
 — edit the SVG, not the PNGs. The same script emits `docs/store/store-icon-128.png`,

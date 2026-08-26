@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <style>
+    .icon :not(.fill) { fill: none; stroke: #7d8590; stroke-width: 1.4;
+      stroke-linecap: round; stroke-linejoin: round; }
+    .icon .fill { fill: #7d8590; stroke: none; opacity: .28; }
+  </style>
+  <g class="icon"><path d="M5.6 7.2V6.1a2.4 2.4 0 0 1 4.8 0v1.1"/><path d="M2.6 7.4h10.8"/><circle cx="5.5" cy="11.7" r="2.05"/><circle cx="10.5" cy="11.7" r="2.05"/><path d="M7.55 11.7h0.9"/></g>
+</svg>

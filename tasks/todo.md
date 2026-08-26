@@ -398,3 +398,63 @@ Verified by rendering the options page headlessly against the real catalogues fo
 ja and tr — including the rebuilt demo line and the localised action-bar caption.
 
 159 assertions pass. Version 1.8.0.
+
+## Round 11 — the user's own order, and cleaning as a policy
+
+- [x] `src/settings.js` — `actionOrder` (full id list as the default), `cleanBeforeAction`,
+      ordered `visibleActions`, `actionLabel(action, settings)` flip, `actionById`
+- [x] `src/background.js` — clean in `handle()` after `assertSafe()`, worker-side
+- [x] `src/content.js` — ordered `rebuildButtons()`, flipped `copyClean`, cleaned
+      `open`/`copy`, hover preview follows whichever button cleans
+- [x] `ui/options.*` + `ui.css` — drag handles *and* arrow buttons, the cleaning switch,
+      the onboarding demo follows the user's order
+- [x] `_locales/*` ×10 — eight new keys, translated
+- [x] `tools/build-readme-icons.js` + `docs/icons/*.svg` — README shows the real icons
+- [x] `tests/run.js` — order normalization, the cleaned/untouched pair, icon drift guard
+- [x] `manifest.json` → 1.9.0, rebuilt `docs/store/*.png`
+
+### Review
+
+**Order.** `actionOrder` stores the full id list rather than a diff from `ACTIONS`, which
+keeps `normalize({})` equal to `DEFAULTS` and makes the stale-order cases obvious:
+unknown ids dropped, duplicates collapsed, and *missing ids appended* — the same
+reasoning as `hiddenActions` being opt-out, so an action added in a later version turns
+up rather than vanishing for anyone who saved an order before it existed. `visibleActions`
+is now ordered as well as filtered, so the content script iterates ids and looks up, and
+the code's own order is only ever the default.
+
+**Cleaning.** It happens in the service worker, in `handle()`, right after `assertSafe()`
+— the rule list already lives there and the page stays untrusted. Only `open`, `copy` and
+`copyClean` never reach the worker, so those three clean in the page via the existing
+`requestClean()`.
+
+Two buttons doing the same thing would be the obvious wart, so `copyClean` flips to
+**Copy original link** and copies verbatim while the switch is on. `actionLabel()` decides
+that in one place, which is why the menu, the options list and the onboarding demo cannot
+disagree about it.
+
+**What the harness caught.** The prefetch for "Open link" was first put in `expand()`,
+which looked right and was wrong: `openMenu()` sets `expanded` directly when the bar
+opens immediately or the modifier is held, and never calls `expand()`. It moved to
+`applyStage()`, the one place both paths go through. Found by driving the real content
+script in Chrome with the shadow root opened by `sed` — the same trick
+`tests/harness/build.sh` uses to rename the element — and asserting on the buttons it
+drew. Worth repeating: 20 unit assertions all passed while that path was dead.
+
+**Verification.** 195 assertions in `tests/run.js`, each new guard checked by breaking the
+code and watching it fail. 31 driven checks against the real options page — the arrows,
+the drag (midpoint insertion, dropping past the last row, save deferred to dragend), the
+flip, focus surviving a move, hiding everything. 16 driven checks against the real menu,
+run twice — cleaning on and off — through both expand paths.
+
+One trap worth recording: writing `ui/options.js` put a literal NUL byte where the source
+had the escape `'\u0000'` (the demo line's placeholder sentinel). Same string at runtime,
+so every check passed over it — but git reclassified the file as binary, and `ui/` ships
+in the store zip. `git diff --stat` saying `Bin` is the tell.
+
+**README icons.** The action table used emoji standing in for the drawn icons; they are
+now generated from `src/icons.js` into `docs/icons/`, with a test that fails if the two
+drift. A fixed mid-grey rather than `currentColor`, because GitHub renders README images
+as standalone documents with no text colour to inherit — checked against both canvases.
+
+Version 1.9.0. Steps 3–7 of `RELEASING.md` (tag, release, cask, zip) not done.

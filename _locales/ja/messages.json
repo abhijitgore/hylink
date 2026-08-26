@@ -23,6 +23,9 @@
   "actionCopyClean": {
     "message": "クリーンなリンクをコピー"
   },
+  "actionCopyOriginal": {
+    "message": "元のリンクをコピー"
+  },
   "menuLabel": {
     "message": "リンクの操作"
   },
@@ -61,6 +64,9 @@
   },
   "capCleanedNone": {
     "message": "コピーしました — 削除するものはありませんでした"
+  },
+  "capCopiedOriginal": {
+    "message": "元のリンクをコピーしました"
   },
   "errBadUrl": {
     "message": "有効な URL ではありません"
@@ -191,11 +197,29 @@
   "optActions": {
     "message": "メニューに表示する操作"
   },
+  "optActionsHint": {
+    "message": "行をドラッグするか矢印を使って、メニューを好きな順番に並べ替えられます。チェックを外した操作はメニューに出ません。"
+  },
+  "optMoveUp": {
+    "message": "上へ移動"
+  },
+  "optMoveDown": {
+    "message": "下へ移動"
+  },
   "optNewTabActive": {
     "message": "新しいタブへすぐ切り替える"
   },
   "optNewTabActiveHint": {
     "message": "オフにすると「新しいタブで開く」はバックグラウンドで開きます。"
+  },
+  "optCleaning": {
+    "message": "トラッキングパラメータ"
+  },
+  "optCleanFirst": {
+    "message": "すべての操作の前にトラッキングパラメータを取り除く"
+  },
+  "optCleanFirstHint": {
+    "message": "コピーだけでなく、どの操作もクリーンにしたリンクを開いたりコピーしたりします。そのとき「クリーンなリンクをコピー」は「元のリンクをコピー」に変わるので、手を加えていない URL もワンクリックで手に入ります。"
   },
   "optWhere": {
     "message": "表示される場所"

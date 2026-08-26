@@ -23,6 +23,9 @@
   "actionCopyClean": {
     "message": "Temiz bağlantıyı kopyala"
   },
+  "actionCopyOriginal": {
+    "message": "Özgün bağlantıyı kopyala"
+  },
   "menuLabel": {
     "message": "Bağlantı işlemleri"
   },
@@ -61,6 +64,9 @@
   },
   "capCleanedNone": {
     "message": "Kopyalandı — kaldırılacak bir şey yoktu"
+  },
+  "capCopiedOriginal": {
+    "message": "Özgün bağlantı kopyalandı"
   },
   "errBadUrl": {
     "message": "Geçerli bir URL değil"
@@ -191,11 +197,29 @@
   "optActions": {
     "message": "Menüde görünen işlemler"
   },
+  "optActionsHint": {
+    "message": "Menüyü istediğin sıraya koymak için bir satırı sürükle ya da okları kullan. İşaretini kaldırdığın eylem menüde görünmez."
+  },
+  "optMoveUp": {
+    "message": "Yukarı taşı"
+  },
+  "optMoveDown": {
+    "message": "Aşağı taşı"
+  },
   "optNewTabActive": {
     "message": "Yeni sekmelere hemen geç"
   },
   "optNewTabActiveHint": {
     "message": "Kapalıyken \"Yeni sekmede aç\" onu arka planda açar."
+  },
+  "optCleaning": {
+    "message": "Takip parametreleri"
+  },
+  "optCleanFirst": {
+    "message": "Her eylemden önce takip parametrelerini kaldır"
+  },
+  "optCleanFirstHint": {
+    "message": "Yalnızca kopyalayan değil, her eylem temizlenmiş bağlantıyı açar ya da kopyalar. \"Temiz bağlantıyı kopyala\" da \"Özgün bağlantıyı kopyala\" olur, böylece dokunulmamış URL yine bir tık uzakta kalır."
   },
   "optWhere": {
     "message": "Nerede görünür"

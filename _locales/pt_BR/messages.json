@@ -23,6 +23,9 @@
   "actionCopyClean": {
     "message": "Copiar link limpo"
   },
+  "actionCopyOriginal": {
+    "message": "Copiar o link original"
+  },
   "menuLabel": {
     "message": "Ações do link"
   },
@@ -61,6 +64,9 @@
   },
   "capCleanedNone": {
     "message": "Copiado — nada a remover"
+  },
+  "capCopiedOriginal": {
+    "message": "Link original copiado"
   },
   "errBadUrl": {
     "message": "URL inválida"
@@ -191,11 +197,29 @@
   "optActions": {
     "message": "Ações exibidas no menu"
   },
+  "optActionsHint": {
+    "message": "Arraste uma linha, ou use as setas, para deixar o menu na ordem que você quiser. Desmarcar uma deixa ela de fora."
+  },
+  "optMoveUp": {
+    "message": "Mover para cima"
+  },
+  "optMoveDown": {
+    "message": "Mover para baixo"
+  },
   "optNewTabActive": {
     "message": "Mudar para as novas abas imediatamente"
   },
   "optNewTabActiveHint": {
     "message": "Desativado, \"Abrir em nova aba\" abre em segundo plano."
+  },
+  "optCleaning": {
+    "message": "Parâmetros de rastreamento"
+  },
+  "optCleanFirst": {
+    "message": "Remover os parâmetros de rastreamento antes de cada ação"
+  },
+  "optCleanFirstHint": {
+    "message": "Toda ação abre ou copia o link limpo, não só a de copiar. \"Copiar link limpo\" vira \"Copiar o link original\", então a URL intacta continua a um clique."
   },
   "optWhere": {
     "message": "Onde aparece"

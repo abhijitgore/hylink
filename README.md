@@ -76,14 +76,14 @@ Move the cursor onto the three dots and they expand into the action bar:
 
 | Icon | Action | What it does |
 | --- | --- | --- |
-| → | **Open link** | Opens the link in the current tab. |
-| ⊞ | **Open in new tab** | Opens it in a new tab right after the current one. |
-| ↗ | **Open in new window** | Opens it in a new, normally-sized window. |
-| 🕵 | **Open in incognito** | Opens it in an existing incognito window, or creates one. Needs *Allow in incognito* — see [Install](#install). |
-| ▐ | **Open in side (right)** | If the tab is **already in a Chrome split view**, opens it in the other pane. Otherwise moves the current window to the **left half** of the screen and opens the link in a new window on the **right half**. |
-| ▄ | **Open in side (stacked)** | Same split-view behaviour; otherwise moves the current window to the **top half** and opens the link in a new window on the **bottom half**. |
-| 📋 | **Copy link address** | Copies the full URL to the clipboard. |
-| ✨ | **Copy clean link** | Copies the URL with tracking parameters removed, the way Brave's *Copy clean link* does. Hover the button to see how many will be removed before you click. |
+| <img src="docs/icons/open.svg" width="16" height="16" alt=""> | **Open link** | Opens the link in the current tab. |
+| <img src="docs/icons/newTab.svg" width="16" height="16" alt=""> | **Open in new tab** | Opens it in a new tab right after the current one. |
+| <img src="docs/icons/newWindow.svg" width="16" height="16" alt=""> | **Open in new window** | Opens it in a new, normally-sized window. |
+| <img src="docs/icons/incognito.svg" width="16" height="16" alt=""> | **Open in incognito** | Opens it in an existing incognito window, or creates one. Needs *Allow in incognito* — see [Install](#install). |
+| <img src="docs/icons/sideRight.svg" width="16" height="16" alt=""> | **Open in side (right)** | If the tab is **already in a Chrome split view**, opens it in the other pane. Otherwise moves the current window to the **left half** of the screen and opens the link in a new window on the **right half**. |
+| <img src="docs/icons/sideStacked.svg" width="16" height="16" alt=""> | **Open in side (stacked)** | Same split-view behaviour; otherwise moves the current window to the **top half** and opens the link in a new window on the **bottom half**. |
+| <img src="docs/icons/copy.svg" width="16" height="16" alt=""> | **Copy link address** | Copies the full URL to the clipboard. |
+| <img src="docs/icons/copyClean.svg" width="16" height="16" alt=""> | **Copy clean link** | Copies the URL with tracking parameters removed, the way Brave's *Copy clean link* does. Hover the button to see how many will be removed before you click. |
 
 ## How "open in side" works
 
@@ -149,8 +149,11 @@ or open **All settings…** for:
 - **Skip navigation, headers and sidebars** (on by default).
 - **Hover delay** (default 220 ms) before the dots appear.
 - **Modifier key** — optionally require Alt/Ctrl/Shift/Cmd to be held.
-- **Which of the eight actions** appear in the bar.
+- **Which of the eight actions** appear in the bar, **and in what order** — drag a row
+  or use the arrow buttons; the menu on every open tab follows along without a reload.
 - **Foreground or background** new tabs.
+- **Remove tracking parameters before every action** (off by default) — see
+  [Clean links](#clean-links).
 - **Disabled sites** — one hostname per line; each entry also covers its subdomains.
 
 Press <kbd>Esc</kbd>, click elsewhere, scroll, or move the mouse away to dismiss the
@@ -185,6 +188,15 @@ keeps its `$placeholders$`.
 `utm_*`, `fbclid`, `gclid`, `si`, Amazon's `ref_`, and several hundred more — so what
 you paste is the page, not a record of how you got there.
 
+**Remove tracking parameters before every action** in the options extends that to the
+whole menu: opening in a new tab, a new window, incognito or a side window all navigate
+to the stripped URL, and **Copy link address** copies it stripped too. Because that
+would leave two buttons doing the same thing, **Copy clean link** flips to **Copy
+original link** while the setting is on — the untouched URL stays one click away.
+
+Anything the menu opens is cleaned in the service worker, on its side of the privilege
+boundary, rather than being cleaned in the page and taken on trust.
+
 The rules are Brave's, copied verbatim from
 [brave/adblock-lists](https://github.com/brave/adblock-lists/blob/master/brave-lists/clean-urls.json)
 into `src/clean-list.js`, plus the click identifiers from Brave's navigation-time query
@@ -209,7 +221,8 @@ runs in the service worker, so the rule list is never injected into the pages yo
 ```
 manifest.json
 src/settings.js     shared defaults, storage helpers, denylist matching
-src/icons.js        the menu's icon set, shared with the options page
+src/icons.js        the menu's icon set, shared with the options page and README
+docs/icons/         GENERATED from it for the table above; see tools/build-readme-icons.js
 _locales/           ten UI translations; `en` is the fallback
 ui/i18n.js          fills the pages from _locales, keeping the English as a fallback
 src/clean.js        tracking-parameter removal (worker only)
@@ -218,7 +231,7 @@ src/content.js      hover detection + top-layer shadow-DOM menu (all frames)
 src/tiling.js       display work-area math and window placement
 src/background.js   service worker; split-view reuse, tabs/windows privileges
 ui/                 options page and toolbar popup
-tests/run.js        `node tests/run.js` — 169 assertions, no dependencies
+tests/run.js        `node tests/run.js` — 195 assertions, no dependencies
 tools/              regenerates the clean-link rules, the icons and the store assets
 tests/harness/      manual page for hover timing and overlay-dodging
 icons/
