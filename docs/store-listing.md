@@ -10,6 +10,8 @@ and [image specs](https://developer.chrome.com/docs/webstore/images).
 > HyLink shows a small menu beside the link under the mouse, with ways to open that
 > link — in the current tab, a new tab, a new window, incognito, or side by side or
 > stacked with the current page — or to copy it, with or without tracking parameters.
+> Links it opens have tracking parameters removed by default; that can be switched off
+> in the options.
 
 Everything in the extension serves that one purpose. No second feature, no account, no
 network access.
@@ -17,21 +19,30 @@ network access.
 ## Store listing copy
 
 **Name:** HyLink — Hover Link Menu
-**Summary** (the manifest `description`, 121 of the allowed 132 characters):
+**Summary** (the manifest `description`, 131 of the allowed 132 characters):
 
-> Hover over a link to reveal a menu: open it in a new tab, window, incognito, or side
-> by side, or copy it. No right-click.
+> Every link you copy is mostly tracking garbage. Hover a link: clean copy, new tab,
+> window, incognito, split screen. No right-click.
 
 **Category:** Workflow & Planning
 **Language:** English
 
 **Detailed description:**
 
+> You know how the links you copy are mostly tracking garbage? HyLink fixes that —
+> hover a link, one click, clean copy. It also does new tab, new window, incognito and
+> split screen without a right-click. Free, and it phones home to no one.
+>
 > Hover the mouse over a link to reveal a small three-dot menu beside it. Move the
 > cursor onto the menu and it expands into eight ways to interact with that link: open
 > it in the current tab, a new tab, a new window, or incognito; open it side by side or
 > stacked with the current page; copy the link; or copy a clean link with the tracking
 > parameters removed, the way Brave does it.
+>
+> Links you open are cleaned by default — a link you are following has no use for the
+> campaign tag that came with it — and you can switch that off in the options. The copy
+> buttons never change: "Copy link address" hands over the link exactly as it is, and
+> "Copy clean link" is the one that strips it.
 >
 > Designed to stay out of your way while you read:
 >
@@ -45,8 +56,9 @@ network access.
 > • It moves out of the way of hover cards like Wikipedia's link previews instead of
 >   covering them.
 >
-> Everything is configurable: the hover delay, which actions appear, whether a
-> modifier key must be held, and a per-site off switch in the toolbar popup.
+> Everything is configurable: the hover delay, which actions appear and in what order,
+> whether links you open get cleaned, whether a modifier key must be held, and a
+> per-site off switch in the toolbar popup.
 >
 > About the "read and change all your data on all websites" warning: Chrome shows
 > that to every extension that runs on every site, and links exist on every page, so

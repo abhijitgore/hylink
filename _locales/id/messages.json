@@ -23,9 +23,6 @@
   "actionCopyClean": {
     "message": "Salin tautan bersih"
   },
-  "actionCopyOriginal": {
-    "message": "Salin tautan asli"
-  },
   "menuLabel": {
     "message": "Tindakan tautan"
   },
@@ -64,9 +61,6 @@
   },
   "capCleanedNone": {
     "message": "Disalin — tidak ada yang perlu dihapus"
-  },
-  "capCopiedOriginal": {
-    "message": "Tautan asli disalin"
   },
   "errBadUrl": {
     "message": "URL tidak valid"
@@ -216,10 +210,10 @@
     "message": "Parameter pelacak"
   },
   "optCleanFirst": {
-    "message": "Hapus parameter pelacak sebelum setiap tindakan"
+    "message": "Hapus parameter pelacak dari tautan yang kamu buka"
   },
   "optCleanFirstHint": {
-    "message": "Bukan cuma yang menyalin — setiap tindakan membuka atau menyalin tautan yang sudah bersih. \"Salin tautan bersih\" lalu berubah jadi \"Salin tautan asli\", jadi URL yang utuh tetap sejauh satu klik."
+    "message": "Aktif secara bawaan. Setiap cara membuka tautan — tab baru, jendela, penyamaran, berdampingan — menuju URL yang sudah bersih. Tombol salin tidak terpengaruh: \"Salin alamat tautan\" selalu menyalin tautan apa adanya, dan \"Salin tautan bersih\" adalah yang membersihkannya."
   },
   "optWhere": {
     "message": "Tempat munculnya"

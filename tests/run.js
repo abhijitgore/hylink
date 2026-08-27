@@ -128,9 +128,10 @@ function loadWorker(opts = {}) {
   eq('visible list is derived from hiddenActions',
      normalize({ hiddenActions: ['copy'] }).visibleActions, ACTION_IDS.filter((i) => i !== 'copy'));
   eq('unknown modifier falls back', normalize({ modifier: 'hyper' }).modifier, 'alt');
-  eq('cleaning every action is opt-in', DEFAULTS.cleanBeforeAction, false);
-  eq('the cleaning switch round-trips',
-     normalize({ cleanBeforeAction: true }).cleanBeforeAction, true);
+  // The default that matters most: a link you follow is cleaned without being asked.
+  eq('links you open are cleaned out of the box', DEFAULTS.cleanBeforeOpen, true);
+  eq('and the switch turns it off',
+     normalize({ cleanBeforeOpen: false }).cleanBeforeOpen, false);
 
   describe('the menu order is the user\'s');
   {
@@ -156,27 +157,11 @@ function loadWorker(opts = {}) {
        normalize({ actionOrder: 'copy,open' }).actionOrder, ACTION_IDS);
     eq('every action is still accounted for',
        normalize({ actionOrder: ['copy'] }).actionOrder.length, ACTION_IDS.length);
-  }
-
-  describe('the flipped copy button');
-  {
-    const { actionLabel, actionById } = loadPlain(['settings.js']).HyLinkSettings;
-    const copyClean = actionById('copyClean');
-    // No `chrome` in the sandbox, so t() falls through to the English written inline —
-    // which is exactly the fallback path a missing catalogue would take.
-    eq('is the clean one while cleaning is off',
-       actionLabel(copyClean, normalize({})), 'Copy clean link');
-    eq('and the way back to the original while it is on',
-       actionLabel(copyClean, normalize({ cleanBeforeAction: true })), 'Copy original link');
-    eq('no other action changes label',
-       ACTIONS.filter((a) => a.id !== 'copyClean')
-         .filter((a) => actionLabel(a, normalize({ cleanBeforeAction: true })) !== actionLabel(a)),
-       []);
-    eq('and a caller with no settings gets the plain label',
-       actionLabel(copyClean), 'Copy clean link');
+    const { actionById } = loadPlain(['settings.js']).HyLinkSettings;
     eq('actionById knows every action', ACTION_IDS.filter((id) => !actionById(id)), []);
     eq('and nothing else', actionById('telepathy'), undefined);
   }
+
   eq('hostnames trimmed and lowercased', normalize({ disabledSites: [' Mail.Google.COM ', ''] }).disabledSites, ['mail.google.com']);
 
   describe('navigational class/id tokens');
@@ -476,7 +461,7 @@ function loadWorker(opts = {}) {
           JSON.stringify(opts));
   }
 
-  describe('cleaning before every action');
+  describe('cleaning links the menu opens');
   {
     const DIRTY = 'https://example.com/a?utm_source=news&id=7&fbclid=xyz';
     const CLEAN = 'https://example.com/a?id=7';
@@ -484,14 +469,16 @@ function loadWorker(opts = {}) {
 
     // Both halves on purpose: a worker that mangled every URL would pass the "cleaned"
     // assertion on its own, exactly the way the scheme guard once passed for rejecting
-    // everything (tasks/lessons.md).
-    let sb = loadWorker({ tab, settings: { cleanBeforeAction: true } });
+    // everything (tasks/lessons.md). The off case is now the non-default path, which
+    // makes it the easier one to break without noticing.
+    let sb = loadWorker({ tab, settings: {} });   // no override: the shipped default
     await sb.send('newTab', DIRTY);
-    eq('a new tab gets the stripped URL', sb.__log.find((e) => e[0] === 'tab.create')[1].url, CLEAN);
+    eq('a new tab gets the stripped URL without anyone opting in',
+       sb.__log.find((e) => e[0] === 'tab.create')[1].url, CLEAN);
     await sb.send('newWindow', DIRTY);
     eq('so does a new window', sb.__log.find((e) => e[0] === 'window.create')[1].url, CLEAN);
 
-    sb = loadWorker({ tab, settings: { cleanBeforeAction: false } });
+    sb = loadWorker({ tab, settings: { cleanBeforeOpen: false } });
     await sb.send('newTab', DIRTY);
     eq('switched off, the URL is passed through untouched',
        sb.__log.find((e) => e[0] === 'tab.create')[1].url, DIRTY);
@@ -500,10 +487,10 @@ function loadWorker(opts = {}) {
        sb.__log.find((e) => e[0] === 'window.create')[1].url, DIRTY);
 
     // Cleaning happens after the scheme guard, not instead of it.
-    sb = loadWorker({ tab, settings: { cleanBeforeAction: true } });
+    sb = loadWorker({ tab, settings: {} });
     const bad = await sb.send('newTab', 'javascript:alert(1)');
     check('the scheme guard still runs first', bad.ok === false, JSON.stringify(bad));
-    sb = loadWorker({ tab, settings: { cleanBeforeAction: true } });
+    sb = loadWorker({ tab, settings: {} });
     await sb.send('newTab', 'https://example.com/a');
     eq('a URL with nothing to remove is not re-encoded',
        sb.__log.find((e) => e[0] === 'tab.create')[1].url, 'https://example.com/a');
@@ -572,6 +559,30 @@ function loadWorker(opts = {}) {
   r = await sb.send('sideRight', 'javascript:alert(1)');
   check('rejects javascript: before touching the sibling pane',
     r.ok === false && sb.__log.length === 0, JSON.stringify([r, sb.__log]));
+
+  describe('retired keys');
+  {
+    // cleanBeforeAction (1.9.0) meant "clean every action, copy included" and was off
+    // by default. It is deliberately NOT carried across: save() wrote every key, so
+    // anyone who opened the options page once has `false` on disk, and honouring it
+    // would switch the new default off for exactly those people.
+    let { api, store } = loadSettingsWith({ cleanBeforeAction: false });
+    let s1 = await api.getSettings();
+    eq('a stored cleanBeforeAction does not hold the new default down', s1.cleanBeforeOpen, true);
+    eq('and it does not survive as a stray key', s1.cleanBeforeAction, undefined);
+    check('it is swept out of sync storage', !('cleanBeforeAction' in store),
+          JSON.stringify(Object.keys(store)));
+
+    // A true value is no different: the key is gone, not reinterpreted.
+    ({ api, store } = loadSettingsWith({ cleanBeforeAction: true, cleanBeforeOpen: false }));
+    s1 = await api.getSettings();
+    eq('the live key is what decides', s1.cleanBeforeOpen, false);
+
+    // The sweep must take the retired keys and nothing else with them.
+    ({ api, store } = loadSettingsWith({ hoverDelay: 90, cleanBeforeAction: true }));
+    await api.getSettings();
+    eq('the sweep takes the dead key and leaves the live ones', store, { hoverDelay: 90 });
+  }
 
   describe('settings migration: opt-in visibleActions -> opt-out hiddenActions');
   {

@@ -23,9 +23,6 @@
   "actionCopyClean": {
     "message": "Bereinigten Link kopieren"
   },
-  "actionCopyOriginal": {
-    "message": "Ursprünglichen Link kopieren"
-  },
   "menuLabel": {
     "message": "Linkaktionen"
   },
@@ -64,9 +61,6 @@
   },
   "capCleanedNone": {
     "message": "Kopiert — nichts zu entfernen"
-  },
-  "capCopiedOriginal": {
-    "message": "Ursprünglichen Link kopiert"
   },
   "errBadUrl": {
     "message": "Keine gültige URL"
@@ -216,10 +210,10 @@
     "message": "Tracking-Parameter"
   },
   "optCleanFirst": {
-    "message": "Tracking-Parameter vor jeder Aktion entfernen"
+    "message": "Tracking-Parameter aus Links entfernen, die du öffnest"
   },
   "optCleanFirstHint": {
-    "message": "Jede Aktion öffnet oder kopiert dann den bereinigten Link, nicht nur die zum Kopieren. Aus „Bereinigten Link kopieren“ wird „Ursprünglichen Link kopieren“, die unveränderte URL bleibt also einen Klick entfernt."
+    "message": "Standardmäßig an. Jede Art, einen Link zu öffnen — neuer Tab, Fenster, Inkognito, nebeneinander — führt zur bereinigten URL. Die Kopierschaltflächen bleiben davon unberührt: „Linkadresse kopieren“ kopiert den Link immer genau so, wie er ist, und „Bereinigten Link kopieren“ ist die, die bereinigt."
   },
   "optWhere": {
     "message": "Wo es erscheint"

@@ -330,7 +330,7 @@
       btn.type = 'button';
       btn.className = 'btn';
       btn.dataset.action = action.id;
-      const label = actionLabel(action, settings);
+      const label = actionLabel(action);
       btn.title = label;
       btn.setAttribute('role', 'menuitem');
       btn.setAttribute('aria-label', label);
@@ -342,7 +342,7 @@
       });
       btn.addEventListener('pointerenter', () => {
         setCaption(label, 'strong');
-        if (cleansOnClick(action.id)) previewClean(btn);
+        if (action.id === 'copyClean') previewClean(btn);
       });
       btn.addEventListener('pointerleave', () => setCaption(shortUrl(currentUrl)));
       btn.addEventListener('focus', () => setCaption(label, 'strong'));
@@ -628,8 +628,8 @@
     // the worker. Ask as soon as the bar is on screen — here rather than in expand(),
     // because the bar can also open straight from openMenu() in immediate mode or when
     // the modifier is held, which never goes through expand(). requestClean() caches
-    // per URL, so asking twice costs nothing.
-    if (expanded && settings.cleanBeforeAction && currentUrl) requestClean(currentUrl);
+    // per URL, so the hover over "Copy clean link" that usually follows is free.
+    if (expanded && settings.cleanBeforeOpen && currentUrl) requestClean(currentUrl);
   }
 
   /** Grow the grip into the full action bar and re-place it at its new size. */
@@ -752,26 +752,6 @@
       ? `Copy without ${count} trackers` : `Copied — ${count} trackers removed`, [String(count)]);
   }
 
-  /**
-   * True when clicking this button produces a cleaned URL — which button that is
-   * depends on the setting. With cleaning switched on, "Copy link address" is the
-   * cleaned one and "Copy clean link" has become the way back to the original.
-   */
-  function cleansOnClick(actionId) {
-    if (actionId === 'copyClean') return !settings.cleanBeforeAction;
-    if (actionId === 'copy') return settings.cleanBeforeAction;
-    return false;
-  }
-
-  /** What the caption says once the link is on the clipboard. */
-  function copiedCaption(actionId, cleaned, removed) {
-    if (cleaned) return cleanMessage('capCleaned', removed);
-    // The flipped button is the deliberate way to get the untouched URL, so say so
-    // rather than reporting the same "Copied link address" as its neighbour.
-    if (actionId === 'copyClean') return t('capCopiedOriginal', 'Copied the original link');
-    return t('capCopied', 'Copied link address');
-  }
-
   async function previewClean(btn) {
     const url = currentUrl;
     const res = await requestClean(url);
@@ -787,19 +767,27 @@
     // Only these three stay in the page; everything else is the worker's, and the
     // worker does its own cleaning so the page never has to be trusted about it.
     if (actionId === 'open') {
-      const target = settings.cleanBeforeAction ? (await requestClean(url)).url : url;
+      const target = settings.cleanBeforeOpen ? (await requestClean(url)).url : url;
       closeMenu();
       location.href = target;
       return;
     }
-    if (actionId === 'copy' || actionId === 'copyClean') {
-      const clean = cleansOnClick(actionId);
-      const res = clean ? await requestClean(url) : { url, removed: [] };
+    // The copy pair never consults the setting: one hands over the link as it stands,
+    // the other strips it, and having both a click apart is the whole point.
+    if (actionId === 'copy') {
+      const ok = await copyText(url);
+      setCaption(ok ? t('capCopied', 'Copied link address') : t('capCopyFailed', 'Could not copy'),
+                 ok ? 'strong' : 'error');
+      setTimeout(teardown, ok ? 650 : 1400);
+      return;
+    }
+    if (actionId === 'copyClean') {
+      const res = await requestClean(url);
       const ok = await copyText(res.url);
-      setCaption(ok ? copiedCaption(actionId, clean, res.removed.length)
+      setCaption(ok ? cleanMessage('capCleaned', res.removed.length)
                     : t('capCopyFailed', 'Could not copy'),
                  ok ? 'strong' : 'error');
-      setTimeout(teardown, ok ? (clean ? 900 : 650) : 1400);
+      setTimeout(teardown, ok ? 900 : 1400);
       return;
     }
 

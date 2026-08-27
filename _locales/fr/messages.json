@@ -23,9 +23,6 @@
   "actionCopyClean": {
     "message": "Copier le lien nettoyé"
   },
-  "actionCopyOriginal": {
-    "message": "Copier le lien d'origine"
-  },
   "menuLabel": {
     "message": "Actions sur le lien"
   },
@@ -64,9 +61,6 @@
   },
   "capCleanedNone": {
     "message": "Copié — rien à retirer"
-  },
-  "capCopiedOriginal": {
-    "message": "Lien d'origine copié"
   },
   "errBadUrl": {
     "message": "URL non valide"
@@ -216,10 +210,10 @@
     "message": "Paramètres de suivi"
   },
   "optCleanFirst": {
-    "message": "Retirer les paramètres de suivi avant chaque action"
+    "message": "Retirer les paramètres de suivi des liens que tu ouvres"
   },
   "optCleanFirstHint": {
-    "message": "Chaque action ouvre ou copie le lien nettoyé, pas seulement celle qui copie. « Copier le lien nettoyé » devient alors « Copier le lien d’origine », si bien que l’URL intacte reste à un clic."
+    "message": "Activé par défaut. Chaque façon d’ouvrir un lien — nouvel onglet, fenêtre, navigation privée, côte à côte — mène à l’URL nettoyée. Les boutons de copie ne changent pas : « Copier l’adresse du lien » copie toujours le lien tel quel, et « Copier le lien nettoyé » est celui qui nettoie."
   },
   "optWhere": {
     "message": "Où il apparaît"

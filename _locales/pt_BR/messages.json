@@ -23,9 +23,6 @@
   "actionCopyClean": {
     "message": "Copiar link limpo"
   },
-  "actionCopyOriginal": {
-    "message": "Copiar o link original"
-  },
   "menuLabel": {
     "message": "Ações do link"
   },
@@ -64,9 +61,6 @@
   },
   "capCleanedNone": {
     "message": "Copiado — nada a remover"
-  },
-  "capCopiedOriginal": {
-    "message": "Link original copiado"
   },
   "errBadUrl": {
     "message": "URL inválida"
@@ -216,10 +210,10 @@
     "message": "Parâmetros de rastreamento"
   },
   "optCleanFirst": {
-    "message": "Remover os parâmetros de rastreamento antes de cada ação"
+    "message": "Remover os parâmetros de rastreamento dos links que você abrir"
   },
   "optCleanFirstHint": {
-    "message": "Toda ação abre ou copia o link limpo, não só a de copiar. \"Copiar link limpo\" vira \"Copiar o link original\", então a URL intacta continua a um clique."
+    "message": "Ligado por padrão. Toda forma de abrir um link — nova aba, janela, anônima, lado a lado — vai para a URL limpa. Os botões de copiar não mudam: \"Copiar endereço do link\" copia sempre o link como ele está, e \"Copiar link limpo\" é o que limpa."
   },
   "optWhere": {
     "message": "Onde aparece"

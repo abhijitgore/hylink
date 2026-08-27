@@ -96,11 +96,12 @@ async function openIncognito(url) {
 async function handle(action, rawUrl, sender) {
   const settings = await getSettings();
   // Cleaning happens after the scheme guard, not before: the guard is what makes the
-  // page's URL safe to touch at all. Anything the worker opens is cleaned here, in the
-  // one place that already has the rule list — the content script cleans only the two
-  // actions that never reach us.
+  // page's URL safe to touch at all. Every action that reaches the worker opens a link,
+  // so all of them are cleaned here, in the one place that already has the rule list.
+  // The content script handles the three that never reach us — and only one of those,
+  // "Open link", is an open.
   const safe = assertSafe(rawUrl);
-  const url = settings.cleanBeforeAction ? cleanUrl(safe).url : safe;
+  const url = settings.cleanBeforeOpen ? cleanUrl(safe).url : safe;
   const windowId = sender?.tab?.windowId ?? chrome.windows.WINDOW_ID_CURRENT;
 
   switch (action) {

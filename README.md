@@ -152,7 +152,7 @@ or open **All settings…** for:
 - **Which of the eight actions** appear in the bar, **and in what order** — drag a row
   or use the arrow buttons; the menu on every open tab follows along without a reload.
 - **Foreground or background** new tabs.
-- **Remove tracking parameters before every action** (off by default) — see
+- **Remove tracking parameters from links you open** (on by default) — see
   [Clean links](#clean-links).
 - **Disabled sites** — one hostname per line; each entry also covers its subdomains.
 
@@ -188,11 +188,14 @@ keeps its `$placeholders$`.
 `utm_*`, `fbclid`, `gclid`, `si`, Amazon's `ref_`, and several hundred more — so what
 you paste is the page, not a record of how you got there.
 
-**Remove tracking parameters before every action** in the options extends that to the
-whole menu: opening in a new tab, a new window, incognito or a side window all navigate
-to the stripped URL, and **Copy link address** copies it stripped too. Because that
-would leave two buttons doing the same thing, **Copy clean link** flips to **Copy
-original link** while the setting is on — the untouched URL stays one click away.
+**Links you open are cleaned too, by default.** Opening in a new tab, a new window,
+incognito or a side window all navigate to the stripped URL — a link you are following
+has no use for the campaign tag that came with it. Turn off **Remove tracking parameters
+from links you open** in the options to get the URL passed through untouched.
+
+The copy buttons stay out of that: **Copy link address** always hands over the link
+exactly as it is, and **Copy clean link** is always the one that strips. They sit a
+click apart and neither depends on the setting, so whichever you want is one press away.
 
 Anything the menu opens is cleaned in the service worker, on its side of the privilege
 boundary, rather than being cleaned in the page and taken on trust.
@@ -231,7 +234,7 @@ src/content.js      hover detection + top-layer shadow-DOM menu (all frames)
 src/tiling.js       display work-area math and window placement
 src/background.js   service worker; split-view reuse, tabs/windows privileges
 ui/                 options page and toolbar popup
-tests/run.js        `node tests/run.js` — 195 assertions, no dependencies
+tests/run.js        `node tests/run.js` — 196 assertions, no dependencies
 tools/              regenerates the clean-link rules, the icons and the store assets
 tests/harness/      manual page for hover timing and overlay-dodging
 icons/

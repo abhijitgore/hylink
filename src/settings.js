@@ -31,18 +31,8 @@
     }
   }
 
-  /**
-   * The menu label for an action, in the user's language.
-   *
-   * One action changes meaning with the settings: when cleaning applies to everything,
-   * "Copy link address" is already the clean one, so "Copy clean link" would be a
-   * duplicate. It becomes the way back to the untouched URL instead — the only place
-   * that decides this, so the menu, the options list and the demo cannot disagree.
-   */
-  function actionLabel(action, settings) {
-    if (action.id === 'copyClean' && settings && settings.cleanBeforeAction) {
-      return t('actionCopyOriginal', 'Copy original link');
-    }
+  /** The menu label for an action, in the user's language. */
+  function actionLabel(action) {
     return t(action.key, action.label);
   }
 
@@ -107,39 +97,64 @@
      */
     actionOrder: ACTIONS.map((a) => a.id),
     /**
-     * Strip tracking parameters before *every* action, not just "Copy clean link".
-     * The worker does it for anything it opens; the content script does it for the
-     * two actions that never reach the worker.
+     * Strip tracking parameters from links the menu *opens* — new tab, new window,
+     * incognito, either side action, and the current tab. On by default: a link you
+     * follow has no use for the campaign tag that came with it.
+     *
+     * Never the copy buttons. "Copy link address" hands over exactly what is there,
+     * and "Copy clean link" is the one that strips, so the two are always a click
+     * apart and neither depends on what this is set to.
      */
-    cleanBeforeAction: false,
+    cleanBeforeOpen: true,
     /** skip links inside navigation, headers, footers and sidebars */
     skipNavigation: true,
     /** hostnames where the menu never appears */
     disabledSites: []
   };
 
+  /**
+   * Keys that used to mean something and no longer do. They are ignored as input and
+   * swept out of sync storage on the next read; because `storage.sync.get()` returns
+   * only the keys it is asked for, leaving one out of DEFAULTS is already enough to
+   * make it inert, and this only stops it sitting there forever.
+   */
+  const RETIRED = ['visibleActions', 'cleanBeforeAction'];
+
   async function getSettings() {
     try {
-      // `storage.sync.get(DEFAULTS)` only returns keys present in DEFAULTS, so the
-      // retired key has to be asked for explicitly for migration to see it.
-      const stored = await chrome.storage.sync.get({ ...DEFAULTS, visibleActions: null });
+      // `storage.sync.get(DEFAULTS)` only returns keys present in DEFAULTS, so a
+      // retired key has to be asked for explicitly for migration to see it at all.
+      const asked = { ...DEFAULTS };
+      for (const key of RETIRED) asked[key] = null;
+      const stored = await chrome.storage.sync.get(asked);
       return normalize(await migrate(stored));
     } catch (_) {
       return normalize({});
     }
   }
 
-  /** One-time conversion of the old opt-in list into the opt-out one. */
+  /**
+   * One-time conversion of the old opt-in list into the opt-out one, plus the sweep of
+   * anything else retired. `cleanBeforeAction` gets no conversion on purpose: it used
+   * to mean "clean every action, copy included" and was off by default, so carrying a
+   * stored value across would switch the new default off for exactly the people who
+   * had already opened the options page once.
+   */
   async function migrate(stored) {
+    const next = { ...stored };
+    const dead = RETIRED.filter((key) => stored[key] !== null && stored[key] !== undefined);
+    for (const key of RETIRED) delete next[key];
+
     const legacy = stored.visibleActions;
-    if (!Array.isArray(legacy)) return stored;
-    const hiddenActions = LEGACY_ACTIONS.filter((id) => !legacy.includes(id));
-    const next = { ...stored, hiddenActions };
-    delete next.visibleActions;
+    if (Array.isArray(legacy)) {
+      next.hiddenActions = LEGACY_ACTIONS.filter((id) => !legacy.includes(id));
+    }
+    if (!dead.length) return next;
+
     try {
-      await chrome.storage.sync.set({ hiddenActions });
+      if (Array.isArray(legacy)) await chrome.storage.sync.set({ hiddenActions: next.hiddenActions });
       // Without the remove, migration would run again on every read.
-      await chrome.storage.sync.remove('visibleActions');
+      await chrome.storage.sync.remove(dead);
     } catch (_) {
       // A failed write just means we migrate again next time; harmless.
     }
@@ -151,7 +166,7 @@
     const s = { ...DEFAULTS };
     for (const [key, value] of Object.entries(raw || {})) {
       // A deleted key arrives as undefined; that must not shadow the default.
-      if (value !== undefined && key !== 'visibleActions') s[key] = value;
+      if (value !== undefined && !RETIRED.includes(key)) s[key] = value;
     }
 
     const ids = ACTIONS.map((a) => a.id);

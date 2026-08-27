@@ -98,11 +98,12 @@
   <section>
     <h2 data-i18n="optCleaning">Tracking parameters</h2>
     <label class="switch">
-      <input type="checkbox" id="cleanBeforeAction">
-      <span><strong data-i18n="optCleanFirst">Remove tracking parameters before every action</strong>
-        <em data-i18n="optCleanFirstHint">Every action opens or copies the cleaned link, not just
-          the copy one. "Copy clean link" then becomes "Copy original link", so the untouched
-          URL is still one click away.</em></span>
+      <input type="checkbox" id="cleanBeforeOpen">
+      <span><strong data-i18n="optCleanFirst">Remove tracking parameters from links you open</strong>
+        <em data-i18n="optCleanFirstHint">On by default. Every way of opening a link — new tab,
+          window, incognito, side by side — goes to the stripped URL. The copy buttons are
+          unaffected: "Copy link address" always copies the link exactly as it is, and "Copy
+          clean link" is the one that strips.</em></span>
     </label>
   </section>
 

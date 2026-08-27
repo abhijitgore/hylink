@@ -23,9 +23,6 @@
   "actionCopyClean": {
     "message": "Copiar enlace limpio"
   },
-  "actionCopyOriginal": {
-    "message": "Copiar el enlace original"
-  },
   "menuLabel": {
     "message": "Acciones del enlace"
   },
@@ -64,9 +61,6 @@
   },
   "capCleanedNone": {
     "message": "Copiado: no había nada que quitar"
-  },
-  "capCopiedOriginal": {
-    "message": "Enlace original copiado"
   },
   "errBadUrl": {
     "message": "La URL no es válida"
@@ -216,10 +210,10 @@
     "message": "Parámetros de seguimiento"
   },
   "optCleanFirst": {
-    "message": "Quitar los parámetros de seguimiento antes de cada acción"
+    "message": "Quitar los parámetros de seguimiento de los enlaces que abras"
   },
   "optCleanFirstHint": {
-    "message": "Cada acción abre o copia el enlace limpio, no solo la de copiar. «Copiar enlace limpio» pasa a ser «Copiar el enlace original», así que la URL intacta sigue a un clic."
+    "message": "Activado por defecto. Cualquier forma de abrir un enlace —pestaña nueva, ventana, incógnito, en paralelo— va a la URL limpia. Los botones de copiar no cambian: «Copiar dirección del enlace» copia siempre el enlace tal cual, y «Copiar enlace limpio» es el que lo limpia."
   },
   "optWhere": {
     "message": "Dónde aparece"

@@ -23,9 +23,6 @@
   "actionCopyClean": {
     "message": "Temiz bağlantıyı kopyala"
   },
-  "actionCopyOriginal": {
-    "message": "Özgün bağlantıyı kopyala"
-  },
   "menuLabel": {
     "message": "Bağlantı işlemleri"
   },
@@ -64,9 +61,6 @@
   },
   "capCleanedNone": {
     "message": "Kopyalandı — kaldırılacak bir şey yoktu"
-  },
-  "capCopiedOriginal": {
-    "message": "Özgün bağlantı kopyalandı"
   },
   "errBadUrl": {
     "message": "Geçerli bir URL değil"
@@ -216,10 +210,10 @@
     "message": "Takip parametreleri"
   },
   "optCleanFirst": {
-    "message": "Her eylemden önce takip parametrelerini kaldır"
+    "message": "Açtığın bağlantılardan takip parametrelerini kaldır"
   },
   "optCleanFirstHint": {
-    "message": "Yalnızca kopyalayan değil, her eylem temizlenmiş bağlantıyı açar ya da kopyalar. \"Temiz bağlantıyı kopyala\" da \"Özgün bağlantıyı kopyala\" olur, böylece dokunulmamış URL yine bir tık uzakta kalır."
+    "message": "Varsayılan olarak açık. Bağlantıyı açmanın her yolu — yeni sekme, pencere, gizli, yan yana — temizlenmiş adrese gider. Kopyalama düğmeleri bundan etkilenmez: \"Bağlantı adresini kopyala\" bağlantıyı her zaman olduğu gibi kopyalar, temizleyen ise \"Temiz bağlantıyı kopyala\"dır."
   },
   "optWhere": {
     "message": "Nerede görünür"

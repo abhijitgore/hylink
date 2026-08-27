@@ -41,7 +41,7 @@ function actionRow(action, checked, settings) {
   cb.addEventListener('change', save);
   const span = document.createElement('span');
   const strong = document.createElement('strong');
-  strong.textContent = actionLabel(action, settings);
+  strong.textContent = actionLabel(action);
   span.appendChild(strong);
   label.append(cb, span);
 
@@ -177,7 +177,7 @@ function buildDemo(settings) {
   }
   const caption = document.createElement('div');
   caption.className = 'demo-cap';
-  caption.textContent = shown.length ? actionLabel(shown[0], settings) : '';
+  caption.textContent = shown.length ? actionLabel(shown[0]) : '';
   bar.append(row, caption);
 }
 
@@ -195,7 +195,7 @@ function collect() {
     modifier: $('modifier').value,
     newTabActive: $('newTabActive').checked,
     skipNavigation: $('skipNavigation').checked,
-    cleanBeforeAction: $('cleanBeforeAction').checked,
+    cleanBeforeOpen: $('cleanBeforeOpen').checked,
     // The list's own order is the setting — read straight back out of the DOM, so
     // dragging and the arrow buttons need no bookkeeping of their own.
     actionOrder: [...$('actions').children].map((row) => row.dataset.action),
@@ -216,7 +216,7 @@ function render(s) {
   $('expandMode').value = s.expandMode;
   $('newTabActive').checked = s.newTabActive;
   $('skipNavigation').checked = s.skipNavigation;
-  $('cleanBeforeAction').checked = s.cleanBeforeAction;
+  $('cleanBeforeOpen').checked = s.cleanBeforeOpen;
   $('disabledSites').value = s.disabledSites.join('\n');
   $('modifierField').classList.toggle('hidden', !s.requireModifier);
   buildActionList(s);
@@ -243,11 +243,9 @@ function rowsAreStale(settings) {
   return rows.some((row, i) => {
     const id = settings.actionOrder[i];
     if (row.dataset.action !== id) return true;
-    const checked = row.querySelector('input').checked;
-    if (checked === settings.hiddenActions.includes(id)) return true;
-    const action = actionById(id);
-    return action ? row.querySelector('strong').textContent !== actionLabel(action, settings)
-                  : true;
+    // A ticked box means the action is not hidden; disagreeing with what was stored is
+    // the "unticking every box hides none" case coming back.
+    return row.querySelector('input').checked === settings.hiddenActions.includes(id);
   });
 }
 
@@ -265,7 +263,7 @@ wireDragging();
 getSettings().then((s) => {
   render(s);
   for (const id of ['enabled', 'requireModifier', 'modifier', 'newTabActive', 'expandMode',
-    'skipNavigation', 'cleanBeforeAction']) {
+    'skipNavigation', 'cleanBeforeOpen']) {
     $(id).addEventListener('change', save);
   }
   $('hoverDelay').addEventListener('input', () => {

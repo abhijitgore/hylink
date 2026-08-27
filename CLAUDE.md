@@ -11,7 +11,7 @@ There is no build step and no dependencies. Files are loaded as-is by Chrome, an
 test suite runs on a bare Node.
 
 ```sh
-node tests/run.js                # the whole suite (195 assertions), exit 1 on failure
+node tests/run.js                # the whole suite (196 assertions), exit 1 on failure
 sh tests/harness/build.sh        # required before using the manual browser harness
 node tools/build-clean-list.js   # regenerate src/clean-list.js from Brave's rules
 sh tools/package.sh              # dist/hylink-<version>.zip — the Web Store upload

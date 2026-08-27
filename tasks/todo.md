@@ -458,3 +458,46 @@ drift. A fixed mid-grey rather than `currentColor`, because GitHub renders READM
 as standalone documents with no text colour to inherit — checked against both canvases.
 
 Version 1.9.0. Steps 3–7 of `RELEASING.md` (tag, release, cask, zip) not done.
+
+## Round 12 — clean on the way out, not on the way to the clipboard
+
+- [x] `src/settings.js` — `cleanBeforeAction` → `cleanBeforeOpen`, default true; the
+      flip comes out of `actionLabel()`; retire the old key in `migrate()`
+- [x] `src/background.js` / `src/content.js` — rename, and `run()` collapses back
+- [x] `ui/options.*` — new id, wording that says what turning it off costs
+- [x] `_locales/*` ×10 — delete two keys, rewrite two
+- [x] store copy: manifest description, `docs/store-listing.md`, README
+- [x] `tests/run.js` — new default, the pair under the new key, old key proven inert
+- [x] `manifest.json` → 1.10.0, rebuilt `docs/store/*.png`
+
+### Review
+
+1.9.0 made cleaning mean *every* action including copy, which forced "Copy clean link"
+to flip to "Copy original link" so the two copy buttons wouldn't be identical. Narrowing
+it to opens removes the overlap at the source: copy is always verbatim, "Copy clean
+link" always strips, both are always a click apart, and the flip and its two catalogue
+strings are gone. 177 insertions against 193 deletions — the feature got smaller.
+
+**The default.** `cleanBeforeOpen` ships `true`. A link you are following has no use for
+the campaign tag that came with it, and the copy buttons are untouched, so nothing you
+paste changes without asking.
+
+**Why no migration.** `cleanBeforeAction` is not carried across, deliberately.
+`save()` writes every key, so anyone who opened the options page under 1.9.0 has
+`false` on disk — honouring it would switch the new default off for precisely the
+people who had already looked. `getSettings` only asks for the keys in DEFAULTS, so
+dropping it there is already enough to make it inert; `RETIRED` also sweeps it out of
+sync storage on the next read, and a test asserts both rather than assuming them.
+
+**Verification.** 196 assertions; the new default, the sweep and the worker's cleaning
+each broken once to watch them fail. 16 driven checks against the real menu, run twice
+(default and switched off) through both expand paths, and 32 against the real options
+page. The menu harness is the one that matters here — `run()`'s branching changed
+again, and that is where the dead-prefetch bug lived last round.
+
+**Store copy.** New voice, leading with the tracking hook. Two edits to what was asked
+for: the "80%" figure came out (invented, and listing requirements bar misleading
+claims — "mostly tracking garbage" carries the same punch), and the closing line ends
+in a full stop rather than a colon promising a link the store page cannot have.
+
+Version 1.10.0. `RELEASING.md` steps 3–7 not done.
