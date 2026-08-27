@@ -30,46 +30,25 @@ network access.
 **Detailed description:**
 
 > You know how the links you copy are mostly tracking garbage? HyLink fixes that —
-> hover a link, one click, clean copy. It also does new tab, new window, incognito and
-> split screen without a right-click. Free, and it phones home to no one.
+> hover a link, one click, clean copy, using Brave's own rule list. Links you open get
+> the same treatment by default: new tab, new window, incognito, or side by side with
+> the page you're on, all without a right-click, all with the utm_ and fbclid junk
+> stripped off first.
 >
-> Hover the mouse over a link to reveal a small three-dot menu beside it. Move the
-> cursor onto the menu and it expands into eight ways to interact with that link: open
-> it in the current tab, a new tab, a new window, or incognito; open it side by side or
-> stacked with the current page; copy the link; or copy a clean link with the tracking
-> parameters removed, the way Brave does it.
+> It stays out of your way. What appears is three small dots beside the link — only in
+> body text, never in navigation bars or sidebars, and only once your pointer actually
+> stops, so reading never triggers it. Move onto the dots and they open into the action
+> bar; Esc, scrolling, or moving away dismisses it, and it steps aside for hover cards
+> like Wikipedia's previews instead of covering them. The hover delay, which actions
+> appear and in what order, whether links you open are cleaned, and a per-site off
+> switch are all in the options.
 >
-> Links you open are cleaned by default — a link you are following has no use for the
-> campaign tag that came with it — and you can switch that off in the options. The copy
-> buttons never change: "Copy link address" hands over the link exactly as it is, and
-> "Copy clean link" is the one that strips it.
->
-> Designed to stay out of your way while you read:
->
-> • You need to hover the mouse over the link to activate it. Moving across text while
->   reading won't trigger anything.
-> • It's only shown for links in paragraphs and body text. It is not shown for
->   elements like navigation bars, headers, footers and sidebars.
-> • What appears first is just three dots, about one character wide. The full menu
->   only opens when you move the cursor onto them.
-> • Press Esc, scroll, or move the mouse away to dismiss it.
-> • It moves out of the way of hover cards like Wikipedia's link previews instead of
->   covering them.
->
-> Everything is configurable: the hover delay, which actions appear and in what order,
-> whether links you open get cleaned, whether a modifier key must be held, and a
-> per-site off switch in the toolbar popup.
->
-> About the "read and change all your data on all websites" warning: Chrome shows
-> that to every extension that runs on every site, and links exist on every page, so
-> a hover menu has no narrower permission to ask for. What HyLink reads is the address
-> of the link under your pointer, and the tag and class names around it so it can tell
-> a nav bar from an article. It never reads page text, form fields, passwords, cookies
-> or history.
->
-> HyLink makes no network requests and has no analytics, no account, and no server.
-> Your settings sync through your own Chrome profile, and nothing else leaves your
-> browser.
+> About the "read and change all your data on all websites" warning: Chrome shows it to
+> every extension that runs on every site, and links exist on every page. HyLink reads
+> the address of the link under your pointer, and the tag and class names around it so
+> it can tell an article from a nav bar — never page text, form fields, passwords,
+> cookies or history. No network requests, no analytics, no account, no server. Your
+> settings sync through your own Chrome profile and nothing else leaves your browser.
 
 ## Privacy tab
 
