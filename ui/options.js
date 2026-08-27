@@ -22,7 +22,7 @@ const DRAG_DOTS =
  * do the same thing — move the row — and the stored order is then read back out of
  * the DOM, so there is only ever one representation of it.
  */
-function actionRow(action, checked, settings) {
+function actionRow(action, checked) {
   const row = document.createElement('div');
   row.className = 'action-row';
   row.dataset.action = action.id;
@@ -88,7 +88,7 @@ function buildActionList(settings) {
   box.textContent = '';
   for (const id of settings.actionOrder) {
     const action = actionById(id);
-    if (action) box.appendChild(actionRow(action, !settings.hiddenActions.includes(id), settings));
+    if (action) box.appendChild(actionRow(action, !settings.hiddenActions.includes(id)));
   }
   syncNudges();
 }

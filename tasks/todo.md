@@ -500,4 +500,7 @@ for: the "80%" figure came out (invented, and listing requirements bar misleadin
 claims — "mostly tracking garbage" carries the same punch), and the closing line ends
 in a full stop rather than a colon promising a link the store page cannot have.
 
-Version 1.10.0. `RELEASING.md` steps 3–7 not done.
+Released as 1.10.0, then 1.10.1 immediately after: the summary called the side
+actions "split screen", which is the name of a Chrome feature this is not. Repo, tap
+and zip all moved together both times; only the Web Store upload is left, which has no
+API path.

@@ -140,7 +140,7 @@ Everything is rendered at 2× and resampled to 1280×800, because rendering stra
 - [ ] Trader / non-trader declared in the dashboard — non-trader, for a free extension
       with no commercial activity. The EU's Digital Services Act made this mandatory;
       declaring trader would require publishing a physical address.
-- [ ] `dist/hylink-<version>.zip` built with `sh tools/package.sh`
+- [x] `dist/hylink-<version>.zip` built with `sh tools/package.sh`
 
 ## Known review risks
 
