@@ -26,7 +26,7 @@ whether URL cleaning is a second feature — instead of leaving it to be asked.
 **Summary** (the manifest `description`, 131 of the allowed 132 characters):
 
 > Every link you copy is mostly tracking garbage. Hover a link: clean copy, new tab,
-> window, incognito, split screen. No right-click.
+> window, incognito, side by side. No right-click.
 
 **Category:** Workflow & Planning
 **Language:** English
