@@ -7,14 +7,18 @@ and [image specs](https://developer.chrome.com/docs/webstore/images).
 
 ## Single purpose
 
-> HyLink shows a small menu beside the link under the mouse, with ways to open that
-> link — in the current tab, a new tab, a new window, incognito, or side by side or
-> stacked with the current page — or to copy it, with or without tracking parameters.
-> Links it opens have tracking parameters removed by default; that can be switched off
-> in the options.
+> HyLink has one purpose: acting on the hyperlink under the user's pointer. Hovering a
+> link shows a small menu beside it with ways to open that link — in the current tab, a
+> new tab, a new window, incognito, or side by side or stacked with the current page —
+> or to copy it, exactly as it is or with tracking parameters removed. Cleaning is part
+> of how links are opened and copied, not a second feature: opens are cleaned by
+> default, using Brave's rule list bundled in the package, with an off switch in the
+> options. Every setting configures this one menu. No account, no analytics, no network
+> requests.
 
-Everything in the extension serves that one purpose. No second feature, no account, no
-network access.
+Written for a reviewer rather than a shopper: the box is a compliance justification, so
+it is plain and narrow on purpose. It answers the question the 1.10.0 default invites —
+whether URL cleaning is a second feature — instead of leaving it to be asked.
 
 ## Store listing copy
 
@@ -73,7 +77,7 @@ the `<all_urls>` one matters most.
 
 | Field | Justification |
 | --- | --- |
-| `storage` | Saves the user's settings — hover delay, which actions appear, per-site off switches. No browsing data is stored. |
+| `storage` | Saves the user's settings — hover delay, which actions appear and in what order, whether opened links are cleaned, per-site off switches. No browsing data is stored. |
 | `system.display` | The "open in side" actions place two windows side by side on the current display. The display's work area is needed to size them so neither lands under the taskbar or off-screen. |
 | `activeTab` | The toolbar popup shows the current site's hostname and offers a "turn off on this site" switch. Used instead of the broader `tabs` permission, which would expose browsing history. |
 | Host permission (`<all_urls>`) | The extension's only feature is a menu beside a hovered link, and links exist on every site, so the content script has to run everywhere. It reads only the `href` of the hovered link and the page geometry needed to place the menu clear of hover cards. No network requests; no data leaves the device. |
