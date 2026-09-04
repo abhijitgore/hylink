@@ -16,6 +16,7 @@ sh tests/harness/build.sh        # required before using the manual browser harn
 node tools/build-clean-list.js   # regenerate src/clean-list.js from Brave's rules
 sh tools/package.sh              # dist/hylink-<version>.zip — the Web Store upload
 node tools/build-store-shots.js  # docs/store/*.png — the listing images
+node tools/build-demo-wikipedia.js # docs/demo-wikipedia.gif — the README's demo clip
 node tools/build-readme-icons.js # docs/icons/*.svg — the README's icon column
 ```
 

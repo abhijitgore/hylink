@@ -1,0 +1,183 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Ferris wheel — Openpedia</title>
+<!--
+  A stand-in encyclopedia page for the zoomed store screenshots and the demo GIF,
+  styled like Wikipedia's Vector skin but original in every particular — an invented
+  site name, own layout, own markup — for the same reason tools/shots/article.html
+  gives for not using a real news site: the listing images shouldn't carry someone
+  else's branding. The facts in the article body are real (Ferris wheel history), kept
+  simple and uncontroversial since this is a visual prop, not a citation.
+
+  The one thing this page is engineered for: `#demo-link` sits mid-paragraph with a
+  wide, empty column below and to its right, so HyLink's menu always lands in its
+  default "down and right of the grip" placement (src/content.js's growFrom(), first
+  candidate) — the build scripts compute the menu's box from that assumption rather
+  than reading it back out of the closed shadow root.
+-->
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 14px/1.6 -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #202122;
+    background: #fff;
+  }
+  a { color: #0645ad; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .topbar {
+    background: #fff; border-bottom: 1px solid #a2a9b1;
+    padding: 6px 20px; display: flex; align-items: center; gap: 14px;
+  }
+  .topbar .search {
+    margin-left: auto; width: 220px; height: 26px; border: 1px solid #a2a9b1;
+    border-radius: 2px; background: #f8f9fa;
+  }
+  .topbar .lang { font-size: 12.5px; color: #54595d; }
+
+  .frame { display: grid; grid-template-columns: 190px 1fr; }
+
+  nav.side {
+    border-right: 1px solid #eaecf0; padding: 16px 14px; font-size: 12.5px;
+  }
+  nav.side .brand {
+    font-weight: 700; font-size: 15px; letter-spacing: -.01em; color: #000;
+    margin-bottom: 14px;
+  }
+  nav.side h3 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .03em;
+    color: #54595d; margin: 16px 0 6px; font-weight: 600;
+  }
+  nav.side ul { list-style: none; margin: 0; padding: 0; }
+  nav.side li { margin-bottom: 7px; }
+  nav.side a { color: #202122; }
+
+  main { padding: 18px 34px 60px; max-width: 900px; }
+  .tabs { font-size: 13px; color: #54595d; margin-bottom: 6px; }
+  .tabs b { color: #202122; border-bottom: 2px solid #a2a9b1; padding-bottom: 6px; }
+  .tabs span + span { margin-left: 16px; }
+
+  h1 {
+    font: 400 30px/1.2 "Linux Libertine", Georgia, "Times New Roman", serif;
+    border-bottom: 1px solid #a2a9b1; padding-bottom: 8px; margin: 0 0 4px;
+  }
+  .sub { font-size: 12.5px; font-style: italic; color: #54595d; margin: 0 0 18px; }
+
+  .infobox {
+    float: right; width: 240px; margin: 0 0 16px 24px;
+    border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 12.5px;
+  }
+  .infobox .title { text-align: center; font-weight: 700; padding: 8px; font-size: 14px; }
+  .infobox .art {
+    height: 130px; background: linear-gradient(160deg, #cfe0f3 0%, #eef3fa 100%);
+    display: flex; align-items: center; justify-content: center; color: #6b7684;
+    font-size: 11px;
+  }
+  .infobox table { width: 100%; border-collapse: collapse; }
+  .infobox td { padding: 5px 8px; border-top: 1px solid #eaecf0; vertical-align: top; }
+  .infobox td:first-child { color: #54595d; width: 40%; }
+
+  main p { margin: 0 0 14px; }
+  main h2 {
+    font: 400 21px/1.3 "Linux Libertine", Georgia, serif;
+    border-bottom: 1px solid #a2a9b1; padding-bottom: 4px; margin: 26px 0 10px;
+  }
+
+  .catlinks {
+    margin-top: 34px; padding-top: 10px; border-top: 1px solid #eaecf0;
+    font-size: 12.5px; color: #54595d;
+  }
+  .catlinks a { margin-right: 4px; }
+</style>
+
+<div class="topbar">
+  <span class="brand" style="font-weight:700;">OPENPEDIA</span>
+  <span class="lang">The free encyclopedia</span>
+  <div class="search"></div>
+</div>
+
+<div class="frame">
+  <nav class="side">
+    <h3>Navigation</h3>
+    <ul>
+      <li><a href="/wiki/Main_Page">Main page</a></li>
+      <li><a href="/wiki/Special:Contents">Contents</a></li>
+      <li><a href="/wiki/Portal:Current_events">Current events</a></li>
+      <li><a href="/wiki/Special:Random">Random article</a></li>
+      <li><a href="/wiki/Openpedia:About">About Openpedia</a></li>
+    </ul>
+    <h3>Contribute</h3>
+    <ul>
+      <li><a href="/wiki/Help:Contents">Help</a></li>
+      <li><a href="/wiki/Special:Community">Community portal</a></li>
+      <li><a href="/wiki/Special:RecentChanges">Recent changes</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="tabs">
+      <b>Article</b><span>Talk</span>
+      <span style="margin-left:28px">Read</span><span>Edit</span><span>View history</span>
+    </div>
+    <h1>Ferris wheel</h1>
+    <p class="sub">From Openpedia, the free encyclopedia</p>
+
+    <aside class="infobox">
+      <div class="title">Ferris wheel</div>
+      <div class="art">illustration placeholder</div>
+      <table>
+        <tr><td>Also known as</td><td>Big wheel, observation wheel</td></tr>
+        <tr><td>Named after</td><td>George W. G. Ferris Jr.</td></tr>
+        <tr><td>Debut</td><td>1893, Chicago</td></tr>
+        <tr><td>Type</td><td>Amusement ride</td></tr>
+      </table>
+    </aside>
+
+    <p>
+      A <b>Ferris wheel</b> is an amusement ride consisting of a rotating upright wheel
+      with multiple passenger-carrying cabins, called gondolas or pods, attached to the
+      rim in such a way that as the wheel turns, they are kept upright, usually by
+      gravity, and sometimes by a motor. Some Ferris wheels are described as
+      <a href="https://example.org/wiki/Observation_wheel">observation wheels</a>,
+      built primarily to give riders a view of the surrounding area.
+    </p>
+    <p>
+      The original Ferris wheel was designed and built by
+      <a href="https://example.org/wiki/George_Washington_Gale_Ferris_Jr.">George
+      Washington Gale Ferris Jr.</a> as a landmark for the 1893 World's Columbian
+      Exposition in Chicago, which celebrated the 400th anniversary of Christopher
+      Columbus's voyage. The exposition committee wanted something to rival the Eiffel
+      Tower, built for the 1889 Paris exposition, and Ferris's wheel — 80.4 metres tall,
+      with 36 wooden cars each able to hold 60 people — met the brief.
+    </p>
+    <p>
+      Later wheels grew taller and switched from wood to steel, and many modern
+      observation wheels use permanently enclosed, climate-controlled cabins rather
+      than open cars. The tallest examples today exceed 150 metres, roughly double the
+      height of the original.
+    </p>
+
+    <h2>Design</h2>
+    <p>
+      A Ferris wheel's rim is typically supported by a network of spokes running to a
+      central hub, similar in principle to a bicycle wheel, though very large modern
+      wheels sometimes use a cable-supported rim instead to save weight. Gondolas hang
+      from the rim on bearings that let them rotate freely, keeping the floor level as
+      the wheel turns — the same effect a gimbal has on a ship's compass.
+    </p>
+    <p>
+      Rotation speed is deliberately slow: a full revolution on most large wheels takes
+      somewhere between fifteen and thirty minutes, which keeps
+      <a id="demo-link" href="https://example.org/wiki/Amusement_ride_operations">loading
+      and unloading</a> simple and gives riders a long, steady view rather than a brief one.
+    </p>
+
+    <div class="catlinks">
+      Categories: <a href="/wiki/Category:Amusement_rides">Amusement rides</a>
+      · <a href="/wiki/Category:1893_introductions">1893 introductions</a>
+      · <a href="/wiki/Category:Observation_towers">Observation towers</a>
+    </div>
+  </main>
+</div>

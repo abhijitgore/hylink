@@ -74,16 +74,21 @@ on every link.
 
 Move the cursor onto the three dots and they expand into the action bar:
 
+Shown here in the default order (`src/settings.js`'s `ACTIONS`) — yours may differ if
+you've customised it in the options page:
+
 | Icon | Action | What it does |
 | --- | --- | --- |
-| <img src="docs/icons/open.svg" width="16" height="16" alt=""> | **Open link** | Opens the link in the current tab. |
 | <img src="docs/icons/newTab.svg" width="16" height="16" alt=""> | **Open in new tab** | Opens it in a new tab right after the current one. |
 | <img src="docs/icons/newWindow.svg" width="16" height="16" alt=""> | **Open in new window** | Opens it in a new, normally-sized window. |
 | <img src="docs/icons/incognito.svg" width="16" height="16" alt=""> | **Open in incognito** | Opens it in an existing incognito window, or creates one. Needs *Allow in incognito* — see [Install](#install). |
+| <img src="docs/icons/copyClean.svg" width="16" height="16" alt=""> | **Copy clean link** | Copies the URL with tracking parameters removed, the way Brave's *Copy clean link* does. Hover the button to see how many will be removed before you click. |
 | <img src="docs/icons/sideRight.svg" width="16" height="16" alt=""> | **Open in side (right)** | If the tab is **already in a Chrome split view**, opens it in the other pane. Otherwise moves the current window to the **left half** of the screen and opens the link in a new window on the **right half**. |
 | <img src="docs/icons/sideStacked.svg" width="16" height="16" alt=""> | **Open in side (stacked)** | Same split-view behaviour; otherwise moves the current window to the **top half** and opens the link in a new window on the **bottom half**. |
 | <img src="docs/icons/copy.svg" width="16" height="16" alt=""> | **Copy link address** | Copies the full URL to the clipboard. |
-| <img src="docs/icons/copyClean.svg" width="16" height="16" alt=""> | **Copy clean link** | Copies the URL with tracking parameters removed, the way Brave's *Copy clean link* does. Hover the button to see how many will be removed before you click. |
+| <img src="docs/icons/open.svg" width="16" height="16" alt=""> | **Open link** | Opens the link in the current tab. |
+
+<img src="docs/demo-wikipedia.gif" alt="The mouse hovers a link on a sample article; three dots appear; moving onto them opens the action bar; the cursor visits each action in turn." width="560">
 
 ## How "open in side" works
 

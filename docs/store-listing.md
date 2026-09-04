@@ -87,14 +87,19 @@ the `<all_urls>` one matters most.
 | Asset | Size | Status |
 | --- | --- | --- |
 | Store icon | 128×128 PNG | ✅ `docs/store/store-icon-128.png` — 96×96 of artwork with 16px transparent padding, which is what the store asks for. `icons/icon128.png` fills its box instead, which is right for the toolbar and wrong here. |
-| Action bar on an article | 1280×800 | ✅ `docs/store/screenshot-1-actions.png` |
-| The grip on an article | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` |
+| Action bar, zoomed | 1280×800 | ✅ `docs/store/screenshot-1-actions.png` — cropped tight around the bar and scaled back up, not just a full page at 1280×800. The un-zoomed version was too small to read at listing thumbnail size. |
+| The grip, zoomed | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` — same treatment, around the three dots. |
 | Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` |
 | Small promo tile | 440×280 | ✅ `docs/store/promo-440x280.png` |
 | Marquee | 1400×560 | Optional; only needed for featured placement |
 
 Upload order matters — the first screenshot is what most people judge the extension on,
 so lead with the expanded action bar, then the grip on its own, then the settings page.
+
+A separate script, `node tools/build-demo-wikipedia.js`, produces `docs/demo-wikipedia.gif` —
+the same hover, zoomed the same way, animated: dots appear, the bar opens, the cursor visits
+every action. It is **not** a Store asset; the Web Store's screenshot slots only take static
+PNG/JPEG, so this GIF has nowhere to go there. It's for the README and for sharing elsewhere.
 
 ### Two things the script has to work around
 
@@ -112,11 +117,19 @@ seconds while it runs. It also reuses that window's one tab rather than opening 
 ones: a tab created over CDP starts backgrounded, and a backgrounded page has its timers
 clamped to roughly a second, which is slower than the hover being captured.
 
-The article at `tools/shots/article.html` is written for this. Using a real news site
-would put someone else's masthead and copy in the listing images.
+The sample page at `tools/shots/wikipedia.html` is written for this — a Wikipedia-styled
+mock, own invented site name and markup, real (if simplified) article content. Using a real
+site would put someone else's masthead and copy in the listing images, same reasoning
+`tools/shots/article.html` was originally written on; that file is no longer used by either
+capture script but is left in place rather than deleted.
 
-Everything is rendered at 2× and resampled to 1280×800, because rendering straight at
-1280×800 gives thin, undersampled text.
+Everything is rendered at 2×–3× and resampled to the target size, because rendering straight
+at 1280×800 gives thin, undersampled text. The two hover shots are captured at 3× specifically
+because they're then cropped before the resample — cropping first and upscaling a smaller
+region is what makes the "zoom" — so they need the extra native resolution the crop eats into.
+The menu itself renders inside a closed shadow root, so the crop box is computed from the CSS
+in `src/content.js` rather than read back from the page; `tools/lib/menu-geometry.js` has the
+constants and the reasoning, shared with `tools/build-demo-wikipedia.js`.
 
 ## Pre-submission checklist
 
