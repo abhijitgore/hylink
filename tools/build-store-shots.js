@@ -129,6 +129,18 @@ function zoomShot(file, session, box) {
   const options = await cdp.open(`chrome-extension://${extId}/ui/options.html`, { settle: 5600 });
   await shootFrame(cdp, options, 'screenshot-3-settings.png');
 
+  // The intro shot above is the pitch (the demo, the enable toggle); this one is the
+  // actual configuration surface — the reorderable, toggleable action list is the
+  // richest control on the page, more representative of "configuring HyLink" than the
+  // top of the page (which is mostly explainer text) ever was.
+  await cdp.eval(options.sessionId, `(() => {
+    const section = document.getElementById('actions').closest('section');
+    window.scrollTo(0, window.scrollY + section.getBoundingClientRect().top - 24);
+    return true;
+  })()`);
+  await sleep(300);
+  await shootFrame(cdp, options, 'screenshot-4-config.png');
+
   /* 4 — the promo tile ------------------------------------------------------------- */
   const tile = await cdp.open(`http://127.0.0.1:${PORT}/tools/shots/tile.html`,
     { scale: 4, width: 440, height: 280, settle: 800 });

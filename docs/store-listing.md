@@ -89,12 +89,14 @@ the `<all_urls>` one matters most.
 | Store icon | 128×128 PNG | ✅ `docs/store/store-icon-128.png` — 96×96 of artwork with 16px transparent padding, which is what the store asks for. `icons/icon128.png` fills its box instead, which is right for the toolbar and wrong here. |
 | Action bar, zoomed | 1280×800 | ✅ `docs/store/screenshot-1-actions.png` — cropped tight around the bar and scaled back up, not just a full page at 1280×800. The un-zoomed version was too small to read at listing thumbnail size. |
 | The grip, zoomed | 1280×800 | ✅ `docs/store/screenshot-2-grip.png` — same treatment, around the three dots. |
-| Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` |
+| Settings page | 1280×800 | ✅ `docs/store/screenshot-3-settings.png` — the intro: the demo, the "how it works" copy, the enable toggle. |
+| Configuration | 1280×800 | ✅ `docs/store/screenshot-4-config.png` — scrolled to the reorderable, toggleable action list, the richest control on the page and the one that actually answers "can I configure this?" The settings shot above barely gets past the intro before its 800px cuts off. |
 | Small promo tile | 440×280 | ✅ `docs/store/promo-440x280.png` |
 | Marquee | 1400×560 | Optional; only needed for featured placement |
 
-Upload order matters — the first screenshot is what most people judge the extension on,
-so lead with the expanded action bar, then the grip on its own, then the settings page.
+Upload order matters — the first screenshot is what most people judge the extension on, so
+lead with the expanded action bar, then the grip on its own, then the settings intro, then
+the configuration shot.
 
 A separate script, `node tools/build-demo-wikipedia.js`, produces `docs/demo-wikipedia.gif` —
 the same hover, zoomed the same way, animated: dots appear, the bar opens, the cursor visits
