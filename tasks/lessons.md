@@ -121,3 +121,16 @@ Only a reload fixes it.
 captured — here, polling for `hylink-root` and throwing if it never appears, plus a
 check that the two states are not byte-identical. And when a retry is meant to recover
 from a missing injection, retry the *navigation*, not the interaction.
+
+## Store copy leads with why, not how
+
+A "shorter" rewrite of the Web Store description was rejected because it was still a
+feature tour: hover → menu → actions → options. Shorter was not the point. A shopper
+reads the first sentence to decide whether the problem is theirs; mechanics only earn
+attention once the benefit has.
+
+**How to apply:** for listing, README-intro or announcement copy, the first sentence
+names the reader's problem and the second states the promise (here: links carry
+tracking; HyLink strips it *and* makes opening links faster). Everything after that
+exists to make those claims credible. If a draft's opening could caption a screenshot,
+it is describing how, not why — start over.

@@ -8,14 +8,14 @@
 
   /** Every action the hover menu can offer, in its default menu order. */
   const ACTIONS = [
-    { id: 'open',        key: 'actionOpen',        label: 'Open link' },
     { id: 'newTab',      key: 'actionNewTab',      label: 'Open in new tab' },
     { id: 'newWindow',   key: 'actionNewWindow',   label: 'Open in new window' },
     { id: 'incognito',   key: 'actionIncognito',   label: 'Open in incognito' },
+    { id: 'copyClean',   key: 'actionCopyClean',   label: 'Copy clean link' },
     { id: 'sideRight',   key: 'actionSideRight',   label: 'Open in side (right)' },
     { id: 'sideStacked', key: 'actionSideStacked', label: 'Open in side (stacked)' },
     { id: 'copy',        key: 'actionCopy',        label: 'Copy link address' },
-    { id: 'copyClean',   key: 'actionCopyClean',   label: 'Copy clean link' }
+    { id: 'open',        key: 'actionOpen',        label: 'Open link' }
   ];
 
   /**

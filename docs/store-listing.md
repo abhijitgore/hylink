@@ -33,26 +33,23 @@ whether URL cleaning is a second feature — instead of leaving it to be asked.
 
 **Detailed description:**
 
-> You know how the links you copy are mostly tracking garbage? HyLink fixes that —
-> hover a link, one click, clean copy, using Brave's own rule list. Links you open get
-> the same treatment by default: new tab, new window, incognito, or side by side with
-> the page you're on, all without a right-click, all with the utm_ and fbclid junk
-> stripped off first.
+> Every link you copy or open drags tracking along with it — utm_, fbclid, gclid and
+> hundreds of others that tell advertisers where you came from and travel with the link
+> when you share it. HyLink strips them out, and makes opening links faster while it's
+> at it.
 >
-> It stays out of your way. What appears is three small dots beside the link — only in
-> body text, never in navigation bars or sidebars, and only once your pointer actually
-> stops, so reading never triggers it. Move onto the dots and they open into the action
-> bar; Esc, scrolling, or moving away dismisses it, and it steps aside for hover cards
-> like Wikipedia's previews instead of covering them. The hover delay, which actions
-> appear and in what order, whether links you open are cleaned, and a per-site off
-> switch are all in the options.
+> Hover a link and a small menu appears beside it. One click copies it clean, or opens
+> it clean in a new tab, a new window, incognito, or side by side with the page you're
+> on. No right-click, no digging through a menu, no pasting into a URL cleaner
+> afterwards.
 >
-> About the "read and change all your data on all websites" warning: Chrome shows it to
-> every extension that runs on every site, and links exist on every page. HyLink reads
-> the address of the link under your pointer, and the tag and class names around it so
-> it can tell an article from a nav bar — never page text, form fields, passwords,
-> cookies or history. No network requests, no analytics, no account, no server. Your
-> settings sync through your own Chrome profile and nothing else leaves your browser.
+> Cleaning uses Brave's rule list, so what you share is just the link. Turn it off in
+> the options if a site needs its parameters.
+>
+> It stays out of your way — nothing appears until your pointer pauses on a link, and
+> only in body text. Private by design — no network requests, no analytics, no account.
+> Chrome's "read and change all your data" warning is its standard wording for any
+> extension that runs on every site; HyLink reads only the link under your pointer.
 
 ## Privacy tab
 

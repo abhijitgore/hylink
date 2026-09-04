@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "HyLink — Hover Link Menu",
   "short_name": "HyLink",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "Every link you copy is mostly tracking garbage. Hover a link: clean copy, new tab, window, incognito, side by side. No right-click.",
   "default_locale": "en",
   "homepage_url": "https://github.com/abhijitgore/hylink",
