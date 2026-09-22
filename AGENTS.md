@@ -1,6 +1,8 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for coding agents working in this repository. Claude Code reads it through the
+`@AGENTS.md` import in `CLAUDE.md`; Codex reads it directly. Global rules load from each
+tool's user-level file and are not repeated here.
 
 HyLink is a Chrome MV3 extension: hovering a link in a page's body text shows a small
 menu of ways to open or copy it. See `README.md` for what it does from a user's side.
